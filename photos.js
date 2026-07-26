@@ -31,6 +31,178 @@ const PHOTOS = [
     camera: "Sony a6400", lens: "16-50mm", aperture: "f/4.5", shutter: "1/160", iso: "1000",
     alt: "A white lifeguard rescue boat resting on its beach trailer at dusk, dune grass and shoreline in the background" },
 
+  { file: "images/ceramics/2025-03-plates-and-cups.jpg", title: "Plates and cups", date: "2025-03",
+    size: "md", tags: ["ceramics"],
+    alt: "Handmade marbled ceramic plates and glazed cups arranged on a wood table" },
+
+  { file: "images/cape-may-point/2024-07-frisbee.jpg", title: "Frisbee, dusk", date: "2024-07",
+    location: "Cape May Point, NJ", size: "md", tags: ["beach"],
+    alt: "A young man throwing a red frisbee on a beach at dusk, soft pastel light" },
+
+  { file: "images/honeymoon/spain/2024-07-alley-bunting.jpg", title: "Alley, bunting", date: "2024-07",
+    location: "Barcelona, Spain", size: "lg", tags: ["street"],
+    alt: "A narrow Barcelona alley strung with colorful bunting, bikes and laundry along the walls" },
+
+  { file: "images/honeymoon/spain/2024-07-barcelona-tower.jpg", title: "Gothic tower", date: "2024-07",
+    location: "Barcelona, Spain", size: "md", tags: ["architecture"],
+    alt: "A Gothic tower glimpsed through trees in central Barcelona" },
+
+  { file: "images/honeymoon/spain/2024-07-barcelona-courtyard.jpg", title: "Courtyard, Barcelona", date: "2024-07",
+    location: "Barcelona, Spain", size: "md", tags: ["street"],
+    alt: "An outdoor cafe courtyard shaded by a banyan-like tree strung with colorful bunting" },
+
+  { file: "images/honeymoon/spain/2024-07-montjuic-cable-car.jpg", title: "Montjuic cable car", date: "2024-07",
+    location: "Barcelona, Spain", size: "lg", tags: ["landscape"],
+    alt: "A cable car descending Montjuic with the Barcelona skyline spread out below" },
+
+  { file: "images/honeymoon/spain/2024-07-shadow-portrait.jpg", title: "Shadow portrait", date: "2024-07",
+    location: "Barcelona, Spain", size: "md", tags: ["portrait"],
+    alt: "A couple standing in dappled tree-shadow against a sunlit stone wall" },
+
+  { file: "images/honeymoon/spain/2024-07-parakeets.jpg", title: "Parakeets", date: "2024-07",
+    location: "Barcelona, Spain", size: "sm", tags: ["landscape"],
+    alt: "A bare tree full of wild monk parakeets, a red-brick building behind" },
+
+  { file: "images/honeymoon/spain/2024-07-feeding-parakeets.jpg", title: "Feeding parakeets", date: "2024-07",
+    location: "Barcelona, Spain", size: "md", tags: ["portrait"],
+    alt: "A man smiling as two monk parakeets perch on his hand in a city park" },
+
+  { file: "images/honeymoon/spain/2024-07-mural-cutout.jpg", title: "Mural, cut open", date: "2024-07",
+    location: "Barcelona, Spain", size: "sm", tags: ["street"],
+    alt: "A torn hole in a painted mural revealing a quiet courtyard beyond" },
+
+  { file: "images/honeymoon/spain/2024-07-cathedral-spire.jpg", title: "Cathedral spire", date: "2024-07",
+    location: "Barcelona, Spain", size: "md", tags: ["architecture"],
+    alt: "The Gothic spire of Barcelona Cathedral against a dusk sky" },
+
+  { file: "images/honeymoon/france/2024-07-alpine-lake.jpg", title: "Alpine lake", date: "2024-07",
+    location: "Pyrenees, France", size: "lg", tags: ["landscape"],
+    alt: "A woman standing in a grassy field overlooking a turquoise alpine lake ringed by mountains" },
+
+  { file: "images/honeymoon/france/2024-07-lake-panorama.jpg", title: "Lake panorama", date: "2024-07",
+    location: "Pyrenees, France", size: "md", tags: ["landscape"],
+    alt: "A wide turquoise alpine lake bordered by forested slopes, a rocky peak rising behind" },
+
+  { file: "images/honeymoon/france/2024-07-alpine-lake-film.jpg", title: "Alpine lake, on film", date: "2024-07",
+    location: "Pyrenees, France", size: "md", tags: ["landscape"],
+    alt: "A turquoise alpine lake and forested slopes" },
+
+  { file: "images/honeymoon/france/2024-07-valley-view.jpg", title: "Valley view", date: "2024-07",
+    location: "Pyrenees, France", size: "md", tags: ["landscape"],
+    alt: "A green mountain valley with a distant ridge, seen through drifting fog" },
+
+  { file: "images/honeymoon/france/2024-07-summit-view.jpg", title: "Summit view", date: "2024-07",
+    location: "Pyrenees, France", size: "lg", tags: ["landscape"],
+    alt: "Bare rock summits streaked with late snow above a forested valley" },
+
+  { file: "images/honeymoon/france/2024-07-mountain-panorama.jpg", title: "Mountain panorama", date: "2024-07",
+    location: "Pyrenees, France", size: "lg", tags: ["landscape"],
+    alt: "A wide panorama of Pyrenees peaks and grassy slopes under a partly cloudy sky" },
+
+  { file: "images/honeymoon/france/2024-07-mountain-vista.jpg", title: "Mountain vista", date: "2024-07",
+    location: "Pyrenees, France", size: "md", tags: ["landscape"],
+    alt: "Jagged green peaks rising above a valley" },
+
+  { file: "images/honeymoon/france/2024-07-green-slopes.jpg", title: "Green slopes", date: "2024-07",
+    location: "Pyrenees, France", size: "sm", tags: ["landscape"],
+    alt: "Layered green mountain slopes fading into haze" },
+
+  { file: "images/honeymoon/france/2024-07-roadside-view.jpg", title: "Roadside view", date: "2024-07",
+    location: "Pyrenees, France", size: "sm", tags: ["landscape"],
+    alt: "A green mountain valley seen from a roadside pull-off" },
+
+  { file: "images/honeymoon/france/2024-07-mountain-stream.jpg", title: "Mountain stream", date: "2024-07",
+    location: "Pyrenees, France", size: "lg", tags: ["landscape"],
+    alt: "A rocky mountain stream cutting through a green valley, cattle grazing on the ridge above" },
+
+  { file: "images/honeymoon/france/2024-07-road-cattle.jpg", title: "Road cattle", date: "2024-07",
+    location: "Pyrenees, France", size: "sm", tags: ["landscape"],
+    alt: "Cattle with bells standing in the road on a high mountain pass" },
+
+  { file: "images/honeymoon/france/2024-07-cattle-close.jpg", title: "Cattle, close", date: "2024-07",
+    location: "Pyrenees, France", size: "md", tags: ["landscape"],
+    alt: "A herd of horned cattle grazing beside a mountain road, calves among them" },
+
+  { file: "images/honeymoon/france/2024-07-cows-in-road.jpg", title: "Cows in the road", date: "2024-07",
+    location: "Pyrenees, France", size: "sm", tags: ["landscape"],
+    alt: "Two cows with bells standing in the middle of a mountain road, more peaks behind" },
+
+  { file: "images/honeymoon/france/2024-07-pass-cattle.jpg", title: "Pass cattle", date: "2024-07",
+    location: "Pyrenees, France", size: "md", tags: ["landscape"],
+    alt: "Cattle resting near parked cars at a high mountain pass" },
+
+  { file: "images/honeymoon/france/2024-07-mountain-road.jpg", title: "Mountain road", date: "2024-07",
+    location: "Pyrenees, France", size: "md", tags: ["landscape"],
+    alt: "A parking area overlooking layered green peaks, cars pulled off along a mountain pass" },
+
+  { file: "images/honeymoon/france/2024-07-hilltop-chapel.jpg", title: "Hilltop chapel", date: "2024-07",
+    location: "Pyrenees, France", size: "md", tags: ["landscape", "architecture"],
+    alt: "A stone chapel and cluster of houses on a hilltop, framed by two peaks behind" },
+
+  { file: "images/honeymoon/france/2024-07-chapel-distant.jpg", title: "Chapel, distant", date: "2024-07",
+    location: "Pyrenees, France", size: "sm", tags: ["landscape", "architecture"],
+    alt: "A distant hilltop chapel above a wooded valley" },
+
+  { file: "images/honeymoon/france/2024-07-spa-town-rooftops.jpg", title: "Spa town rooftops", date: "2024-07",
+    location: "Pyrenees, France", size: "md", tags: ["landscape", "architecture"],
+    alt: "Rooftops of a fog-wrapped Pyrenean town, a mountainside rising behind" },
+
+  { file: "images/honeymoon/france/2024-07-grand-hotel.jpg", title: "Grand hotel", date: "2024-07",
+    location: "Pyrenees, France", size: "lg", tags: ["architecture"],
+    alt: "A grand hotel facade beneath a fog-covered mountainside, flower boxes in bloom" },
+
+  { file: "images/honeymoon/france/2024-07-village-drive-by.jpg", title: "Village, drive-by", date: "2024-07",
+    location: "Pyrenees, France", size: "sm", tags: ["landscape"],
+    alt: "A mountainside village of stone-roofed houses and a church, seen in motion from a moving car" },
+
+  { file: "images/honeymoon/france/2024-07-village-window.jpg", title: "Village, through glass", date: "2024-07",
+    location: "Pyrenees, France", size: "md", tags: ["landscape"],
+    alt: "A stone village seen through a car window on a foggy mountain road" },
+
+  { file: "images/honeymoon/france/2024-07-village-blur.jpg", title: "Village, in motion", date: "2024-07",
+    location: "Pyrenees, France", size: "sm", tags: ["landscape"],
+    alt: "A mountainside village blurred by motion, seen from a moving car" },
+
+  { file: "images/honeymoon/spain/2024-07-la-concha-pier.jpg", title: "La Concha pier", date: "2024-07",
+    location: "San Sebastian, Spain", size: "lg", tags: ["coast"],
+    alt: "A pier and diving platform in La Concha bay, San Sebastian's beach and hotels along the shore" },
+
+  { file: "images/honeymoon/spain/2024-07-la-concha-view.jpg", title: "La Concha, from the pier", date: "2024-07",
+    location: "San Sebastian, Spain", size: "md", tags: ["coast"],
+    alt: "A view across La Concha bay toward San Sebastian's beachfront hotels" },
+
+  { file: "images/honeymoon/spain/2024-07-monte-urgull.jpg", title: "Monte Urgull", date: "2024-07",
+    location: "San Sebastian, Spain", size: "md", tags: ["coast"],
+    alt: "Monte Urgull's silhouette above San Sebastian's harbor" },
+
+  { file: "images/honeymoon/spain/2024-07-santa-clara.jpg", title: "Santa Clara island", date: "2024-07",
+    location: "San Sebastian, Spain", size: "sm", tags: ["coast"],
+    alt: "Santa Clara island in La Concha bay" },
+
+  { file: "images/honeymoon/spain/2024-07-peine-del-viento.jpg", title: "Peine del Viento", date: "2024-07",
+    location: "San Sebastian, Spain", size: "lg", tags: ["coast"],
+    alt: "Chillida's rusted iron sculptures gripping the rocks at the edge of the sea" },
+
+  { file: "images/honeymoon/spain/2024-07-sailboat-sunset.jpg", title: "Sailboat, sunset", date: "2024-07",
+    location: "San Sebastian, Spain", size: "md", tags: ["coast"],
+    alt: "A lone sailboat silhouetted against the setting sun over open water" },
+
+  { file: "images/honeymoon/spain/2024-07-dune-path.jpg", title: "Dune path", date: "2024-07",
+    location: "San Sebastian, Spain", size: "sm", tags: ["coast"],
+    alt: "Two people walking a path through dune grass and tamarisk trees" },
+
+  { file: "images/honeymoon/spain/2024-07-rooftop-antenna.jpg", title: "Rooftop antenna", date: "2024-07",
+    location: "San Sebastian, Spain", size: "sm", tags: ["architecture"],
+    alt: "A rooftop antenna tower silhouetted at dusk above San Sebastian's old town" },
+
+  { file: "images/honeymoon/spain/2024-07-tiled-villa.jpg", title: "Tiled villa", date: "2024-07",
+    location: "San Sebastian, Spain", size: "md", tags: ["architecture"],
+    alt: "A white villa with blue tile medallions and green shutters on a Basque coastal street" },
+
+  { file: "images/honeymoon/spain/2024-07-old-town-steps.jpg", title: "Old town steps", date: "2024-07",
+    location: "San Sebastian, Spain", size: "sm", tags: ["street"],
+    alt: "A steep stepped street in San Sebastian's old town" },
+
   { file: "images/oregon/2022-10-fog-line.jpg", title: "Fog line", date: "2022-10",
     location: "Oregon", size: "lg", tags: ["landscape"],
     film: "Ilford HP5",
@@ -40,6 +212,30 @@ const PHOTOS = [
     location: "Oregon", size: "md", tags: ["landscape", "coast"],
     film: "Ilford HP5",
     alt: "A rocky sea stack and cliff face above rough surf, seen from above in overcast light" },
+
+  { file: "images/oregon/2022-10-falls-below.jpg", title: "Falls, from below", date: "2022-10",
+    location: "Oregon", size: "lg", tags: ["landscape"],
+    alt: "A waterfall spilling over a moss-covered cliff, seen from a rocky pool below" },
+
+  { file: "images/oregon/2022-10-trail-photographer.jpg", title: "On the trail", date: "2022-10",
+    location: "Oregon", size: "md", tags: ["landscape"],
+    alt: "A hiker in a green rain jacket photographing the forest along a fern-lined trail" },
+
+  { file: "images/oregon/2022-10-fallen-log.jpg", title: "Fallen log", date: "2022-10",
+    location: "Oregon", size: "md", tags: ["landscape"],
+    alt: "A moss-covered fallen tree trunk crossing a fern-lined forest floor" },
+
+  { file: "images/oregon/2022-10-cliff-fog.jpg", title: "Edge of the fog", date: "2022-10",
+    location: "Oregon", size: "sm", tags: ["landscape", "coast"],
+    alt: "A fog-shrouded cliff edge overlooking the ocean, framed by a dark conifer" },
+
+  { file: "images/oregon/2022-10-beach-flare.jpg", title: "Light leak, beach", date: "2022-10",
+    location: "Oregon", size: "sm", tags: ["beach", "coast"],
+    alt: "A foggy beach scene with birds overhead, warm light leaks washing across the frame" },
+
+  { file: "images/oregon/2022-10-tidepools.jpg", title: "Tidepools", date: "2022-10",
+    location: "Oregon", size: "md", tags: ["coast"],
+    alt: "Mossy tidepool rocks along a rugged stretch of coastline" },
 
   { file: "images/oregon/2022-10-waterfall.jpg", title: "Behind the falls", date: "2022-10",
     location: "Oregon", size: "lg", tags: ["landscape"],
