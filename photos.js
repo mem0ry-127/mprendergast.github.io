@@ -474,6 +474,7 @@ confederacy of dunces type
 knows he looks like the real thing` },
 
   { type: "text", title: "Don't Ever Bother Me", date: "2017", size: "lg", format: "prose",
+    hidden: true,
     body: `i have a painting in my window that i bought from a thrift store and it looks like it could be painted by a 10 year old or a 70 year old there's a head underneath the ground so what does that symbolize it's dark and there's strange lights in the sky and there's a potted plant above the head so the head is a root and maybe it's to symbolize a higher plane of existence that our heads are only the roots of and there's something more to life than just what we see and feel and there's something above us in a different dimension growing as our brains grow fuck i got distracted what if people who accept nonlogical writing as valid are like jesus coming out of the cave performing a miracle and oh boy now im thinking about the cave philosophical cave actually it's also fun thinking about it in real terms like wouldn't it be very strange to live your whole life in darkness and suddenly you come out what the fuck i guess that's very messed up i'm sure it's happened somewhere i'm sure things that i could never even imagine have happened places horrible things i don't want to know about` },
 
   { type: "text", title: "Southern Thematics", date: "2017", size: "md", format: "verse",
