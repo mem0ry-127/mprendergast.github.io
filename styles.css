@@ -2,12 +2,15 @@
    Tokens — dark
 --------------------------------------------------------- */
 :root {
-  --paper: #121212;
-  --ink: #f2f1ec;
-  --grid-line: rgba(255, 255, 255, 0.08);
-  --accent: #ff5a36;
-  --muted: #9c9a92;
-  --hairline: rgba(255, 255, 255, 0.14);
+  --paper: #3c4033;
+  --ink: #edf0e2;
+  --grid-line: rgba(228, 233, 208, 0.08);
+  --accent: #4fc9c2;
+  --muted: #a2a68d;
+  --muted-dim: #74786a;
+  --hairline: rgba(228, 233, 208, 0.14);
+  --overlay: rgba(18, 20, 14, 0.7);
+  --scrim: rgba(8, 9, 6, 0.97);
 
   --font-display: 'Archivo', sans-serif;
   --font-body: 'IBM Plex Sans', sans-serif;
@@ -188,8 +191,8 @@ button {
   left: 12px;
   font-family: var(--font-mono);
   font-size: 11px;
-  color: #f2f1ec;
-  background: rgba(0, 0, 0, 0.65);
+  color: var(--ink);
+  background: var(--overlay);
   padding: 3px 7px;
   letter-spacing: 0.02em;
 }
@@ -254,7 +257,7 @@ button {
 .lightbox {
   position: fixed;
   inset: 0;
-  background: rgba(4, 4, 4, 0.98);
+  background: var(--scrim);
   display: none;
   align-items: center;
   justify-content: center;
@@ -280,7 +283,7 @@ button {
 
 .lightbox-figure figcaption {
   margin-top: 18px;
-  color: #f2f2ee;
+  color: var(--ink);
   text-align: center;
 }
 
@@ -296,19 +299,19 @@ button {
   letter-spacing: 0.02em;
 }
 .lightbox-title { font-family: var(--font-body); text-transform: none; font-size: 14px; }
-.lightbox-meta { color: #918f88; }
+.lightbox-meta { color: var(--muted); }
 
 .lightbox-specs {
   margin-top: 6px;
   font-family: var(--font-mono);
   font-size: 11px;
-  color: #6f6d67;
+  color: var(--muted-dim);
   letter-spacing: 0.02em;
 }
 
 .lightbox-close, .lightbox-nav {
   position: absolute;
-  color: #f2f2ee;
+  color: var(--ink);
   font-size: 18px;
   padding: 12px;
   z-index: 1;
@@ -329,7 +332,7 @@ button {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #6f6d67;
+  color: var(--muted-dim);
 }
 
 /* ---------------------------------------------------------
