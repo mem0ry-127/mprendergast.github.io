@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Photographs — an index</title>
 <meta name="description" content="A running index of photographs.">
+<meta name="color-scheme" content="dark">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,11 +14,6 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<div class="grid-overlay" aria-hidden="true">
-  <div></div><div></div><div></div><div></div><div></div><div></div>
-  <div></div><div></div><div></div><div></div><div></div><div></div>
-</div>
 
 <header class="site-header">
   <div class="wordmark">
@@ -29,6 +25,10 @@
     <span class="index-year">2026&mdash;</span>
   </div>
 </header>
+
+<nav class="filters" id="filters" aria-label="Filter photographs by tag">
+  <!-- populated by script.js: "All" plus one chip per tag used in photos.js -->
+</nav>
 
 <main>
   <section class="gallery" id="gallery" aria-label="Photograph index">
@@ -53,12 +53,16 @@
   <figure class="lightbox-figure">
     <img id="lightbox-image" src="" alt="">
     <figcaption>
-      <span class="lightbox-index" id="lightbox-index"></span>
-      <span class="lightbox-title" id="lightbox-title"></span>
-      <span class="lightbox-meta" id="lightbox-meta"></span>
+      <div class="lightbox-caption-line">
+        <span class="lightbox-index" id="lightbox-index"></span>
+        <span class="lightbox-title" id="lightbox-title"></span>
+        <span class="lightbox-meta" id="lightbox-meta"></span>
+      </div>
+      <div class="lightbox-specs" id="lightbox-specs"></div>
     </figcaption>
   </figure>
   <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next photograph">&#8594;</button>
+  <p class="lightbox-hint" aria-hidden="true">&larr; &rarr; Navigate &middot; Esc Close &middot; Swipe on Touch</p>
 </div>
 
 <script src="photos.js"></script>

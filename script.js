@@ -4,39 +4,97 @@
   const gallery = document.getElementById("gallery");
   const emptyState = document.getElementById("empty-state");
   const indexCount = document.getElementById("index-count");
+  const filtersNav = document.getElementById("filters");
 
   const lightbox = document.getElementById("lightbox");
   const lightboxImage = document.getElementById("lightbox-image");
   const lightboxIndex = document.getElementById("lightbox-index");
   const lightboxTitle = document.getElementById("lightbox-title");
   const lightboxMeta = document.getElementById("lightbox-meta");
+  const lightboxSpecs = document.getElementById("lightbox-specs");
   const closeBtn = document.getElementById("lightbox-close");
   const prevBtn = document.getElementById("lightbox-prev");
   const nextBtn = document.getElementById("lightbox-next");
 
-  const photos = Array.isArray(window.PHOTOS) ? window.PHOTOS : [];
+  const allPhotos = Array.isArray(window.PHOTOS) ? window.PHOTOS : [];
+  let visiblePhotos = allPhotos.slice();
+  let activeTag = "all";
   let currentIndex = 0;
   let lastFocused = null;
+  let touchStartX = null;
 
   function pad(n) {
     return String(n).padStart(2, "0");
   }
 
   function metaLine(photo) {
-    return [photo.date, photo.location].filter(Boolean).join(" · ");
+    return [photo.date, photo.location].filter(Boolean).join(" \u00b7 ");
   }
 
-  function render() {
-    indexCount.textContent = "N\u00b0 " + pad(photos.length);
+  function specLine(photo) {
+    return [photo.camera, photo.lens, photo.aperture, photo.shutter, photo.iso, photo.film]
+      .filter(Boolean)
+      .join(" \u00b7 ");
+  }
 
-    if (photos.length === 0) {
+  /* ---------------- Filters ---------------- */
+
+  function collectTags() {
+    const tags = new Set();
+    allPhotos.forEach((p) => {
+      if (Array.isArray(p.tags)) p.tags.forEach((t) => tags.add(t));
+    });
+    return Array.from(tags).sort();
+  }
+
+  function renderFilters() {
+    const tags = collectTags();
+    if (tags.length === 0) {
+      filtersNav.hidden = true;
+      return;
+    }
+    filtersNav.hidden = false;
+    filtersNav.innerHTML = "";
+
+    const makeChip = (label, tag) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "filter-chip" + (activeTag === tag ? " is-active" : "");
+      btn.textContent = label;
+      btn.addEventListener("click", () => setActiveTag(tag));
+      return btn;
+    };
+
+    filtersNav.appendChild(makeChip("All", "all"));
+    tags.forEach((t) => filtersNav.appendChild(makeChip(t, t)));
+  }
+
+  function setActiveTag(tag) {
+    activeTag = tag;
+    visiblePhotos =
+      tag === "all"
+        ? allPhotos.slice()
+        : allPhotos.filter((p) => Array.isArray(p.tags) && p.tags.includes(tag));
+    if (lightbox.classList.contains("is-open")) closeLightbox();
+    renderFilters();
+    renderGallery();
+  }
+
+  /* ---------------- Gallery ---------------- */
+
+  function renderGallery() {
+    gallery.innerHTML = "";
+    indexCount.textContent = "N\u00b0 " + pad(visiblePhotos.length);
+
+    if (visiblePhotos.length === 0) {
       emptyState.hidden = false;
       return;
     }
+    emptyState.hidden = true;
 
     const frag = document.createDocumentFragment();
 
-    photos.forEach((photo, i) => {
+    visiblePhotos.forEach((photo, i) => {
       const size = ["lg", "md", "sm"].includes(photo.size) ? photo.size : "md";
 
       const figure = document.createElement("figure");
@@ -80,8 +138,10 @@
     gallery.appendChild(frag);
   }
 
+  /* ---------------- Lightbox ---------------- */
+
   function openLightbox(i) {
-    if (!photos.length) return;
+    if (!visiblePhotos.length) return;
     currentIndex = i;
     lastFocused = document.activeElement;
     updateLightbox();
@@ -99,16 +159,18 @@
   }
 
   function updateLightbox() {
-    const photo = photos[currentIndex];
+    const photo = visiblePhotos[currentIndex];
     lightboxImage.src = photo.file;
     lightboxImage.alt = photo.alt || "";
-    lightboxIndex.textContent = "N\u00b0 " + pad(currentIndex + 1) + " / " + pad(photos.length);
+    lightboxIndex.textContent = "N\u00b0 " + pad(currentIndex + 1) + " / " + pad(visiblePhotos.length);
     lightboxTitle.textContent = photo.title || "Untitled";
     lightboxMeta.textContent = metaLine(photo);
+    lightboxSpecs.textContent = specLine(photo);
+    lightboxSpecs.hidden = specLine(photo).length === 0;
   }
 
   function step(delta) {
-    currentIndex = (currentIndex + delta + photos.length) % photos.length;
+    currentIndex = (currentIndex + delta + visiblePhotos.length) % visiblePhotos.length;
     updateLightbox();
   }
 
@@ -125,5 +187,35 @@
     if (e.target === lightbox) closeLightbox();
   });
 
-  render();
+  // Tap zones: clicking the left/right third of the image steps
+  // through the set, same as the arrow buttons — useful on phones
+  // where the arrow buttons sit near the screen edge.
+  lightboxImage.addEventListener("click", (e) => {
+    const rect = lightboxImage.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    if (x < rect.width / 3) step(-1);
+    else if (x > (rect.width * 2) / 3) step(1);
+  });
+
+  // Swipe navigation for touch devices.
+  lightbox.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartX = e.changedTouches[0].clientX;
+    },
+    { passive: true }
+  );
+  lightbox.addEventListener(
+    "touchend",
+    (e) => {
+      if (touchStartX === null) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) step(dx > 0 ? -1 : 1);
+      touchStartX = null;
+    },
+    { passive: true }
+  );
+
+  renderFilters();
+  renderGallery();
 })();

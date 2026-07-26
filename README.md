@@ -21,6 +21,7 @@ images/         the actual image files (currently 8 placeholder .svg graphics)
 ```js
 { file: "images/2026-02-rittenhouse.jpg", title: "Rittenhouse, February",
   date: "2026-02", location: "Philadelphia, PA", size: "md",
+  tags: ["street", "winter"], camera: "Leica M6", lens: "35mm", aperture: "f/5.6",
   alt: "Bare trees over a fountain in winter light" },
 ```
 
@@ -32,6 +33,14 @@ images/         the actual image files (currently 8 placeholder .svg graphics)
 `size` is `"lg"`, `"md"`, or `"sm"` — it sets how much grid width the photo
 takes. Mix them; a page where every photo is the same size stops looking
 like a considered index and starts looking like a spreadsheet.
+
+`tags` is optional and free-form — every unique tag used across all your
+photos automatically becomes a filter chip above the gallery, so tagging
+consistently (`"street"`, not sometimes `"streets"`) is the only thing
+that matters. `camera`, `lens`, `aperture`, `shutter`, `iso`, and `film`
+are also optional; whichever you fill in show up as a small spec line at
+the bottom of the full-size lightbox view. Leave any of them out entirely
+if you don't want to bother — the site only shows what you provide.
 
 ## Resizing and compressing — do this before every commit
 
