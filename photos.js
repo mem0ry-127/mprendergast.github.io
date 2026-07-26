@@ -627,4 +627,38 @@ somewhere in the sickening Wide-Open
 and I stand here, in this orange glow
 looking, and looking, and looking` },
 
+  { type: "audio", file: "audio/music/video-store.mp3", title: "video store_Master", date: "2026-02", size: "md" },
+
+  { type: "audio", file: "audio/music/2024-10-31.mp3", title: "10.31.24 4_Master", date: "2024-10-31", size: "sm" },
+
+  { type: "audio", file: "audio/music/2024-10-18.mp3", title: "10.18.2024_Master", date: "2024-10-18", size: "sm" },
+
+  { type: "audio", file: "audio/music/2024-09-23.mp3", title: "9.23.2024_2_Master", date: "2024-09-23", size: "md" },
+
+  { type: "audio", file: "audio/music/2024-02-15.mp3", title: "2.15.2024_Master", date: "2024-02-15", size: "md" },
+
+  { type: "audio", file: "audio/music/2022-01-10.mp3", title: "1.10.2022", date: "2022-01-10", size: "sm" },
+
+  { type: "audio", file: "audio/music/2021-12-22.mp3", title: "12.22.2021", date: "2021-12-22", size: "sm" },
+
+  { type: "audio", file: "audio/music/2021-12-13.mp3", title: "12.13.2021", date: "2021-12-13", size: "md" },
+
+  { type: "audio", file: "audio/music/2021-12-10.mp3", title: "12.10.2021", date: "2021-12-10", size: "sm" },
+
+  { type: "audio", file: "audio/music/2021-10-05.mp3", title: "10.5.2021", date: "2021-10-05", size: "md" },
+
+  { type: "audio", file: "audio/music/2021-09-02.mp3", title: "9.2.2021", date: "2021-09-02", size: "sm" },
+
+  { type: "audio", file: "audio/music/2021-08-09.mp3", title: "8.9.2021", date: "2021-08-09", size: "sm" },
+
+  { type: "audio", file: "audio/music/2021-08-05.mp3", title: "8.5.2021", date: "2021-08-05", size: "md" },
+
+  { type: "audio", file: "audio/music/2021-07-01.mp3", title: "7.1.2021", date: "2021-07-01", size: "sm" },
+
+  { type: "audio", file: "audio/music/2021-06-28.mp3", title: "6.28.2021_2_Master", date: "2021-06-28", size: "md" },
+
+  { type: "audio", file: "audio/music/2021-04-05.mp3", title: "4.5.2021", date: "2021-04-05", size: "sm" },
+
+  { type: "audio", file: "audio/music/2020-12-02.mp3", title: "12.2.2020 3_4", date: "2020-12-02", size: "md" },
+
 ];

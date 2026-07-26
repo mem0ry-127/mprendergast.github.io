@@ -21,6 +21,12 @@
   const lightboxText = document.getElementById("lightbox-text");
   const lightboxTextBody = document.getElementById("lightbox-text-body");
   const plainTextToggle = document.getElementById("plain-text-toggle");
+  const lightboxAudio = document.getElementById("lightbox-audio");
+  const audioElement = document.getElementById("audio-element");
+  const audioPlayBtn = document.getElementById("audio-play");
+  const audioProgress = document.getElementById("audio-progress");
+  const audioProgressFill = document.getElementById("audio-progress-fill");
+  const audioTime = document.getElementById("audio-time");
   const lightboxIndex = document.getElementById("lightbox-index");
   const lightboxTitle = document.getElementById("lightbox-title");
   const lightboxMeta = document.getElementById("lightbox-meta");
@@ -75,6 +81,13 @@
 
   function pad(n) {
     return String(n).padStart(2, "0");
+  }
+
+  function formatAudioTime(seconds) {
+    if (!isFinite(seconds) || seconds < 0) return "0:00";
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return m + ":" + pad(s);
   }
 
   function metaLine(photo) {
@@ -180,12 +193,14 @@
     visiblePhotos.forEach((photo, i) => {
       const size = ["lg", "md", "sm"].includes(photo.size) ? photo.size : "md";
       const isText = itemType(photo) === "text";
+      const isAudio = itemType(photo) === "audio";
 
       const figure = document.createElement("figure");
       figure.className = "tile tile--" + size;
 
       const button = document.createElement("button");
-      button.className = "tile-button" + (isText ? " tile-button--text" : "");
+      button.className =
+        "tile-button" + (isText ? " tile-button--text" : "") + (isAudio ? " tile-button--audio" : "");
       button.type = "button";
       button.setAttribute("aria-label", "Open " + (photo.title || "photograph") + " full size");
       button.addEventListener("click", () => openLightbox(i));
@@ -205,6 +220,18 @@
         excerpt.textContent = photo.body || "";
         preview.appendChild(previewTitle);
         preview.appendChild(excerpt);
+        button.appendChild(preview);
+      } else if (isAudio) {
+        const mark = document.createElement("span");
+        mark.className = "tile-audio-mark";
+        mark.textContent = "\u25b8";
+        const preview = document.createElement("div");
+        preview.className = "tile-text-preview";
+        const previewTitle = document.createElement("span");
+        previewTitle.className = "tile-text-title";
+        previewTitle.textContent = photo.title || "Untitled";
+        preview.appendChild(previewTitle);
+        button.appendChild(mark);
         button.appendChild(preview);
       } else {
         const img = document.createElement("img");
@@ -253,19 +280,35 @@
     lightbox.setAttribute("aria-hidden", "true");
     document.removeEventListener("keydown", onKeydown);
     setZoomed(false);
+    stopAudio();
     if (lastFocused) lastFocused.focus();
+  }
+
+  function stopAudio() {
+    audioElement.pause();
+    audioElement.removeAttribute("src");
+    audioElement.load();
+    audioPlayBtn.textContent = "\u25b6";
+    audioProgressFill.style.width = "0%";
+    audioTime.textContent = "0:00 / 0:00";
   }
 
   function updateLightbox() {
     const photo = visiblePhotos[currentIndex];
     const isText = itemType(photo) === "text";
+    const isAudio = itemType(photo) === "audio";
     isPlainText = false;
+    stopAudio();
 
-    lightboxImage.hidden = isText;
+    lightboxImage.hidden = isText || isAudio;
     lightboxText.hidden = !isText;
+    lightboxAudio.hidden = !isAudio;
+
     if (isText) {
       plainTextToggle.textContent = "Plain text";
       renderTextBody(photo, false);
+    } else if (isAudio) {
+      audioElement.src = photo.file;
     } else {
       lightboxImage.src = photo.file;
       lightboxImage.alt = photo.alt || "";
@@ -305,6 +348,34 @@
   });
   lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox) closeLightbox();
+  });
+
+  audioPlayBtn.addEventListener("click", () => {
+    if (audioElement.paused) audioElement.play();
+    else audioElement.pause();
+  });
+  audioElement.addEventListener("play", () => {
+    audioPlayBtn.textContent = "❚❚";
+  });
+  audioElement.addEventListener("pause", () => {
+    audioPlayBtn.textContent = "▶";
+  });
+  audioElement.addEventListener("ended", () => {
+    audioPlayBtn.textContent = "▶";
+  });
+  audioElement.addEventListener("timeupdate", () => {
+    const pct = audioElement.duration ? (audioElement.currentTime / audioElement.duration) * 100 : 0;
+    audioProgressFill.style.width = pct + "%";
+    audioTime.textContent = formatAudioTime(audioElement.currentTime) + " / " + formatAudioTime(audioElement.duration);
+  });
+  audioElement.addEventListener("loadedmetadata", () => {
+    audioTime.textContent = formatAudioTime(audioElement.currentTime) + " / " + formatAudioTime(audioElement.duration);
+  });
+  audioProgress.addEventListener("click", (e) => {
+    if (!audioElement.duration) return;
+    const rect = audioProgress.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    audioElement.currentTime = pct * audioElement.duration;
   });
 
   // Tap zones: clicking the left/right third of the image steps

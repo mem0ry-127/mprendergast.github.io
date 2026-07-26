@@ -269,6 +269,24 @@ button {
   white-space: pre-line;
 }
 
+/* Audio-post tiles: compact, content-sized like text tiles — just a
+   title and a play mark, no waveform or artwork. */
+.tile-button--audio {
+  aspect-ratio: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  background: var(--overlay);
+}
+
+.tile-audio-mark {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: var(--accent);
+}
+
 .tile figcaption {
   display: flex;
   justify-content: space-between;
@@ -410,6 +428,57 @@ button {
   line-height: 1.6;
   text-align: left;
   color: var(--muted);
+}
+
+/* Audio player: a bare play toggle, a click-to-seek progress bar,
+   and a time readout — no native browser widget, so it stays
+   consistent with the rest of the site's controls. */
+.lightbox-audio {
+  width: min(560px, 84vw);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 32px;
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+}
+
+.audio-play {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--ink);
+  border: 1px solid var(--hairline);
+  border-radius: 50%;
+}
+.audio-play:hover { border-color: var(--accent); color: var(--accent); }
+
+.audio-progress {
+  flex: 1;
+  height: 3px;
+  background: var(--hairline);
+  cursor: pointer;
+  position: relative;
+}
+.audio-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  background: var(--accent);
+}
+
+.audio-time {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
 }
 
 .lightbox-figure figcaption {
