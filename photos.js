@@ -30,8 +30,8 @@
 
 const PHOTOS = [
   { file: "images/MPP03325.jpg", title: "cmp", date: "2026-07-23",
-    location: "Cape May Point, NJ", size: "lg", tags: ["circle", "geometry"],
+    location: "Cape May Point, NJ", size: "lg", tags: ["beach"],
     camera: "Demo View 4x5", lens: "150mm", aperture: "f/8", shutter: "1/60", iso: "100",
-    alt: "Abstract demo graphic, overlapping circle and diagonal bar" },
+    alt: "" },
 
 ];
