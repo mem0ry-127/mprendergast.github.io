@@ -35,7 +35,9 @@
   const prevBtn = document.getElementById("lightbox-prev");
   const nextBtn = document.getElementById("lightbox-next");
 
-  const allPhotos = typeof PHOTOS !== "undefined" && Array.isArray(PHOTOS) ? PHOTOS : [];
+  const allPhotos = (typeof PHOTOS !== "undefined" && Array.isArray(PHOTOS) ? PHOTOS : []).filter(
+    (p) => !p.hidden
+  );
   let activeType = DEFAULT_TYPE;
   let activeTag = "all";
   let visiblePhotos = [];

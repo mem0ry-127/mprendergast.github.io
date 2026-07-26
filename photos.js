@@ -23,6 +23,10 @@
               shown as a small spec line at the bottom of the lightbox
               only, to keep the grid view uncluttered. Fill in whichever
               you actually know; leave the rest out.
+    hidden    true — pulls the entry from the site entirely (every
+              section, every tag) without touching the image file or
+              deleting the entry. Set it back to false (or remove the
+              line) to bring it back.
 */
 
 const PHOTOS = [
@@ -36,6 +40,7 @@ const PHOTOS = [
     alt: "Handmade marbled ceramic plates and glazed cups arranged on a wood table" },
 
   { file: "images/cape-may-point/2024-07-frisbee.jpg", title: "Frisbee, dusk", date: "2024-07",
+    hidden: true,
     location: "Cape May Point, NJ", size: "md", tags: ["beach"],
     alt: "A young man throwing a red frisbee on a beach at dusk, soft pastel light" },
 
@@ -48,6 +53,7 @@ const PHOTOS = [
     alt: "A Gothic tower glimpsed through trees in central Barcelona" },
 
   { file: "images/honeymoon/spain/2024-07-barcelona-courtyard.jpg", title: "Courtyard, Barcelona", date: "2024-07",
+    hidden: true,
     location: "Barcelona, Spain", size: "md", tags: ["street"],
     alt: "An outdoor cafe courtyard shaded by a banyan-like tree strung with colorful bunting" },
 

@@ -87,6 +87,7 @@ button {
    selecting a specific section reveals its own tag row below,
    set apart with a distinct background (see .filters).
 --------------------------------------------------------- */
+.type-nav[hidden] { display: none; }
 .type-nav {
   display: flex;
   flex-wrap: wrap;
@@ -433,6 +434,7 @@ button {
 /* Audio player: a bare play toggle, a click-to-seek progress bar,
    and a time readout — no native browser widget, so it stays
    consistent with the rest of the site's controls. */
+.lightbox-audio[hidden] { display: none; }
 .lightbox-audio {
   width: min(560px, 84vw);
   display: flex;
