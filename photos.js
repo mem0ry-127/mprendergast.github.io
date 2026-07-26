@@ -41,6 +41,51 @@ const PHOTOS = [
     film: "Ilford HP5",
     alt: "A rocky sea stack and cliff face above rough surf, seen from above in overcast light" },
 
+  { file: "images/oregon/2022-10-waterfall.jpg", title: "Behind the falls", date: "2022-10",
+    location: "Oregon", size: "lg", tags: ["landscape"],
+    film: "Ilford HP5",
+    alt: "A waterfall seen from within a rock alcove, overlooking a mossy forest canyon" },
+
+  { file: "images/oregon/2022-10-old-growth.jpg", title: "Old growth", date: "2022-10",
+    location: "Oregon", size: "md", tags: ["landscape"],
+    film: "Ilford HP5",
+    alt: "A person standing dwarfed by towering old-growth trees in misty forest" },
+
+  { file: "images/oregon/2022-10-canopy.jpg", title: "Canopy", date: "2022-10",
+    location: "Oregon", size: "sm", tags: ["landscape"],
+    film: "Ilford HP5",
+    alt: "Tall conifers rising into fog, backlit by diffuse light" },
+
+  { file: "images/oregon/2022-10-standing-timber.jpg", title: "Standing timber", date: "2022-10",
+    location: "Oregon", size: "md", tags: ["landscape"],
+    film: "Ilford HP5",
+    alt: "Tall trees silhouetted against a bright, foggy sky" },
+
+  { file: "images/oregon/2022-10-coastline.jpg", title: "Coastline", date: "2022-10",
+    location: "Oregon", size: "sm", tags: ["landscape", "coast"],
+    film: "Ilford HP5",
+    alt: "Silhouetted trees framing a foggy view of the coastline and surf below" },
+
+  { file: "images/oregon/2022-10-moss.jpg", title: "Moss", date: "2022-10",
+    location: "Oregon", size: "md", tags: ["landscape"],
+    film: "Ilford HP5",
+    alt: "Moss-draped tree branches arching low over dense forest undergrowth" },
+
+  { file: "images/oregon/2022-10-mossy-arch.jpg", title: "Mossy arch", date: "2022-10",
+    location: "Oregon", size: "sm", tags: ["landscape"],
+    film: "Ilford HP5",
+    alt: "A thick moss-covered branch arching through the forest canopy" },
+
+  { file: "images/oregon/2022-10-greenhouse.jpg", title: "Greenhouse", date: "2022-10",
+    location: "Oregon", size: "md", tags: ["landscape"],
+    film: "Ilford HP5",
+    alt: "A small glass greenhouse behind a wrought iron fence, surrounded by trees in heavy fog" },
+
+  { file: "images/oregon/2022-10-storefront.jpg", title: "Storefront", date: "2022-10",
+    location: "Oregon", size: "sm", tags: ["street"],
+    film: "Ilford HP5",
+    alt: "A vacant single-story commercial building with boarded windows and closed garage doors, across an empty street" },
+
   { file: "images/cape-may-point/2022-07-beach-portrait.jpg", title: "Beach portrait", date: "2022-07",
     location: "Cape May Point, NJ", size: "md", tags: ["beach", "portrait"],
     film: "Kodak Portra 400",
@@ -75,5 +120,40 @@ const PHOTOS = [
     location: "Spain", size: "md", tags: ["landscape"],
     film: "Kodak Portra 400",
     alt: "A rocky mountain ridge under a blue sky with scattered clouds, seen through a car window" },
+
+  { file: "images/spain/2022-06-valencia-skyline.jpg", title: "Valencia skyline", date: "2022-06",
+    location: "Valencia, Spain", size: "lg", tags: ["landscape"],
+    film: "Kodak Portra 400",
+    alt: "Rooftops of Valencia's old town with the Micalet bell tower and cathedral dome rising above the city" },
+
+  { file: "images/spain/2022-06-rooftops.jpg", title: "Rooftops", date: "2022-06",
+    location: "Valencia, Spain", size: "md", tags: ["landscape"],
+    film: "Kodak Portra 400",
+    alt: "Terracotta rooftops and antennas across a city skyline, a domed church visible in the distance" },
+
+  { file: "images/spain/2022-06-terrace.jpg", title: "Terrace", date: "2022-06",
+    location: "Valencia, Spain", size: "md", tags: ["street"],
+    film: "Kodak Portra 400",
+    alt: "A woman looking out from a terrace at ornate apartment buildings across the street" },
+
+  { file: "images/spain/2022-06-wires.jpg", title: "Wires", date: "2022-06",
+    location: "Valencia, Spain", size: "sm", tags: ["street"],
+    film: "Kodak Portra 400",
+    alt: "Utility wires radiating from a rooftop pole against a clear sky, buildings below" },
+
+  { file: "images/spain/2022-06-laundry.jpg", title: "Laundry", date: "2022-06",
+    location: "Valencia, Spain", size: "sm", tags: ["street"],
+    film: "Kodak Portra 400",
+    alt: "Sheets and clothing hanging from a wrought iron balcony to dry against a clear blue sky" },
+
+  { file: "images/spain/2022-06-lattice.jpg", title: "Lattice", date: "2022-06",
+    location: "Valencia, Spain", size: "md", tags: ["architecture"],
+    film: "Kodak Portra 400",
+    alt: "A white geometric lattice screen on a building facade, woven material visible behind it" },
+
+  { file: "images/spain/2022-06-barred-window.jpg", title: "Barred window", date: "2022-06",
+    location: "Valencia, Spain", size: "sm", tags: ["street"],
+    film: "Kodak Portra 400",
+    alt: "A window covered by bars painted in bright colors, layered with graffiti and a faded 1973 tag" },
 
 ];
