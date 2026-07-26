@@ -29,39 +29,9 @@
 */
 
 const PHOTOS = [
-  { file: "images/01-demo.svg", title: "Sample frame — replace me", date: "2026-01",
-    location: "Philadelphia, PA", size: "lg", tags: ["circle", "geometry"],
+  { file: "images/MPP03325.jpg", title: "cmp", date: "2026-07-23",
+    location: "Cape May Point, NJ", size: "lg", tags: ["circle", "geometry"],
     camera: "Demo View 4x5", lens: "150mm", aperture: "f/8", shutter: "1/60", iso: "100",
     alt: "Abstract demo graphic, overlapping circle and diagonal bar" },
 
-  { file: "images/02-demo.svg", title: "Sample frame — replace me", date: "2026-01",
-    size: "md", tags: ["arc"],
-    alt: "Abstract demo graphic, quarter circle in corner" },
-
-  { file: "images/03-demo.svg", title: "Sample frame — replace me", date: "2025-12",
-    location: "Mt. Airy, Philadelphia", size: "sm", tags: ["dots", "grid"],
-    camera: "Demo Rangefinder", lens: "35mm", aperture: "f/5.6",
-    alt: "Abstract demo graphic, grid of small dots" },
-
-  { file: "images/04-demo.svg", title: "Sample frame — replace me", date: "2025-12",
-    size: "sm", tags: ["line"],
-    alt: "Abstract demo graphic, single diagonal line" },
-
-  { file: "images/05-demo.svg", title: "Sample frame — replace me", date: "2025-11",
-    location: "Wissahickon Valley", size: "md", tags: ["circle"],
-    film: "Demo 400", iso: "400",
-    alt: "Abstract demo graphic, concentric circles" },
-
-  { file: "images/06-demo.svg", title: "Sample frame — replace me", date: "2025-11",
-    size: "lg", tags: ["geometry"],
-    alt: "Abstract demo graphic, offset rectangles" },
-
-  { file: "images/07-demo.svg", title: "Sample frame — replace me", date: "2025-10",
-    location: "Philadelphia, PA", size: "sm", tags: ["line", "geometry"],
-    alt: "Abstract demo graphic, radiating lines" },
-
-  { file: "images/08-demo.svg", title: "Sample frame — replace me", date: "2025-10",
-    size: "md", tags: ["circle"],
-    camera: "Demo Rangefinder", lens: "50mm", aperture: "f/2", shutter: "1/125", iso: "200",
-    alt: "Abstract demo graphic, two circles and a bar" },
 ];
