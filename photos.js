@@ -19,5 +19,5 @@
 */
 
 const PHOTOS = [
-  { file: "images/MPP03325.JPEG", title: "cmp", date: "2026-07-25", location: "Philadelphia, PA", size: "lg", alt: "" },
+  { file: "images/MPP03325.jpg", title: "cmp", date: "2026-07-25", location: "Philadelphia, PA", size: "lg", alt: "" },
 ];
