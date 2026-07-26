@@ -23,15 +23,12 @@
               shown as a small spec line at the bottom of the lightbox
               only, to keep the grid view uncluttered. Fill in whichever
               you actually know; leave the rest out.
-
-  These first entries are placeholder demo graphics, not photographs —
-  delete them once you've added your own.
 */
 
 const PHOTOS = [
-  { file: "images/MPP03325.jpg", title: "cmp", date: "2026-07-23",
+  { file: "images/MPP03325.jpg", title: "Rescue boat, dusk", date: "2026-07-22",
     location: "Cape May Point, NJ", size: "lg", tags: ["beach"],
-    camera: "Demo View 4x5", lens: "150mm", aperture: "f/8", shutter: "1/60", iso: "100",
-    alt: "" },
+    camera: "Sony a6400", lens: "16-50mm", aperture: "f/4.5", shutter: "1/160", iso: "1000",
+    alt: "A white lifeguard rescue boat resting on its beach trailer at dusk, dune grass and shoreline in the background" },
 
 ];
