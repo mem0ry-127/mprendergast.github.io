@@ -113,6 +113,7 @@ button {
    A visibly different background from .type-nav above it marks
    this row as the nested, section-specific tier.
 --------------------------------------------------------- */
+.filters[hidden] { display: none; }
 .filters {
   display: flex;
   flex-wrap: wrap;
