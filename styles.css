@@ -1,5 +1,10 @@
 /* ---------------------------------------------------------
-   Tokens — dark
+   Tokens — dark (default) and light. --accent, --scrim, and the
+   --badge-* pair stay fixed across themes: the accent is the site's
+   one brand color regardless of chrome, the lightbox stays a dark
+   viewing environment in either theme, and the tile-index badge sits
+   on top of arbitrary photo content so it needs guaranteed contrast
+   independent of the page theme.
 --------------------------------------------------------- */
 :root {
   --paper: #4d5566;
@@ -11,6 +16,8 @@
   --hairline: rgba(225, 228, 236, 0.14);
   --overlay: rgba(20, 22, 28, 0.7);
   --scrim: rgba(10, 11, 15, 0.97);
+  --badge-bg: rgba(10, 11, 15, 0.7);
+  --badge-ink: #f2f1ec;
 
   --font-display: 'Archivo', sans-serif;
   --font-body: 'IBM Plex Sans', sans-serif;
@@ -19,6 +26,16 @@
 
   --gap: 1px;
   --edge: clamp(16px, 4vw, 48px);
+}
+
+:root[data-theme="light"] {
+  --paper: #eef0e6;
+  --ink: #363b30;
+  --grid-line: rgba(40, 45, 30, 0.08);
+  --muted: #7c8371;
+  --muted-dim: #a3a897;
+  --hairline: rgba(40, 45, 30, 0.14);
+  --overlay: rgba(0, 0, 0, 0.05);
 }
 
 * { box-sizing: border-box; }
@@ -67,6 +84,23 @@ button {
   font-size: 14px;
   letter-spacing: 0.01em;
 }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.theme-toggle {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  border: 1px solid var(--hairline);
+  padding: 5px 10px;
+}
+.theme-toggle:hover { color: var(--ink); border-color: var(--accent); }
 
 .header-meta {
   display: flex;
@@ -247,8 +281,8 @@ button {
   left: 12px;
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--ink);
-  background: var(--overlay);
+  color: var(--badge-ink);
+  background: var(--badge-bg);
   padding: 3px 7px;
   letter-spacing: 0.02em;
 }
@@ -261,7 +295,7 @@ button {
   aspect-ratio: auto;
   display: block;
   max-height: 420px;
-  padding: 20px;
+  padding: 48px 20px 20px;
   background: var(--overlay);
   overflow: hidden;
   position: relative;
@@ -304,7 +338,7 @@ button {
    in place within the tile itself. Only one tile plays at a time. */
 .tile-audio {
   position: relative;
-  padding: 20px;
+  padding: 48px 20px 20px;
   background: var(--overlay);
 }
 
