@@ -5,6 +5,7 @@
   const emptyState = document.getElementById("empty-state");
   const indexCount = document.getElementById("index-count");
   const typeNav = document.getElementById("type-nav");
+  const locationNav = document.getElementById("location-nav");
   const filtersNav = document.getElementById("filters");
 
   // Fixed top-level sections, shown in this order regardless of which
@@ -33,6 +34,7 @@
     (p) => !p.hidden
   );
   let activeType = DEFAULT_TYPE;
+  let activeLocation = "all";
   let activeTag = "all";
   let visiblePhotos = [];
   let currentIndex = 0;
@@ -72,8 +74,22 @@
   }
 
   function itemsOfActiveType() {
-    if (activeType === "all") return allPhotos.slice();
-    return allPhotos.filter((p) => itemType(p) === activeType);
+    let items = activeType === "all" ? allPhotos.slice() : allPhotos.filter((p) => itemType(p) === activeType);
+    if (activeType === "photo" && activeLocation !== "all") {
+      items = items.filter((p) => placeGroup(p) === activeLocation);
+    }
+    return items;
+  }
+
+  // Groups the free-text `location` field into a coarser place for the
+  // Photography section's location nav. Most locations map to
+  // themselves; multi-city countries (Spain currently has entries
+  // tagged with the bare country and three different city names) merge
+  // into one bucket so the location nav reads as one trip, not four.
+  function placeGroup(photo) {
+    const loc = photo.location || "";
+    if (/spain/i.test(loc)) return "Spain";
+    return loc || "Unspecified";
   }
 
   function pad(n) {
@@ -251,9 +267,54 @@
 
   function setActiveType(type) {
     activeType = type;
+    activeLocation = "all";
     activeTag = "all";
     if (lightbox.classList.contains("is-open")) closeLightbox();
     renderTypeNav();
+    renderLocationNav();
+    renderFilters();
+    applyFilter();
+  }
+
+  /* ---------------- Location nav (Photography only) ---------------- */
+
+  function collectLocations() {
+    const places = new Set();
+    allPhotos.filter((p) => itemType(p) === "photo").forEach((p) => places.add(placeGroup(p)));
+    return Array.from(places).sort();
+  }
+
+  function renderLocationNav() {
+    if (activeType !== "photo") {
+      locationNav.hidden = true;
+      return;
+    }
+    const places = collectLocations();
+    if (places.length === 0) {
+      locationNav.hidden = true;
+      return;
+    }
+    locationNav.hidden = false;
+    locationNav.innerHTML = "";
+
+    const makeChip = (label, place) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "location-chip" + (activeLocation === place ? " is-active" : "");
+      btn.textContent = label;
+      btn.addEventListener("click", () => setActiveLocation(place));
+      return btn;
+    };
+
+    locationNav.appendChild(makeChip("All", "all"));
+    places.forEach((place) => locationNav.appendChild(makeChip(place, place)));
+  }
+
+  function setActiveLocation(place) {
+    activeLocation = place;
+    activeTag = "all";
+    if (lightbox.classList.contains("is-open")) closeLightbox();
+    renderLocationNav();
     renderFilters();
     applyFilter();
   }
@@ -500,6 +561,7 @@
   );
 
   renderTypeNav();
+  renderLocationNav();
   renderFilters();
   applyFilter();
 })();

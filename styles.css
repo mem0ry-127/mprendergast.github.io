@@ -112,6 +112,36 @@ button {
 }
 
 /* ---------------------------------------------------------
+   Location nav — a middle tier, Photography-only: shares the tag
+   row's darker "nested" background below it (no border between the
+   two, so they read as one continuous panel), but sits a size step
+   up in the type scale to mark it as the coarser of the two filters.
+--------------------------------------------------------- */
+.location-nav[hidden] { display: none; }
+.location-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 14px var(--edge) 0;
+  background: rgba(0, 0, 0, 0.14);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.location-chip {
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.location-chip:hover { color: var(--ink); }
+.location-chip.is-active {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+/* ---------------------------------------------------------
    Filter chips — tab-style, not pills; underline marks state.
    A visibly different background from .type-nav above it marks
    this row as the nested, section-specific tier.
