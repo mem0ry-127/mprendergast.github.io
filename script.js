@@ -7,10 +7,11 @@
   const typeNav = document.getElementById("type-nav");
   const filtersNav = document.getElementById("filters");
 
-  const TYPE_LABELS = { photo: "Photos", audio: "Audio", text: "Writing" };
-  function typeLabel(type) {
-    return TYPE_LABELS[type] || type.charAt(0).toUpperCase() + type.slice(1);
-  }
+  // Fixed top-level sections, shown in this order regardless of which
+  // ones have entries yet — sections with nothing in them just show
+  // the existing empty state rather than being hidden from the nav.
+  const TYPES = ["all", "photo", "text", "audio"];
+  const TYPE_LABELS = { all: "All", photo: "Photography", text: "Text", audio: "Audio" };
 
   const lightbox = document.getElementById("lightbox");
   const lightboxFigure = document.querySelector(".lightbox-figure");
@@ -24,7 +25,7 @@
   const nextBtn = document.getElementById("lightbox-next");
 
   const allPhotos = typeof PHOTOS !== "undefined" && Array.isArray(PHOTOS) ? PHOTOS : [];
-  let activeType = null;
+  let activeType = "all";
   let activeTag = "all";
   let visiblePhotos = [];
   let currentIndex = 0;
@@ -37,6 +38,7 @@
   }
 
   function itemsOfActiveType() {
+    if (activeType === "all") return allPhotos.slice();
     return allPhotos.filter((p) => itemType(p) === activeType);
   }
 
@@ -56,30 +58,14 @@
 
   /* ---------------- Type nav (top-level sections) ---------------- */
 
-  function collectTypes() {
-    const types = new Set();
-    allPhotos.forEach((p) => types.add(itemType(p)));
-    return Array.from(types).sort();
-  }
-
   function renderTypeNav() {
-    const types = collectTypes();
-    if (!activeType || !types.includes(activeType)) activeType = types[0] || "photo";
-
-    // With only one section, there's nothing to switch between — skip
-    // the extra nav row and go straight to that section's tag filters.
-    if (types.length <= 1) {
-      typeNav.hidden = true;
-      return;
-    }
-
     typeNav.hidden = false;
     typeNav.innerHTML = "";
-    types.forEach((t) => {
+    TYPES.forEach((t) => {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "type-chip" + (activeType === t ? " is-active" : "");
-      btn.textContent = typeLabel(t);
+      btn.textContent = TYPE_LABELS[t];
       btn.addEventListener("click", () => setActiveType(t));
       typeNav.appendChild(btn);
     });
@@ -105,6 +91,12 @@
   }
 
   function renderFilters() {
+    // "All" is the merged view across every section — no sub-tag row.
+    // A specific section only gets a tag row when it actually has tags.
+    if (activeType === "all") {
+      filtersNav.hidden = true;
+      return;
+    }
     const tags = collectTags();
     if (tags.length === 0) {
       filtersNav.hidden = true;

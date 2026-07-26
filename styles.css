@@ -79,15 +79,18 @@ button {
 .index-count { color: var(--ink); }
 
 /* ---------------------------------------------------------
-   Type nav — top-level sections (Photos/Audio/Writing). Bolder
-   and larger than the tag chips beneath it, since it's one level
-   up. Hidden entirely while only one type exists.
+   Type nav — top-level sections (All/Photography/Text/Audio).
+   Always visible, bolder and larger than the tag chips beneath
+   it. Selecting "All" merges every section with no sub-tag row;
+   selecting a specific section reveals its own tag row below,
+   set apart with a distinct background (see .filters).
 --------------------------------------------------------- */
 .type-nav {
   display: flex;
   flex-wrap: wrap;
   gap: 28px;
-  padding: 20px var(--edge) 0;
+  padding: 20px var(--edge);
+  border-bottom: 1px solid var(--hairline);
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 15px;
@@ -106,13 +109,16 @@ button {
 }
 
 /* ---------------------------------------------------------
-   Filter chips — tab-style, not pills; underline marks state
+   Filter chips — tab-style, not pills; underline marks state.
+   A visibly different background from .type-nav above it marks
+   this row as the nested, section-specific tier.
 --------------------------------------------------------- */
 .filters {
   display: flex;
   flex-wrap: wrap;
   gap: 22px;
-  padding: 18px var(--edge);
+  padding: 14px var(--edge);
+  background: rgba(0, 0, 0, 0.14);
   border-bottom: 1px solid var(--hairline);
   font-family: var(--font-mono);
   font-size: 12px;
