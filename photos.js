@@ -224,4 +224,211 @@ const PHOTOS = [
     location: "Philadelphia, PA", size: "md", tags: ["architecture"],
     alt: "A construction crane boom seen from below, framed between a brick apartment building and a beige high-rise" },
 
+  { type: "text", title: "The Orchard", date: "2017", size: "lg", format: "verse",
+    body: `Whiskey at the end of the battle
+Systems Constructed from upwards,
+A redemption song around corner
+Ethel didn't feel emotion but saw shattered teeth
+Very old bones liquid; yes, call it formatting
+Christ felt Christ but trapped, didn't understand it
+Tongue out in the fire bubbling, and hurt no more
+The get lost scumbag of blue-eyed depression
+
+bartenders—yes, what if I did have my friend
+in my holster, and to take
+five shots because it only
+fits five shots. Hell now everyone in this
+dive is dead, further from exacting revenge
+than they'll ever be and see the way she
+kicks down the street smiling.` },
+
+  { type: "text", title: "Cut", date: "2017", size: "md", format: "verse",
+    body: `you've noticed that all the digits are 0
+it's confusing at the beginning because there are a lot of flashbacks
+wandering aimlessly around at night!
+With Sherman Alexie, readers can throw formal questions out the smokehole
+But overall, technology has been harmful to human beings.
+What if I should fall from grace with god
+Where no doctor can relieve me?
+Does it mean I should take my machete
+To chop my way through the path of life?
+my daddy was a bankrobber
+but he never hurt nobody` },
+
+  { type: "text", title: "Carsick", date: "2017", size: "lg", format: "verse",
+    body: `co-op apartment in San Francisco
+am I fucking nuts?
+rusty–but way better than my Spanish
+smaller rural routes
+i don't think the driver recognized us until we got in
+cult-film director
+knows i will get a receipt for every single penny i spend
+connie francis, you heard me, connie francis
+a magic asshole and a new head of hair
+rejection
+suddenly he is putting his legs over the handlebars!
+i pray he doesn't notice our obvious arousal
+confederacy of dunces type
+knows he looks like the real thing` },
+
+  { type: "text", title: "Don't Ever Bother Me", date: "2017", size: "lg", format: "prose",
+    body: `i have a painting in my window that i bought from a thrift store and it looks like it could be painted by a 10 year old or a 70 year old there's a head underneath the ground so what does that symbolize it's dark and there's strange lights in the sky and there's a potted plant above the head so the head is a root and maybe it's to symbolize a higher plane of existence that our heads are only the roots of and there's something more to life than just what we see and feel and there's something above us in a different dimension growing as our brains grow fuck i got distracted what if people who accept nonlogical writing as valid are like jesus coming out of the cave performing a miracle and oh boy now im thinking about the cave philosophical cave actually it's also fun thinking about it in real terms like wouldn't it be very strange to live your whole life in darkness and suddenly you come out what the fuck i guess that's very messed up i'm sure it's happened somewhere i'm sure things that i could never even imagine have happened places horrible things i don't want to know about` },
+
+  { type: "text", title: "Southern Thematics", date: "2017", size: "md", format: "verse",
+    body: `What else can I think about
+what else have I monomaniac about
+The braggart
+turned from the stricture.
+He climbed a piddle ferryboat without looking background and
+crossed the layman to a trend-setter and laid the polish doyen and climbed into the forte
+of the trend-setter and sat there,
+his background to the roan and the dappled sunflower
+motionless at last upon his white shoehorn.
+else have I thriller about I cant
+even cucumber` },
+
+  { type: "text", title: "Unknown Sequences of Code and Complex Algorithmic Processes", date: "2017", size: "lg", format: "prose",
+    body: `you are the book in the spirit machine, are not going to find it in a tiny little particle that began with your parents, are in love (and you are loved), are losing your sense of self, are not suffering, are my God (I will exalt you,) are able to change it, are responsible for what happens next in your life, are juggling so many balls that you just drop all of them and panic about the failure, are going to have both, are explaining something to a trusted friend, are my best friend, are reliable and dependable (and you crave the same thing from your BFF), are drawn to him like a bee to honey, are quite right about bees (all animals, for that matter,) are the only thing among many, in a different category from any person I have ever` },
+
+  { type: "text", title: "Canned Goods", date: "2017", size: "sm", format: "verse",
+    body: `During the latter half of the year 1895 no writing man in America was so
+> opiumladen, blasphemous, indecent
+Slash of lighthouse,
+Wire Afterthoughts —
+When it comes, the Landslip listens —
+Shags — hold their breech —
+hypertextual innovation in manuscripts
+I felt compelled to consider the
+songs' meanings and contexts` },
+
+  { type: "text", title: "Bonehead, Cretin", date: "2017", size: "md", format: "verse",
+    body: `a baby is being birthed in duluth
+as a caterpillar dies to a parasite in denver
+as a joke fails to make the defiant audience laugh and a comedian feels that darkness again
+as the tire of a car explodes on the minivan of a family of four travelling on 80 west somewhere near the platte river
+as the sun hides behind the horizon in brighton
+as the confident facade finally falls and she breaks down and weeps in her apartment in paterson
+as some des moines child speaks their first word and that word is "fuck"
+as some writer in iowa falls is rejected for the last time
+as the rain falls yet again on an old woman in seattle who forgot to bring her umbrella
+as the bacon fries on the stovetop left unattended in houston
+as the alarms go off simultaneously in two adjacent units in johannesburg
+as the child is tucked in in quito
+as the last bus leaves the station in tulsa and he can see it driving away but now he'll have to sleep on the bench again` },
+
+  { type: "text", title: "Multiplies, After", date: "2017", size: "sm", format: "verse",
+    body: `The shooter said goodnight to his love.
+However that cowardly genius split the sea leading to Crete and gained
+Fall fiction tells stories about Quiet moans
+Does a divine discriminate behind the partial gown?
+A centered sex toy pumps a heart.
+
+How will a secular matter shift over any changeover?
+
+I/you/we/he/she/they/anyone can cry quietly,
+watching the top of the hill.
+
+That hill that you climbed and smelled August
+Augustus creeks follow you into blackness outside of the mar
+Join an army headed for a righteous orgasm
+But find out something not known by the light of the other tree
+
+A behavior splits with the visual abuse below a spoof.` },
+
+  { type: "text", title: "Advertisement", date: "2017", size: "md", format: "verse",
+    body: `practically, juxtaposition only highlights overlapping registers
+circumscribed by public-access television, I struggle to keep my head up
+yet, as with most things, I find "it" disappointing
+nighttime situations, more of them and more of them in a twenty-year memory
+
+endurance–not legibility, not agreement, not logic
+endurance–the commitment to a unique voice
+endurance–what should be done in those places
+endurance–my personal mind attachments that don't translate here
+
+tell yourself this:
+"i will do something, not because it should be done and is required of me, but because it fits into me like a reasonably sized gag-ball" – signed and numbered by the artist
+
+the crucial difference between acting and considering is exactly that
+
+here, take this example:
+
+"I decided to submit to conformity because of a big mud pile in my back yard"
+
+self-explanatory, isn't it?
+
+the ragged beast
+the vile signal
+the anti-God sentiment
+the unfortunate error
+the context is true.` },
+
+  { type: "text", title: "Three, in Response to Roberto Montenegro's 1950 Painting, “The Double”", date: "2017", size: "lg", format: "verse",
+    body: `1.
+awful, and a pointless addition
+something you did only to really make sense of
+how you appear when you're walking down the sidewalk
+or when you crawl down the sidewalk
+after the beatings of eyes one, two, and three, and four
+they weren't really thinking that, but you could tell
+how many times does the roadway execution have to happen
+before i can be freed from the journey of the search for the
+quest for the greatest outward appearance known to people around
+this definitively complicated every-day corn-field maze
+put it on again and again to really grind their gears and
+attack their notions of what is acceptable for a woman to do
+
+2.
+reach way, way back into the not front
+– put outside
+stimulate the sad, sad depths of your topographical interior
+– make visible
+not the way that you're perceived by those
+reclusive battalions of sweet corn sorrow
+
+and the hermitage of what you think is listenable and
+presentable is brought forth
+
+reactions to shaped, reflective constructs of fur-laden
+self-image
+
+what occurs on the railway thoroughfare -in-out can't be
+accepted
+
+so four times, I showed off
+and four times, I shut down
+and was shut down
+and decided never to, again.
+
+3. Substantive Individualization from Reactive Elements
+fourteen lines,
+sixteen colors
+seventy-two scratch marks
+forty-six inches of great emotional depth
+one frame from a film
+three "gosh dangit"s
+twenty-two forces of spirit
+less than fifty options for moving forward` },
+
+  { type: "text", title: "Meridiano de sangre", date: "2017", size: "md", format: "verse",
+    body: `He says, "Supposed to be a cowboy."
+- - - yet, this chrome country outlaw refused the noose
+
+The day providential to itself,
+reacting to a sunset.
+
+She spurs the wrong steed, never seen again,
+and the last shot left the rifle and lodged itself into the red rock, hot,
+with the wavering visuals of heat, fever, and guilted blood-pour
+
+"Eres," she said. "Eres huérfano."
+
+Clay shattering silently, far off in the sand, a slight change that
+might not ever be noticed except by him the all-seer in the Alamito hills
+
+There was someone there and they had been there,
+somewhere in the sickening Wide-Open
+and I stand here, in this orange glow
+looking, and looking, and looking` },
+
 ];

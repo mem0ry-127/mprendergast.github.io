@@ -16,6 +16,9 @@
   const lightbox = document.getElementById("lightbox");
   const lightboxFigure = document.querySelector(".lightbox-figure");
   const lightboxImage = document.getElementById("lightbox-image");
+  const lightboxText = document.getElementById("lightbox-text");
+  const lightboxTextBody = document.getElementById("lightbox-text-body");
+  const plainTextToggle = document.getElementById("plain-text-toggle");
   const lightboxIndex = document.getElementById("lightbox-index");
   const lightboxTitle = document.getElementById("lightbox-title");
   const lightboxMeta = document.getElementById("lightbox-meta");
@@ -32,9 +35,35 @@
   let lastFocused = null;
   let touchStartX = null;
   let isZoomed = false;
+  let isPlainText = false;
 
   function itemType(p) {
     return p.type || "photo";
+  }
+
+  // Verse: literal line breaks + blank-line stanza breaks, no special
+  // per-poem indentation or effects. Prose: a single justified block,
+  // reflowing normally. This is a deliberately simplified, consistent
+  // template rather than a faithful per-poem replica of the source PDF.
+  function renderTextBody(item, plain) {
+    lightboxTextBody.innerHTML = "";
+    lightboxTextBody.className = "lightbox-text-body" + (plain ? " is-plain" : "");
+    const body = item.body || "";
+    const stanzas = body.split(/\n\s*\n/);
+    stanzas.forEach((stanza) => {
+      const p = document.createElement("p");
+      if (!plain && item.format === "prose") {
+        p.className = "text-prose";
+        p.textContent = stanza.replace(/\n/g, " ").trim();
+      } else {
+        p.className = "text-verse";
+        stanza.split("\n").forEach((line, i) => {
+          if (i > 0) p.appendChild(document.createElement("br"));
+          p.appendChild(document.createTextNode(line));
+        });
+      }
+      lightboxTextBody.appendChild(p);
+    });
   }
 
   function itemsOfActiveType() {
@@ -148,26 +177,40 @@
 
     visiblePhotos.forEach((photo, i) => {
       const size = ["lg", "md", "sm"].includes(photo.size) ? photo.size : "md";
+      const isText = itemType(photo) === "text";
 
       const figure = document.createElement("figure");
       figure.className = "tile tile--" + size;
 
       const button = document.createElement("button");
-      button.className = "tile-button";
+      button.className = "tile-button" + (isText ? " tile-button--text" : "");
       button.type = "button";
       button.setAttribute("aria-label", "Open " + (photo.title || "photograph") + " full size");
       button.addEventListener("click", () => openLightbox(i));
-
-      const img = document.createElement("img");
-      img.src = photo.file;
-      img.alt = photo.alt || "";
-      img.loading = "lazy";
 
       const indexTag = document.createElement("span");
       indexTag.className = "tile-index";
       indexTag.textContent = "N\u00b0 " + pad(i + 1);
 
-      button.appendChild(img);
+      if (isText) {
+        const preview = document.createElement("div");
+        preview.className = "tile-text-preview";
+        const previewTitle = document.createElement("span");
+        previewTitle.className = "tile-text-title";
+        previewTitle.textContent = photo.title || "Untitled";
+        const excerpt = document.createElement("p");
+        excerpt.className = "tile-text-excerpt";
+        excerpt.textContent = (photo.body || "").split(/\n+/).slice(0, 3).join(" \u2014 ");
+        preview.appendChild(previewTitle);
+        preview.appendChild(excerpt);
+        button.appendChild(preview);
+      } else {
+        const img = document.createElement("img");
+        img.src = photo.file;
+        img.alt = photo.alt || "";
+        img.loading = "lazy";
+        button.appendChild(img);
+      }
       button.appendChild(indexTag);
 
       const caption = document.createElement("figcaption");
@@ -213,8 +256,19 @@
 
   function updateLightbox() {
     const photo = visiblePhotos[currentIndex];
-    lightboxImage.src = photo.file;
-    lightboxImage.alt = photo.alt || "";
+    const isText = itemType(photo) === "text";
+    isPlainText = false;
+
+    lightboxImage.hidden = isText;
+    lightboxText.hidden = !isText;
+    if (isText) {
+      plainTextToggle.textContent = "Plain text";
+      renderTextBody(photo, false);
+    } else {
+      lightboxImage.src = photo.file;
+      lightboxImage.alt = photo.alt || "";
+    }
+
     lightboxIndex.textContent = "N\u00b0 " + pad(currentIndex + 1) + " / " + pad(visiblePhotos.length);
     lightboxTitle.textContent = photo.title || "Untitled";
     lightboxMeta.textContent = metaLine(photo);
@@ -242,6 +296,11 @@
   closeBtn.addEventListener("click", closeLightbox);
   prevBtn.addEventListener("click", () => step(-1));
   nextBtn.addEventListener("click", () => step(1));
+  plainTextToggle.addEventListener("click", () => {
+    isPlainText = !isPlainText;
+    plainTextToggle.textContent = isPlainText ? "Styled" : "Plain text";
+    renderTextBody(visiblePhotos[currentIndex], isPlainText);
+  });
   lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox) closeLightbox();
   });

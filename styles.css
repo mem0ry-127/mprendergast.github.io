@@ -15,6 +15,7 @@
   --font-display: 'Archivo', sans-serif;
   --font-body: 'IBM Plex Sans', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
+  --font-serif: Baskerville, 'Libre Baskerville', 'Times New Roman', serif;
 
   --gap: 1px;
   --edge: clamp(16px, 4vw, 48px);
@@ -220,6 +221,41 @@ button {
   letter-spacing: 0.02em;
 }
 
+/* Text-post tiles: same grid module and hover bracket as photo tiles,
+   filled with title + excerpt instead of an image. */
+.tile-button--text {
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  background: var(--overlay);
+}
+
+.tile-text-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.tile-text-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--ink);
+}
+
+.tile-text-excerpt {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .tile figcaption {
   display: flex;
   justify-content: space-between;
@@ -317,6 +353,50 @@ button {
   max-height: none;
   max-width: none;
   cursor: zoom-out;
+}
+
+/* Text posts: a scrollable, book-page-like panel in place of the
+   image. Deliberately simplified relative to the source PDF — verse
+   keeps its line and stanza breaks, prose reflows as one justified
+   block, but per-poem one-off effects aren't replicated. */
+.lightbox-text {
+  width: min(640px, 84vw);
+  max-height: 76vh;
+  overflow-y: auto;
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  padding: 48px clamp(24px, 5vw, 64px);
+}
+
+.plain-text-toggle {
+  display: block;
+  margin: 0 0 24px auto;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--muted);
+}
+.plain-text-toggle:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
+.lightbox-text-body .text-verse,
+.lightbox-text-body .text-prose {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ink);
+  margin: 0 0 1.4em;
+}
+.lightbox-text-body .text-prose { text-align: justify; }
+
+.lightbox-text-body.is-plain .text-verse,
+.lightbox-text-body.is-plain .text-prose {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: left;
+  color: var(--muted);
 }
 
 .lightbox-figure figcaption {
