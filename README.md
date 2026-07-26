@@ -101,22 +101,14 @@ default.
 
 ## Publishing on GitHub Pages
 
-This repo is `mem0ry-127/mprendergast.github.io` — deployed from `main`,
-root folder, via **Settings → Pages → Build and deployment → Source →
-Deploy from a branch**. Because the repo *name* matches the
-`<username>.github.io` pattern but the *owner* account is `mem0ry-127`,
-GitHub does not treat it as that account's special root user-site — it
-deploys as a normal project site instead, at:
+This repo is `michaelprendergast/michaelprendergast.github.io` —
+deployed from `main`, root folder, via **Settings → Pages → Build and
+deployment → Source → Deploy from a branch**. The repo name matches the
+owner account exactly, so GitHub serves it at the bare root domain:
 
 ```
-https://mem0ry-127.github.io/mprendergast.github.io/
+https://michaelprendergast.github.io
 ```
-
-The bare `https://mprendergast.github.io` domain is unrelated to this
-repo and will 404. Getting the clean root domain would require either
-transferring/renaming the repo under an account actually named
-`mprendergast`, or pointing a custom domain at this repo via a `CNAME`
-file.
 
 Every update is: resize the image, add its entry to `photos.js`, commit,
 push. Deploys typically land within a minute or two; a hard refresh
