@@ -53,28 +53,17 @@ button {
 .site-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: baseline;
   gap: 24px;
-  padding: 40px var(--edge) 28px;
+  padding: 22px var(--edge);
   border-bottom: 1px solid var(--hairline);
 }
 
-.wordmark { display: flex; flex-direction: column; }
-
-.wordmark-line1 {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(28px, 6vw, 56px);
-  letter-spacing: -0.02em;
-  line-height: 0.95;
-}
-
-.wordmark-line2 {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 8px;
-  letter-spacing: 0.02em;
+.site-name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.01em;
 }
 
 .header-meta {
