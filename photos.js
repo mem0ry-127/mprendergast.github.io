@@ -156,4 +156,72 @@ const PHOTOS = [
     film: "Kodak Portra 400",
     alt: "A window covered by bars painted in bright colors, layered with graffiti and a faded 1973 tag" },
 
+  { file: "images/spain/2017-madrid-plaza.jpg", title: "Plaza crowd", date: "2017",
+    location: "Madrid, Spain", size: "lg", tags: ["street"],
+    alt: "A crowd gathered in a Madrid plaza at dusk, surrounded by ornate apartment buildings and a Starbucks storefront" },
+
+  { file: "images/spain/2017-street-performer.jpg", title: "Falling", date: "2017",
+    location: "Spain", size: "lg", tags: ["street"],
+    alt: "A street performer in mid-fall pose on a red carpet in a stone plaza, onlookers watching nearby" },
+
+  { file: "images/spain/2017-hillside.jpg", title: "Hillside monastery", date: "2017",
+    location: "Spain", size: "lg", tags: ["landscape"],
+    alt: "A hillside monastery and village among dry hills and cypress trees" },
+
+  { file: "images/spain/2017-roadside-hotel.jpg", title: "Casa Lorenzo", date: "2017",
+    location: "Spain", size: "md", tags: ["landscape"],
+    alt: "A roadside hotel and restaurant beneath dry mountains, buses and cars parked outside" },
+
+  { file: "images/spain/2017-valley-view.jpg", title: "Valley, from the road", date: "2017",
+    location: "Spain", size: "md", tags: ["landscape"],
+    alt: "A distant Spanish town in a valley below dry hills, seen from a moving car" },
+
+  { file: "images/spain/2017-balconies.jpg", title: "Balconies", date: "2017",
+    location: "Spain", size: "md", tags: ["street", "architecture"],
+    alt: "Apartment balconies along a narrow street, laundry and awnings hanging in the sun" },
+
+  { file: "images/spain/2017-beach-hoops.jpg", title: "Beach hoops", date: "2017",
+    location: "Spain", size: "md", tags: ["beach"],
+    alt: "Two basketball backboards seen from behind on a crowded beach, a volleyball net and umbrellas beyond" },
+
+  { file: "images/spain/2017-restaurant-street.jpg", title: "Terra a Nosa", date: "2017",
+    location: "Spain", size: "sm", tags: ["street"],
+    alt: "A narrow street lined with apartment buildings, a hand-painted 'Terra a Nosa' restaurant sign hanging above the sidewalk" },
+
+  { file: "images/spain/2017-palms.jpg", title: "Palms", date: "2017",
+    location: "Spain", size: "sm", tags: ["landscape"],
+    alt: "Two palm trees silhouetted against a partly cloudy sky above a garden wall" },
+
+  { file: "images/spain/2017-airport.jpg", title: "Tarmac", date: "2017",
+    location: "Spain", size: "sm", tags: ["travel"],
+    alt: "An airport tarmac with a jet and ground equipment, seen through a terminal window" },
+
+  { file: "images/avalon-nj/2017-marsh.jpg", title: "Back bay", date: "2017",
+    location: "Avalon, NJ", size: "lg", tags: ["landscape"],
+    alt: "A muted, moody view of salt marsh and winding tidal water under an overcast sky" },
+
+  { file: "images/avalon-nj/2017-running-from-waves.jpg", title: "Running the shoreline", date: "2017",
+    location: "Avalon, NJ", size: "lg", tags: ["beach"],
+    alt: "A person wrapped in a pink blanket running along the shoreline as waves roll in, gulls nearby" },
+
+  { file: "images/avalon-nj/2017-walking.jpg", title: "Walking the tideline", date: "2017",
+    location: "Avalon, NJ", size: "md", tags: ["beach"],
+    alt: "A person in a pink knit poncho walking along the tideline on an overcast beach" },
+
+  { file: "images/avalon-nj/2017-double-exposure.jpg", title: "Double exposure, boardwalk", date: "2017",
+    location: "Avalon, NJ", size: "md", tags: ["portrait", "beach"],
+    alt: "A double-exposure portrait of a woman sitting on a boardwalk railing over stormy surf" },
+
+  { file: "images/avalon-nj/2017-pink-blanket.jpg", title: "Pink blanket", date: "2017",
+    location: "Avalon, NJ", size: "sm", tags: ["beach", "portrait"],
+    alt: "A person wrapped head to toe in a pink woven blanket standing on the beach" },
+
+  { file: "images/avalon-nj/2017-waves.jpg", title: "Foam", date: "2017",
+    location: "Avalon, NJ", size: "sm", tags: ["beach"],
+    alt: "Sea foam and waves rolling onto a beach at dusk under an overcast sky" },
+
+  { file: "images/philadelphia/2017-crane.jpg", title: "Crane, between buildings", date: "2017",
+    location: "Philadelphia, PA", size: "md", tags: ["architecture"],
+    alt: "A construction crane boom seen from below, framed between a brick apartment building and a beige high-rise" },
+
 ];
