@@ -4,7 +4,13 @@
   const gallery = document.getElementById("gallery");
   const emptyState = document.getElementById("empty-state");
   const indexCount = document.getElementById("index-count");
+  const typeNav = document.getElementById("type-nav");
   const filtersNav = document.getElementById("filters");
+
+  const TYPE_LABELS = { photo: "Photos", audio: "Audio", text: "Writing" };
+  function typeLabel(type) {
+    return TYPE_LABELS[type] || type.charAt(0).toUpperCase() + type.slice(1);
+  }
 
   const lightbox = document.getElementById("lightbox");
   const lightboxFigure = document.querySelector(".lightbox-figure");
@@ -18,12 +24,21 @@
   const nextBtn = document.getElementById("lightbox-next");
 
   const allPhotos = typeof PHOTOS !== "undefined" && Array.isArray(PHOTOS) ? PHOTOS : [];
-  let visiblePhotos = allPhotos.slice();
+  let activeType = null;
   let activeTag = "all";
+  let visiblePhotos = [];
   let currentIndex = 0;
   let lastFocused = null;
   let touchStartX = null;
   let isZoomed = false;
+
+  function itemType(p) {
+    return p.type || "photo";
+  }
+
+  function itemsOfActiveType() {
+    return allPhotos.filter((p) => itemType(p) === activeType);
+  }
 
   function pad(n) {
     return String(n).padStart(2, "0");
@@ -39,11 +54,51 @@
       .join(" \u00b7 ");
   }
 
-  /* ---------------- Filters ---------------- */
+  /* ---------------- Type nav (top-level sections) ---------------- */
+
+  function collectTypes() {
+    const types = new Set();
+    allPhotos.forEach((p) => types.add(itemType(p)));
+    return Array.from(types).sort();
+  }
+
+  function renderTypeNav() {
+    const types = collectTypes();
+    if (!activeType || !types.includes(activeType)) activeType = types[0] || "photo";
+
+    // With only one section, there's nothing to switch between — skip
+    // the extra nav row and go straight to that section's tag filters.
+    if (types.length <= 1) {
+      typeNav.hidden = true;
+      return;
+    }
+
+    typeNav.hidden = false;
+    typeNav.innerHTML = "";
+    types.forEach((t) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "type-chip" + (activeType === t ? " is-active" : "");
+      btn.textContent = typeLabel(t);
+      btn.addEventListener("click", () => setActiveType(t));
+      typeNav.appendChild(btn);
+    });
+  }
+
+  function setActiveType(type) {
+    activeType = type;
+    activeTag = "all";
+    if (lightbox.classList.contains("is-open")) closeLightbox();
+    renderTypeNav();
+    renderFilters();
+    applyFilter();
+  }
+
+  /* ---------------- Tag filters (scoped to the active type) ---------------- */
 
   function collectTags() {
     const tags = new Set();
-    allPhotos.forEach((p) => {
+    itemsOfActiveType().forEach((p) => {
       if (Array.isArray(p.tags)) p.tags.forEach((t) => tags.add(t));
     });
     return Array.from(tags).sort();
@@ -73,12 +128,15 @@
 
   function setActiveTag(tag) {
     activeTag = tag;
-    visiblePhotos =
-      tag === "all"
-        ? allPhotos.slice()
-        : allPhotos.filter((p) => Array.isArray(p.tags) && p.tags.includes(tag));
     if (lightbox.classList.contains("is-open")) closeLightbox();
     renderFilters();
+    applyFilter();
+  }
+
+  function applyFilter() {
+    const base = itemsOfActiveType();
+    visiblePhotos =
+      activeTag === "all" ? base.slice() : base.filter((p) => Array.isArray(p.tags) && p.tags.includes(activeTag));
     renderGallery();
   }
 
@@ -231,6 +289,7 @@
     { passive: true }
   );
 
+  renderTypeNav();
   renderFilters();
-  renderGallery();
+  applyFilter();
 })();

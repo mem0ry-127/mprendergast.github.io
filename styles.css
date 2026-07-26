@@ -90,6 +90,33 @@ button {
 .index-count { color: var(--ink); }
 
 /* ---------------------------------------------------------
+   Type nav — top-level sections (Photos/Audio/Writing). Bolder
+   and larger than the tag chips beneath it, since it's one level
+   up. Hidden entirely while only one type exists.
+--------------------------------------------------------- */
+.type-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  padding: 20px var(--edge) 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.type-chip {
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.type-chip:hover { color: var(--ink); }
+.type-chip.is-active {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+/* ---------------------------------------------------------
    Filter chips — tab-style, not pills; underline marks state
 --------------------------------------------------------- */
 .filters {

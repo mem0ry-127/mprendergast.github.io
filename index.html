@@ -26,8 +26,13 @@
   </div>
 </header>
 
+<nav class="type-nav" id="type-nav" aria-label="Filter by section" hidden>
+  <!-- populated by script.js: one chip per distinct entry "type" (photo/audio/text) —
+       hidden entirely while only one type exists in photos.js -->
+</nav>
+
 <nav class="filters" id="filters" aria-label="Filter photographs by tag">
-  <!-- populated by script.js: "All" plus one chip per tag used in photos.js -->
+  <!-- populated by script.js: "All" plus one chip per tag used in the active type -->
 </nav>
 
 <main>
