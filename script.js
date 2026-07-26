@@ -7,6 +7,7 @@
   const filtersNav = document.getElementById("filters");
 
   const lightbox = document.getElementById("lightbox");
+  const lightboxFigure = document.querySelector(".lightbox-figure");
   const lightboxImage = document.getElementById("lightbox-image");
   const lightboxIndex = document.getElementById("lightbox-index");
   const lightboxTitle = document.getElementById("lightbox-title");
@@ -22,6 +23,7 @@
   let currentIndex = 0;
   let lastFocused = null;
   let touchStartX = null;
+  let isZoomed = false;
 
   function pad(n) {
     return String(n).padStart(2, "0");
@@ -155,6 +157,7 @@
     lightbox.classList.remove("is-open");
     lightbox.setAttribute("aria-hidden", "true");
     document.removeEventListener("keydown", onKeydown);
+    setZoomed(false);
     if (lastFocused) lastFocused.focus();
   }
 
@@ -170,8 +173,14 @@
   }
 
   function step(delta) {
+    setZoomed(false);
     currentIndex = (currentIndex + delta + visiblePhotos.length) % visiblePhotos.length;
     updateLightbox();
+  }
+
+  function setZoomed(state) {
+    isZoomed = state;
+    lightboxFigure.classList.toggle("is-zoomed", state);
   }
 
   function onKeydown(e) {
@@ -189,12 +198,18 @@
 
   // Tap zones: clicking the left/right third of the image steps
   // through the set, same as the arrow buttons — useful on phones
-  // where the arrow buttons sit near the screen edge.
+  // where the arrow buttons sit near the screen edge. The center
+  // third toggles a zoomed, scrollable full-resolution view instead.
   lightboxImage.addEventListener("click", (e) => {
+    if (isZoomed) {
+      setZoomed(false);
+      return;
+    }
     const rect = lightboxImage.getBoundingClientRect();
     const x = e.clientX - rect.left;
     if (x < rect.width / 3) step(-1);
     else if (x > (rect.width * 2) / 3) step(1);
+    else setZoomed(true);
   });
 
   // Swipe navigation for touch devices.
