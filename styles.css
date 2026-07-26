@@ -34,6 +34,7 @@ body {
 }
 
 img { display: block; max-width: 100%; }
+img[hidden] { display: none; }
 
 button {
   font-family: inherit;
@@ -221,20 +222,35 @@ button {
   letter-spacing: 0.02em;
 }
 
-/* Text-post tiles: same grid module and hover bracket as photo tiles,
-   filled with title + excerpt instead of an image. */
+/* Text-post tiles: sized to their own content rather than the fixed
+   3:2 photo frame, so a short poem gets a compact box instead of a
+   mostly-empty image-shaped one. Longer poems are capped and faded
+   out at the bottom rather than blowing up the grid. */
 .tile-button--text {
-  display: flex;
-  align-items: flex-end;
+  aspect-ratio: auto;
+  display: block;
+  max-height: 420px;
   padding: 20px;
   background: var(--overlay);
+  overflow: hidden;
+  position: relative;
+  text-align: left;
+}
+.tile-button--text::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 56px;
+  background: linear-gradient(to bottom, transparent, var(--overlay));
+  pointer-events: none;
 }
 
 .tile-text-preview {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  text-align: left;
 }
 
 .tile-text-title {
@@ -250,10 +266,7 @@ button {
   font-size: 14px;
   line-height: 1.5;
   color: var(--muted);
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  white-space: pre-line;
 }
 
 .tile figcaption {

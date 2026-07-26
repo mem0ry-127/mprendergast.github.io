@@ -200,7 +200,7 @@
         previewTitle.textContent = photo.title || "Untitled";
         const excerpt = document.createElement("p");
         excerpt.className = "tile-text-excerpt";
-        excerpt.textContent = (photo.body || "").split(/\n+/).slice(0, 3).join(" \u2014 ");
+        excerpt.textContent = photo.body || "";
         preview.appendChild(previewTitle);
         preview.appendChild(excerpt);
         button.appendChild(preview);
