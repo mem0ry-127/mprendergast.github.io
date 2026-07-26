@@ -87,6 +87,15 @@
     return m + ":" + pad(s);
   }
 
+  const VOLUME_KEY = "photo-site-audio-volume";
+  function getStoredVolume() {
+    const v = parseFloat(localStorage.getItem(VOLUME_KEY));
+    return isFinite(v) && v >= 0 && v <= 1 ? v : 0.8;
+  }
+  function setStoredVolume(v) {
+    localStorage.setItem(VOLUME_KEY, String(v));
+  }
+
   // Audio plays inline within its own grid tile rather than opening the
   // lightbox — there's nothing to navigate prev/next between, so the
   // modal doesn't apply. Only one tile's player is expanded at a time.
@@ -114,6 +123,7 @@
 
     const audioEl = document.createElement("audio");
     audioEl.preload = "none";
+    audioEl.volume = getStoredVolume();
 
     const playBtn = document.createElement("button");
     playBtn.className = "audio-play";
@@ -131,10 +141,25 @@
     time.className = "audio-time";
     time.textContent = "0:00 / 0:00";
 
+    const volume = document.createElement("input");
+    volume.className = "audio-volume";
+    volume.type = "range";
+    volume.min = "0";
+    volume.max = "1";
+    volume.step = "0.01";
+    volume.value = String(audioEl.volume);
+    volume.setAttribute("aria-label", "Volume");
+    volume.addEventListener("input", () => {
+      audioEl.volume = parseFloat(volume.value);
+      setStoredVolume(audioEl.volume);
+    });
+    volume.addEventListener("click", (e) => e.stopPropagation());
+
     player.appendChild(audioEl);
     player.appendChild(playBtn);
     player.appendChild(progress);
     player.appendChild(time);
+    player.appendChild(volume);
 
     function collapse() {
       audioEl.pause();
@@ -152,6 +177,8 @@
         activeAudioTile.collapse();
       }
       activeAudioTile = { collapse };
+      audioEl.volume = getStoredVolume();
+      volume.value = String(audioEl.volume);
       player.hidden = false;
       container.classList.add("is-expanded");
       if (!audioEl.getAttribute("src")) audioEl.src = photo.file;

@@ -496,6 +496,15 @@ button {
   white-space: nowrap;
 }
 
+/* Volume remembers its value (localStorage) across tracks and visits,
+   so it's set once and left alone rather than reset per-track. */
+.audio-volume {
+  flex: none;
+  width: 64px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
 .lightbox-figure figcaption {
   margin-top: 18px;
   color: var(--ink);
