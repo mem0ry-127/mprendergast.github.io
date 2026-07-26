@@ -16,7 +16,7 @@
   const prevBtn = document.getElementById("lightbox-prev");
   const nextBtn = document.getElementById("lightbox-next");
 
-  const allPhotos = Array.isArray(window.PHOTOS) ? window.PHOTOS : [];
+  const allPhotos = typeof PHOTOS !== "undefined" && Array.isArray(PHOTOS) ? PHOTOS : [];
   let visiblePhotos = allPhotos.slice();
   let activeTag = "all";
   let currentIndex = 0;
