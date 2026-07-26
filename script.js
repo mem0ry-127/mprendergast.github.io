@@ -10,8 +10,10 @@
   // Fixed top-level sections, shown in this order regardless of which
   // ones have entries yet — sections with nothing in them just show
   // the existing empty state rather than being hidden from the nav.
-  const TYPES = ["all", "photo", "text", "audio"];
-  const TYPE_LABELS = { all: "All", photo: "Photography", text: "Text", audio: "Audio" };
+  // "All" is last and never the default — the site opens on Photography.
+  const TYPES = ["photo", "text", "audio", "ceramics", "all"];
+  const TYPE_LABELS = { all: "All", photo: "Photography", text: "Text", audio: "Audio", ceramics: "Ceramics" };
+  const DEFAULT_TYPE = "photo";
 
   const lightbox = document.getElementById("lightbox");
   const lightboxFigure = document.querySelector(".lightbox-figure");
@@ -28,7 +30,7 @@
   const nextBtn = document.getElementById("lightbox-next");
 
   const allPhotos = typeof PHOTOS !== "undefined" && Array.isArray(PHOTOS) ? PHOTOS : [];
-  let activeType = "all";
+  let activeType = DEFAULT_TYPE;
   let activeTag = "all";
   let visiblePhotos = [];
   let currentIndex = 0;

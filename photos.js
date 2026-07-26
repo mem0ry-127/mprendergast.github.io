@@ -32,7 +32,7 @@ const PHOTOS = [
     alt: "A white lifeguard rescue boat resting on its beach trailer at dusk, dune grass and shoreline in the background" },
 
   { file: "images/ceramics/2025-03-plates-and-cups.jpg", title: "Plates and cups", date: "2025-03",
-    size: "md", tags: ["ceramics"],
+    type: "ceramics", size: "md",
     alt: "Handmade marbled ceramic plates and glazed cups arranged on a wood table" },
 
   { file: "images/cape-may-point/2024-07-frisbee.jpg", title: "Frisbee, dusk", date: "2024-07",
