@@ -270,16 +270,39 @@ button {
   white-space: pre-line;
 }
 
-/* Audio-post tiles: compact, content-sized like text tiles — just a
-   title and a play mark, no waveform or artwork. */
-.tile-button--audio {
-  aspect-ratio: auto;
-  display: flex;
-  align-items: center;
-  gap: 14px;
+/* Audio tiles: no lightbox — clicking the title expands the player
+   in place within the tile itself. Only one tile plays at a time. */
+.tile-audio {
+  position: relative;
   padding: 20px;
   background: var(--overlay);
 }
+
+.tile-audio-toggle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+}
+.tile-audio-toggle:hover .tile-text-title { color: var(--accent); }
+.tile-audio.is-expanded .tile-audio-mark { color: var(--accent); }
+
+.tile-audio-player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+.tile-audio-player[hidden] { display: none; }
+
+.tile-audio-player .audio-play {
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+}
+.tile-audio-player .audio-time { font-size: 10px; }
 
 .tile-audio-mark {
   flex: none;
@@ -431,20 +454,10 @@ button {
   color: var(--muted);
 }
 
-/* Audio player: a bare play toggle, a click-to-seek progress bar,
-   and a time readout — no native browser widget, so it stays
-   consistent with the rest of the site's controls. */
-.lightbox-audio[hidden] { display: none; }
-.lightbox-audio {
-  width: min(560px, 84vw);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 32px;
-  background: var(--paper);
-  border: 1px solid var(--hairline);
-}
-
+/* Audio player controls: a bare play toggle, a click-to-seek progress
+   bar, and a time readout — no native browser widget, so it stays
+   consistent with the rest of the site's controls. Lives inline
+   inside a .tile-audio-player, not in the lightbox. */
 .audio-play {
   flex: none;
   width: 40px;

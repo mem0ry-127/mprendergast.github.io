@@ -21,12 +21,6 @@
   const lightboxText = document.getElementById("lightbox-text");
   const lightboxTextBody = document.getElementById("lightbox-text-body");
   const plainTextToggle = document.getElementById("plain-text-toggle");
-  const lightboxAudio = document.getElementById("lightbox-audio");
-  const audioElement = document.getElementById("audio-element");
-  const audioPlayBtn = document.getElementById("audio-play");
-  const audioProgress = document.getElementById("audio-progress");
-  const audioProgressFill = document.getElementById("audio-progress-fill");
-  const audioTime = document.getElementById("audio-time");
   const lightboxIndex = document.getElementById("lightbox-index");
   const lightboxTitle = document.getElementById("lightbox-title");
   const lightboxMeta = document.getElementById("lightbox-meta");
@@ -46,6 +40,7 @@
   let touchStartX = null;
   let isZoomed = false;
   let isPlainText = false;
+  let activeAudioTile = null; // { pause, collapse } for whichever audio tile is expanded
 
   function itemType(p) {
     return p.type || "photo";
@@ -90,6 +85,116 @@
     const m = Math.floor(seconds / 60);
     const s = Math.floor(seconds % 60);
     return m + ":" + pad(s);
+  }
+
+  // Audio plays inline within its own grid tile rather than opening the
+  // lightbox — there's nothing to navigate prev/next between, so the
+  // modal doesn't apply. Only one tile's player is expanded at a time.
+  function buildAudioTile(photo, indexTag) {
+    const container = document.createElement("div");
+    container.className = "tile-audio";
+
+    const toggle = document.createElement("button");
+    toggle.className = "tile-audio-toggle";
+    toggle.type = "button";
+    toggle.setAttribute("aria-label", "Play " + (photo.title || "track"));
+
+    const mark = document.createElement("span");
+    mark.className = "tile-audio-mark";
+    mark.textContent = "▸";
+    const previewTitle = document.createElement("span");
+    previewTitle.className = "tile-text-title";
+    previewTitle.textContent = photo.title || "Untitled";
+    toggle.appendChild(mark);
+    toggle.appendChild(previewTitle);
+
+    const player = document.createElement("div");
+    player.className = "tile-audio-player";
+    player.hidden = true;
+
+    const audioEl = document.createElement("audio");
+    audioEl.preload = "none";
+
+    const playBtn = document.createElement("button");
+    playBtn.className = "audio-play";
+    playBtn.type = "button";
+    playBtn.setAttribute("aria-label", "Play");
+    playBtn.textContent = "▶";
+
+    const progress = document.createElement("div");
+    progress.className = "audio-progress";
+    const progressFill = document.createElement("div");
+    progressFill.className = "audio-progress-fill";
+    progress.appendChild(progressFill);
+
+    const time = document.createElement("span");
+    time.className = "audio-time";
+    time.textContent = "0:00 / 0:00";
+
+    player.appendChild(audioEl);
+    player.appendChild(playBtn);
+    player.appendChild(progress);
+    player.appendChild(time);
+
+    function collapse() {
+      audioEl.pause();
+      audioEl.removeAttribute("src");
+      audioEl.load();
+      playBtn.textContent = "▶";
+      progressFill.style.width = "0%";
+      time.textContent = "0:00 / 0:00";
+      player.hidden = true;
+      container.classList.remove("is-expanded");
+    }
+
+    function expand() {
+      if (activeAudioTile && activeAudioTile.collapse !== collapse) {
+        activeAudioTile.collapse();
+      }
+      activeAudioTile = { collapse };
+      player.hidden = false;
+      container.classList.add("is-expanded");
+      if (!audioEl.getAttribute("src")) audioEl.src = photo.file;
+      audioEl.play();
+    }
+
+    toggle.addEventListener("click", () => {
+      if (player.hidden) expand();
+      else if (audioEl.paused) audioEl.play();
+      else audioEl.pause();
+    });
+    playBtn.addEventListener("click", () => {
+      if (audioEl.paused) audioEl.play();
+      else audioEl.pause();
+    });
+    audioEl.addEventListener("play", () => {
+      playBtn.textContent = "❚❚";
+    });
+    audioEl.addEventListener("pause", () => {
+      playBtn.textContent = "▶";
+    });
+    audioEl.addEventListener("ended", () => {
+      playBtn.textContent = "▶";
+    });
+    audioEl.addEventListener("timeupdate", () => {
+      const pct = audioEl.duration ? (audioEl.currentTime / audioEl.duration) * 100 : 0;
+      progressFill.style.width = pct + "%";
+      time.textContent = formatAudioTime(audioEl.currentTime) + " / " + formatAudioTime(audioEl.duration);
+    });
+    audioEl.addEventListener("loadedmetadata", () => {
+      time.textContent = formatAudioTime(audioEl.currentTime) + " / " + formatAudioTime(audioEl.duration);
+    });
+    progress.addEventListener("click", (e) => {
+      if (!audioEl.duration) return;
+      const rect = progress.getBoundingClientRect();
+      const pct = (e.clientX - rect.left) / rect.width;
+      audioEl.currentTime = pct * audioEl.duration;
+    });
+
+    container.appendChild(indexTag);
+    container.appendChild(toggle);
+    container.appendChild(player);
+    return container;
   }
 
   function metaLine(photo) {
@@ -181,6 +286,10 @@
   /* ---------------- Gallery ---------------- */
 
   function renderGallery() {
+    if (activeAudioTile) {
+      activeAudioTile.collapse();
+      activeAudioTile = null;
+    }
     gallery.innerHTML = "";
     indexCount.textContent = "N\u00b0 " + pad(visiblePhotos.length);
 
@@ -200,49 +309,41 @@
       const figure = document.createElement("figure");
       figure.className = "tile tile--" + size;
 
-      const button = document.createElement("button");
-      button.className =
-        "tile-button" + (isText ? " tile-button--text" : "") + (isAudio ? " tile-button--audio" : "");
-      button.type = "button";
-      button.setAttribute("aria-label", "Open " + (photo.title || "photograph") + " full size");
-      button.addEventListener("click", () => openLightbox(i));
-
       const indexTag = document.createElement("span");
       indexTag.className = "tile-index";
       indexTag.textContent = "N\u00b0 " + pad(i + 1);
 
-      if (isText) {
-        const preview = document.createElement("div");
-        preview.className = "tile-text-preview";
-        const previewTitle = document.createElement("span");
-        previewTitle.className = "tile-text-title";
-        previewTitle.textContent = photo.title || "Untitled";
-        const excerpt = document.createElement("p");
-        excerpt.className = "tile-text-excerpt";
-        excerpt.textContent = photo.body || "";
-        preview.appendChild(previewTitle);
-        preview.appendChild(excerpt);
-        button.appendChild(preview);
-      } else if (isAudio) {
-        const mark = document.createElement("span");
-        mark.className = "tile-audio-mark";
-        mark.textContent = "\u25b8";
-        const preview = document.createElement("div");
-        preview.className = "tile-text-preview";
-        const previewTitle = document.createElement("span");
-        previewTitle.className = "tile-text-title";
-        previewTitle.textContent = photo.title || "Untitled";
-        preview.appendChild(previewTitle);
-        button.appendChild(mark);
-        button.appendChild(preview);
+      if (isAudio) {
+        figure.appendChild(buildAudioTile(photo, indexTag));
       } else {
-        const img = document.createElement("img");
-        img.src = photo.file;
-        img.alt = photo.alt || "";
-        img.loading = "lazy";
-        button.appendChild(img);
+        const button = document.createElement("button");
+        button.className = "tile-button" + (isText ? " tile-button--text" : "");
+        button.type = "button";
+        button.setAttribute("aria-label", "Open " + (photo.title || "photograph") + " full size");
+        button.addEventListener("click", () => openLightbox(i));
+
+        if (isText) {
+          const preview = document.createElement("div");
+          preview.className = "tile-text-preview";
+          const previewTitle = document.createElement("span");
+          previewTitle.className = "tile-text-title";
+          previewTitle.textContent = photo.title || "Untitled";
+          const excerpt = document.createElement("p");
+          excerpt.className = "tile-text-excerpt";
+          excerpt.textContent = photo.body || "";
+          preview.appendChild(previewTitle);
+          preview.appendChild(excerpt);
+          button.appendChild(preview);
+        } else {
+          const img = document.createElement("img");
+          img.src = photo.file;
+          img.alt = photo.alt || "";
+          img.loading = "lazy";
+          button.appendChild(img);
+        }
+        button.appendChild(indexTag);
+        figure.appendChild(button);
       }
-      button.appendChild(indexTag);
 
       const caption = document.createElement("figcaption");
       const title = document.createElement("span");
@@ -256,7 +357,6 @@
       caption.appendChild(title);
       caption.appendChild(meta);
 
-      figure.appendChild(button);
       figure.appendChild(caption);
       frag.appendChild(figure);
     });
@@ -282,35 +382,20 @@
     lightbox.setAttribute("aria-hidden", "true");
     document.removeEventListener("keydown", onKeydown);
     setZoomed(false);
-    stopAudio();
     if (lastFocused) lastFocused.focus();
-  }
-
-  function stopAudio() {
-    audioElement.pause();
-    audioElement.removeAttribute("src");
-    audioElement.load();
-    audioPlayBtn.textContent = "\u25b6";
-    audioProgressFill.style.width = "0%";
-    audioTime.textContent = "0:00 / 0:00";
   }
 
   function updateLightbox() {
     const photo = visiblePhotos[currentIndex];
     const isText = itemType(photo) === "text";
-    const isAudio = itemType(photo) === "audio";
     isPlainText = false;
-    stopAudio();
 
-    lightboxImage.hidden = isText || isAudio;
+    lightboxImage.hidden = isText;
     lightboxText.hidden = !isText;
-    lightboxAudio.hidden = !isAudio;
 
     if (isText) {
       plainTextToggle.textContent = "Plain text";
       renderTextBody(photo, false);
-    } else if (isAudio) {
-      audioElement.src = photo.file;
     } else {
       lightboxImage.src = photo.file;
       lightboxImage.alt = photo.alt || "";
@@ -350,34 +435,6 @@
   });
   lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox) closeLightbox();
-  });
-
-  audioPlayBtn.addEventListener("click", () => {
-    if (audioElement.paused) audioElement.play();
-    else audioElement.pause();
-  });
-  audioElement.addEventListener("play", () => {
-    audioPlayBtn.textContent = "❚❚";
-  });
-  audioElement.addEventListener("pause", () => {
-    audioPlayBtn.textContent = "▶";
-  });
-  audioElement.addEventListener("ended", () => {
-    audioPlayBtn.textContent = "▶";
-  });
-  audioElement.addEventListener("timeupdate", () => {
-    const pct = audioElement.duration ? (audioElement.currentTime / audioElement.duration) * 100 : 0;
-    audioProgressFill.style.width = pct + "%";
-    audioTime.textContent = formatAudioTime(audioElement.currentTime) + " / " + formatAudioTime(audioElement.duration);
-  });
-  audioElement.addEventListener("loadedmetadata", () => {
-    audioTime.textContent = formatAudioTime(audioElement.currentTime) + " / " + formatAudioTime(audioElement.duration);
-  });
-  audioProgress.addEventListener("click", (e) => {
-    if (!audioElement.duration) return;
-    const rect = audioProgress.getBoundingClientRect();
-    const pct = (e.clientX - rect.left) / rect.width;
-    audioElement.currentTime = pct * audioElement.duration;
   });
 
   // Tap zones: clicking the left/right third of the image steps
