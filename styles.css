@@ -2,15 +2,15 @@
    Tokens — dark
 --------------------------------------------------------- */
 :root {
-  --paper: #3c4033;
-  --ink: #edf0e2;
-  --grid-line: rgba(228, 233, 208, 0.08);
-  --accent: #4fc9c2;
-  --muted: #a2a68d;
-  --muted-dim: #74786a;
-  --hairline: rgba(228, 233, 208, 0.14);
-  --overlay: rgba(18, 20, 14, 0.7);
-  --scrim: rgba(8, 9, 6, 0.97);
+  --paper: #4d5566;
+  --ink: #f1ede3;
+  --grid-line: rgba(225, 228, 236, 0.08);
+  --accent: #e2914a;
+  --muted: #9298a9;
+  --muted-dim: #6b7182;
+  --hairline: rgba(225, 228, 236, 0.14);
+  --overlay: rgba(20, 22, 28, 0.7);
+  --scrim: rgba(10, 11, 15, 0.97);
 
   --font-display: 'Archivo', sans-serif;
   --font-body: 'IBM Plex Sans', sans-serif;
@@ -278,7 +278,22 @@ button {
   max-height: 76vh;
   width: auto;
   object-fit: contain;
-  cursor: pointer;
+  cursor: zoom-in;
+}
+
+/* Zoomed state: drop the fit-to-viewport cap so the image renders
+   near its native resolution, in a scrollable frame, for examining
+   detail. Toggled by clicking the center third of the image. */
+.lightbox-figure.is-zoomed {
+  max-width: 92vw;
+  max-height: 80vh;
+  overflow: auto;
+  cursor: zoom-out;
+}
+.lightbox-figure.is-zoomed img {
+  max-height: none;
+  max-width: none;
+  cursor: zoom-out;
 }
 
 .lightbox-figure figcaption {
