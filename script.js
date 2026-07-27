@@ -55,6 +55,12 @@
   function renderTextBody(item, plain) {
     lightboxTextBody.innerHTML = "";
     lightboxTextBody.className = "lightbox-text-body" + (plain ? " is-plain" : "");
+    if (!plain) {
+      const heading = document.createElement("p");
+      heading.className = "text-title";
+      heading.textContent = item.title || "Untitled";
+      lightboxTextBody.appendChild(heading);
+    }
     const body = item.body || "";
     const stanzas = body.split(/\n\s*\n/);
     stanzas.forEach((stanza) => {

@@ -22,7 +22,7 @@
   --font-display: 'Archivo', sans-serif;
   --font-body: 'IBM Plex Sans', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
-  --font-serif: Baskerville, 'Libre Baskerville', 'Times New Roman', serif;
+  --font-serif: Baskerville, 'Baskervville', 'Times New Roman', serif;
 
   --gap: 1px;
   --edge: clamp(16px, 4vw, 48px);
@@ -323,6 +323,7 @@ button {
   font-style: italic;
   font-size: 20px;
   color: var(--ink);
+  text-rendering: optimizeLegibility;
 }
 
 .tile-text-excerpt {
@@ -499,13 +500,25 @@ button {
 }
 .plain-text-toggle:hover { color: var(--ink); border-bottom-color: var(--accent); }
 
+.lightbox-text-body .text-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--ink);
+  margin: 0 0 1.6em;
+  text-rendering: optimizeLegibility;
+}
+.lightbox-text-body.is-plain .text-title { display: none; }
+
 .lightbox-text-body .text-verse,
 .lightbox-text-body .text-prose {
   font-family: var(--font-serif);
-  font-size: 17px;
-  line-height: 1.7;
+  font-size: 18px;
+  line-height: 1.45;
   color: var(--ink);
-  margin: 0 0 1.4em;
+  margin: 0 0 1.3em;
+  text-rendering: optimizeLegibility;
+  font-variant-ligatures: common-ligatures;
 }
 .lightbox-text-body .text-prose { text-align: justify; }
 
