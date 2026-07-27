@@ -55,10 +55,10 @@
   function renderTextBody(item, plain) {
     lightboxTextBody.innerHTML = "";
     lightboxTextBody.className = "lightbox-text-body" + (plain ? " is-plain" : "");
-    if (!plain) {
+    if (!plain && item.title) {
       const heading = document.createElement("p");
       heading.className = "text-title";
-      heading.textContent = item.title || "Untitled";
+      heading.textContent = item.title;
       lightboxTextBody.appendChild(heading);
     }
     const body = item.body || "";
