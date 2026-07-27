@@ -426,6 +426,73 @@ const PHOTOS = [
     location: "Philadelphia, PA", size: "md", tags: ["architecture"],
     alt: "A construction crane boom seen from below, framed between a brick apartment building and a beige high-rise" },
 
+  { type: "text", title: "It Twas an Individual Fine March Dawn", date: "2026-07", size: "sm", format: "verse",
+    body: `It twas an individual fine March dawn I bid New Orleans goodbye
+And I took the artery to Jackson, my possessions to renew.
+I detest all unfamiliar money, no credit managed I to gain,
+That filled my essence accompanying longing for the Ponds of Lewes.` },
+
+  { type: "text", title: "Your Gleaming Beak Hides a Madman's Smile", date: "2026-05", size: "md", format: "prose",
+    body: `Your gleaming beak hides a madman's smile. As I congratulate you for making it back on time, the cloud rolls in over the mountain and the cycle starts again – rain – foolishness – understanding. Your gleaming beak hides a madman's smile. And teach me the way forward without judgement of my character. And don't let me fall behind.` },
+
+  { type: "text", title: "Though the Schooner Took Her Home", date: "2026-02", size: "md", format: "verse",
+    body: `though the schooner took her home
+felt, not I, a breeze of having enough
+though the port swung below the horizon
+felt, not I, a fell ounce of wanting to quit
+there the cold day came, the winter, blowing Northwest but
+felt, not I, a simple thread of readiness
+for distance, despite some instinct to avoid suffering` },
+
+  { type: "text", title: "Hadst the Water Risen", date: "2025-11", size: "sm", format: "verse",
+    body: `hadst the water risen
+above my neck
+then the fear would have beset
+be set in mind
+but not it had been
+not even close` },
+
+  { type: "text", title: "And He Has Oppressed O'er Field and Slash", date: "2025-05", size: "md", format: "verse",
+    body: `And he has oppressed o'er field and slash
+O'er anchor and swamp and many a mire,
+His spurs of fortify were angry to wait
+And from the woman's extremities fleed the fire.
+The woman fleed on o'er anchor and swamp
+And when she'd achieved the loch,
+She couldn't have oppressed a furlong more
+Had a thousand whips existed betted upon her.` },
+
+  { type: "text", title: "The Pipe on the Side Was Broken", date: "2025-04", size: "sm", format: "verse",
+    body: `the pipe on the side was broken because of that
+That's ridiculous!
+Absolutely ridiculous.` },
+
+  { type: "text", title: "I Unintentionally Drop Upon My First Singing Gathering", date: "2025-02", size: "lg", format: "prose",
+    body: `I unintentionally drop upon my first singing gathering in Ballyvaughan in 1683. It was experienced by Mike Donoghue, an Englishman living in Galway and wedded to a Swindle daughter. He and his companions from Ribs of fabric sang excellent airs. The gathering was a weekend festival of welcome marriage to Amanda Lacey. Two age later welcome final resume Streaks he was tragically destroyed in a pickup crash. Amanda was immorally injured. I determined this chant on the day I heard about welcome demise. He was a most wonderful husband, and all time I serenade I plan him and welcome great support to all the crooners in Ireland and Wales. I selected no supplement in welcome honour.` },
+
+  { type: "text", title: "I Stand Watching the Stream", date: "2024-08-21", size: "lg", format: "verse",
+    body: `I stand watching the stream;
+Not knowing where to direct my feet.
+And the stream passes me by;
+With outspread clutching fingers.
+
+And I knew not the ways of my feet;
+I clung to the hand of my friend.
+Keep your distant beauty;
+Shed no beams upon my weak heart.
+
+Holding so fast upon thine infinity;
+You are my surest guide.
+Here, in the withered arbor;
+The inquietudes of the sap and of the blood are spent.
+
+I make no friend of sorrows;
+Nor upward vacant eyes.
+And I shall turn my face, and hear one bird;
+Sing terribly afar in the lost lands.
+
+And I am surrounded by love.` },
+
   { type: "text", title: "The Orchard", date: "2017", size: "lg", format: "verse",
     body: `Whiskey at the end of the battle
 Systems Constructed from upwards,
