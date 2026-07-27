@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — mprendergast</title>
+<meta name="description" content="About this site.">
+<meta name="color-scheme" content="dark light" id="color-scheme-meta">
+<script>
+  if (localStorage.getItem("photo-site-theme") === "light") {
+    document.documentElement.setAttribute("data-theme", "light");
+  }
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Baskervville:ital@0;1&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <span class="site-name">Michael Patrick Prendergast</span>
+  <div class="header-right">
+    <nav class="site-nav" aria-label="Site pages">
+      <a href="index.html">Index</a>
+      <a href="about.html" aria-current="page">About</a>
+      <a href="archive.html">Archive</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme"></button>
+  </div>
+</header>
+
+<main class="about-main">
+  <div class="about-content">
+    <p>More about this collection is coming soon.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <span>Philadelphia, PA</span>
+  <span class="rule" aria-hidden="true"></span>
+  <span>Updated as photographs are taken</span>
+</footer>
+
+<script src="theme.js"></script>
+</body>
+</html>

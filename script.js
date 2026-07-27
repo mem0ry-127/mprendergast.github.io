@@ -7,6 +7,8 @@
   const typeNav = document.getElementById("type-nav");
   const locationNav = document.getElementById("location-nav");
   const filtersNav = document.getElementById("filters");
+  const searchInput = document.getElementById("search-input");
+  const shuffleBtn = document.getElementById("shuffle-btn");
 
   // Fixed top-level sections, shown in this order regardless of which
   // ones have entries yet — sections with nothing in them just show
@@ -36,6 +38,7 @@
   let activeType = DEFAULT_TYPE;
   let activeLocation = "all";
   let activeTag = "all";
+  let searchQuery = "";
   let visiblePhotos = [];
   let currentIndex = 0;
   let lastFocused = null;
@@ -100,6 +103,24 @@
 
   function pad(n) {
     return String(n).padStart(2, "0");
+  }
+
+  // Search spans every type/location/tag at once — it's a separate mode
+  // from the section nav, not a further narrowing of it.
+  function matchesSearch(photo, query) {
+    const q = query.trim().toLowerCase();
+    if (!q) return true;
+    const haystack = [
+      photo.title,
+      photo.location,
+      photo.date,
+      photo.body,
+      Array.isArray(photo.tags) ? photo.tags.join(" ") : "",
+    ]
+      .filter(Boolean)
+      .join(" · ")
+      .toLowerCase();
+    return haystack.includes(q);
   }
 
   function formatAudioTime(seconds) {
@@ -261,10 +282,11 @@
   function renderTypeNav() {
     typeNav.hidden = false;
     typeNav.innerHTML = "";
+    const searching = searchQuery.trim().length > 0;
     TYPES.forEach((t) => {
       const btn = document.createElement("button");
       btn.type = "button";
-      btn.className = "type-chip" + (activeType === t ? " is-active" : "");
+      btn.className = "type-chip" + (activeType === t && !searching ? " is-active" : "");
       btn.textContent = TYPE_LABELS[t];
       btn.addEventListener("click", () => setActiveType(t));
       typeNav.appendChild(btn);
@@ -291,7 +313,7 @@
   }
 
   function renderLocationNav() {
-    if (activeType !== "photo") {
+    if (activeType !== "photo" || searchQuery.trim()) {
       locationNav.hidden = true;
       return;
     }
@@ -338,7 +360,8 @@
   function renderFilters() {
     // "All" is the merged view across every section — no sub-tag row.
     // A specific section only gets a tag row when it actually has tags.
-    if (activeType === "all") {
+    // Search bypasses type/location/tag entirely, so it hides this too.
+    if (activeType === "all" || searchQuery.trim()) {
       filtersNav.hidden = true;
       return;
     }
@@ -371,10 +394,24 @@
   }
 
   function applyFilter() {
-    const base = itemsOfActiveType();
-    visiblePhotos =
-      activeTag === "all" ? base.slice() : base.filter((p) => Array.isArray(p.tags) && p.tags.includes(activeTag));
+    if (searchQuery.trim()) {
+      visiblePhotos = allPhotos.filter((p) => matchesSearch(p, searchQuery));
+    } else {
+      const base = itemsOfActiveType();
+      visiblePhotos =
+        activeTag === "all" ? base.slice() : base.filter((p) => Array.isArray(p.tags) && p.tags.includes(activeTag));
+    }
     renderGallery();
+    syncUrl();
+  }
+
+  function setSearchQuery(query) {
+    searchQuery = query;
+    if (lightbox.classList.contains("is-open")) closeLightbox();
+    renderTypeNav();
+    renderLocationNav();
+    renderFilters();
+    applyFilter();
   }
 
   /* ---------------- Gallery ---------------- */
@@ -469,6 +506,7 @@
     lightbox.setAttribute("aria-hidden", "false");
     closeBtn.focus();
     document.addEventListener("keydown", onKeydown);
+    syncUrl();
   }
 
   function closeLightbox() {
@@ -477,6 +515,7 @@
     document.removeEventListener("keydown", onKeydown);
     setZoomed(false);
     if (lastFocused) lastFocused.focus();
+    syncUrl();
   }
 
   function updateLightbox() {
@@ -506,6 +545,7 @@
     setZoomed(false);
     currentIndex = (currentIndex + delta + visiblePhotos.length) % visiblePhotos.length;
     updateLightbox();
+    syncUrl();
   }
 
   function setZoomed(state) {
@@ -566,38 +606,82 @@
     { passive: true }
   );
 
+  searchInput.addEventListener("input", () => setSearchQuery(searchInput.value));
+
+  shuffleBtn.addEventListener("click", () => {
+    if (!visiblePhotos.length) return;
+    const i = Math.floor(Math.random() * visiblePhotos.length);
+    openLightbox(i);
+  });
+
+  /* ---------------- URL state ---------------- */
+  // Reflects the current view (search, or type/location/tag, plus
+  // whichever item is open) in the URL via replaceState, so the page
+  // can be bookmarked or shared. Doesn't push history entries — the
+  // browser back button leaves the page as normal, it doesn't step
+  // back through individual filter/lightbox changes.
+
+  function syncUrl() {
+    const params = new URLSearchParams();
+    if (searchQuery.trim()) {
+      params.set("q", searchQuery.trim());
+    } else {
+      if (activeType !== DEFAULT_TYPE) params.set("type", activeType);
+      if (activeType === "photo" && activeLocation !== "all") params.set("location", activeLocation);
+      if (activeTag !== "all") params.set("tag", activeTag);
+    }
+    if (lightbox.classList.contains("is-open")) {
+      const globalIndex = allPhotos.indexOf(visiblePhotos[currentIndex]);
+      if (globalIndex !== -1) params.set("item", String(globalIndex));
+    }
+    const qs = params.toString();
+    history.replaceState(null, "", window.location.pathname + (qs ? "?" + qs : ""));
+  }
+
+  // Returns the global index to open once the initial render completes,
+  // or null. Also sets whatever type/location/tag/search state is needed
+  // to make that item (or the requested filter combo) actually visible.
+  function readUrlState() {
+    const params = new URLSearchParams(window.location.search);
+
+    const itemParam = params.get("item");
+    if (itemParam !== null && /^\d+$/.test(itemParam)) {
+      const globalIndex = parseInt(itemParam, 10);
+      const item = allPhotos[globalIndex];
+      if (item) {
+        const type = itemType(item);
+        activeType = TYPES.includes(type) ? type : "all";
+        activeLocation = type === "photo" ? placeGroup(item) : "all";
+        activeTag = "all";
+        return globalIndex;
+      }
+    }
+
+    const q = params.get("q");
+    if (q) {
+      searchQuery = q;
+      searchInput.value = q;
+      return null;
+    }
+
+    const type = params.get("type");
+    if (type && TYPES.includes(type)) activeType = type;
+    const place = params.get("location");
+    if (place) activeLocation = place;
+    const tag = params.get("tag");
+    if (tag) activeTag = tag;
+    return null;
+  }
+
+  const pendingOpenIndex = readUrlState();
+
   renderTypeNav();
   renderLocationNav();
   renderFilters();
   applyFilter();
 
-  /* ---------------- Theme toggle ---------------- */
-  // The actual theme is applied by an inline script in <head>, before
-  // CSS paints, to avoid a flash of the wrong theme on load. This just
-  // syncs the toggle button's label and handles switching + persistence.
-  (function initThemeToggle() {
-    const THEME_KEY = "photo-site-theme";
-    const themeToggle = document.getElementById("theme-toggle");
-    const colorSchemeMeta = document.getElementById("color-scheme-meta");
-    if (!themeToggle) return;
-
-    function currentTheme() {
-      return document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
-    }
-
-    function applyTheme(theme) {
-      if (theme === "light") document.documentElement.setAttribute("data-theme", "light");
-      else document.documentElement.removeAttribute("data-theme");
-      if (colorSchemeMeta) colorSchemeMeta.setAttribute("content", theme === "light" ? "light dark" : "dark light");
-      themeToggle.textContent = theme === "light" ? "Dark" : "Light";
-      themeToggle.setAttribute("aria-label", theme === "light" ? "Switch to dark theme" : "Switch to light theme");
-    }
-
-    applyTheme(currentTheme());
-    themeToggle.addEventListener("click", () => {
-      const next = currentTheme() === "light" ? "dark" : "light";
-      localStorage.setItem(THEME_KEY, next);
-      applyTheme(next);
-    });
-  })();
+  if (pendingOpenIndex !== null) {
+    const idx = visiblePhotos.indexOf(allPhotos[pendingOpenIndex]);
+    if (idx !== -1) openLightbox(idx);
+  }
 })();
