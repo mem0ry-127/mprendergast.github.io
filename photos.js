@@ -58,7 +58,6 @@ const PHOTOS = [
     alt: "An outdoor cafe courtyard shaded by a banyan-like tree strung with colorful bunting" },
 
   { file: "images/honeymoon/spain/2024-07-montjuic-cable-car.jpg", title: "Montjuic cable car", date: "2024-07",
-    hidden: true,
     location: "Barcelona, Spain", size: "lg", tags: ["landscape"],
     alt: "A cable car descending Montjuic with the Barcelona skyline spread out below" },
 
