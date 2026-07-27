@@ -271,12 +271,10 @@ button {
 --------------------------------------------------------- */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(15, 1fr);
   gap: var(--gap);
   background: var(--hairline);
   padding: var(--gap) var(--edge) 0;
-  max-width: 1400px;
-  margin: 0 auto;
 }
 
 .tile {
