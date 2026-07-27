@@ -75,18 +75,22 @@ stays in the repo's history forever, even after it's deleted or replaced.
 A folder of full-resolution originals will make the repo balloon over
 time, and slow, bloated clones are the real cost of hosting images in git.
 
-Target: **long edge around 2000–2400px, JPEG quality ~80, aiming for
-150–500 KB per image.** Dense, high-detail images (foliage, texture,
-fine linework) may land a bit above that even at lower quality — that's
-fine; it's still trivial at portfolio scale.
+Target: **keep the original resolution where practical, JPEG quality
+~85–90, aiming for 1–1.5 MB per image.** The lightbox has a click-to-zoom
+view meant to show real detail, so resolution is the thing to protect —
+compress toward the size target with quality first, and only downscale
+resolution as a last resort for unusually detailed or grainy images
+that won't fit the target at a reasonable quality floor (~q80). Those
+still land well above the old flat 2200px cap.
 
 With ImageMagick installed (`brew install imagemagick` on a Mac), this
-resizes and compresses a whole folder of originals at once:
+compresses a whole folder of originals at once without touching
+resolution:
 
 ```bash
 mkdir -p resized
 for f in originals/*.jpg; do
-  magick "$f" -resize 2200x2200\> -quality 82 -strip "resized/$(basename "$f")"
+  magick "$f" -quality 88 -strip "resized/$(basename "$f")"
 done
 ```
 
@@ -123,14 +127,17 @@ clears any stale cached copy of the page.
 - **100 GB/month** soft bandwidth limit for Pages sites — effectively
   unreachable for a personal portfolio.
 
-A few dozen curated photos at 200–500 KB each is a few megabytes total,
-nowhere near any of these. Git LFS or an external image CDN aren't worth
-the added complexity at this size; that only starts paying for itself in
-the hundreds-of-images range, or if responsive transform-on-request
-images are needed. Cloudinary or imgix (generous free tiers) are the
-standard choices if that point is ever reached — the site would stay on
-GitHub Pages and `<img>` tags would just point at the CDN instead of
-`/images`.
+At the current ~1–1.5 MB per photo target, even several hundred curated
+images stays in the few-hundred-MB range — nowhere near GitHub's actual
+limits, though noticeably heavier than the old 200–500 KB target (worth
+knowing since every version of every image stays in git history forever,
+this repo's `.git` folder is already larger than the working files on
+disk). Git LFS or an external image CDN still aren't worth the added
+complexity at this size; that starts paying for itself in the
+thousands-of-images range, or if responsive transform-on-request images
+are needed. Cloudinary or imgix (generous free tiers) are the standard
+choices if that point is ever reached — the site would stay on GitHub
+Pages and `<img>` tags would just point at the CDN instead of `/images`.
 
 ## Planned: mixed media
 

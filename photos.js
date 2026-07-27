@@ -61,6 +61,10 @@ const PHOTOS = [
     location: "Barcelona, Spain", size: "lg", tags: ["landscape"],
     alt: "A cable car descending Montjuic with the Barcelona skyline spread out below" },
 
+  { file: "images/honeymoon/spain/2024-07-fundacio-miro.jpg", title: "Fundacio Miro", date: "2024-07",
+    location: "Barcelona, Spain", size: "lg", tags: ["architecture"],
+    alt: "The travertine-clad rooftop and geometric forms of a modernist museum building against a deep blue sky, cypress trees behind" },
+
   { file: "images/honeymoon/spain/2024-07-shadow-portrait.jpg", title: "Shadow portrait", date: "2024-07",
     location: "Barcelona, Spain", size: "md", tags: ["portrait"],
     alt: "A couple standing in dappled tree-shadow against a sunlit stone wall" },
@@ -700,6 +704,8 @@ There was someone there and they had been there,
 somewhere in the sickening Wide-Open
 and I stand here, in this orange glow
 looking, and looking, and looking` },
+
+  { type: "audio", file: "audio/music/2025-08-21.mp3", title: "8.21.2025_Master", date: "2025-08-21", size: "sm" },
 
   { type: "audio", file: "audio/music/2024-10-31.mp3", title: "10.31.24 4_Master", date: "2024-10-31", size: "sm" },
 
