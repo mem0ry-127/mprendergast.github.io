@@ -779,6 +779,7 @@ button {
   max-height: min(70vh, 480px);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   background: var(--scrim);
   border: 1px solid rgba(242, 241, 236, 0.12);
   color: var(--badge-ink);
@@ -787,6 +788,40 @@ button {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 #site-player[hidden] { display: none; }
+
+/* Mini bar: a compact play/pause + title + next row. Only ever shown
+   on narrow viewports (see the max-width media query below) — on
+   desktop .site-player-full is always what's visible, regardless of
+   the is-collapsed class, since the corner widget is small enough
+   there not to need a collapsed state. */
+.site-player-mini {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.site-player-mini-play { width: 32px; height: 32px; font-size: 11px; }
+.site-player-mini-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 13px;
+}
+.site-player-mini-next {
+  flex: none;
+  font-size: 14px;
+  color: rgba(242, 241, 236, 0.75);
+  padding: 8px;
+}
+
+.site-player-full {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
 
 .site-player-header {
   display: flex;
@@ -802,6 +837,18 @@ button {
   letter-spacing: 0.05em;
   color: rgba(242, 241, 236, 0.55);
 }
+.site-player-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.site-player-collapse {
+  display: none;
+  color: rgba(242, 241, 236, 0.55);
+  font-size: 14px;
+  padding: 4px 6px;
+}
+.site-player-collapse:hover { color: var(--badge-ink); }
 .site-player-close {
   color: rgba(242, 241, 236, 0.55);
   font-size: 12px;
@@ -962,4 +1009,24 @@ button {
   .site-header { flex-direction: column; align-items: flex-start; gap: 10px; }
   .header-meta { flex-direction: row; align-items: baseline; gap: 10px; }
   .lightbox-hint { display: none; }
+
+  /* The corner widget becomes an edge-to-edge bottom bar, defaulting
+     to the compact mini row (see the is-collapsed toggling in
+     player.js) so a playing track doesn't block browsing the rest of
+     the page. Tapping it expands to the full player + playlist. */
+  #site-player {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: 70vh;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+  }
+  #site-player.is-collapsed { max-height: none; }
+  #site-player.is-collapsed .site-player-full { display: none; }
+  #site-player.is-collapsed .site-player-mini { display: flex; }
+  .site-player-collapse { display: inline-flex; }
 }

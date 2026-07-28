@@ -43,9 +43,22 @@
   widget.id = "site-player";
   widget.hidden = true;
   widget.innerHTML =
+    // Mini bar: mobile-only compact state (see the max-width media
+    // query in styles.css — on desktop this never displays, the full
+    // player below is always shown). Tapping it expands to .site-player-full;
+    // its own play/pause and next stay directly usable without expanding.
+    '<div class="site-player-mini">' +
+    '<button class="audio-play site-player-mini-play" type="button" aria-label="Play">▶</button>' +
+    '<span class="site-player-mini-title"></span>' +
+    '<button class="site-player-mini-next" type="button" aria-label="Next track">⏭</button>' +
+    "</div>" +
+    '<div class="site-player-full">' +
     '<div class="site-player-header">' +
     '<span class="site-player-now">Now Playing</span>' +
+    '<div class="site-player-header-actions">' +
+    '<button class="site-player-collapse" type="button" aria-label="Minimize player">⌄</button>' +
     '<button class="site-player-close" type="button" aria-label="Close player">✕</button>' +
+    "</div>" +
     "</div>" +
     '<div class="site-player-track">' +
     '<span class="site-player-title"></span>' +
@@ -59,10 +72,16 @@
     '<button class="site-player-next" type="button" aria-label="Next track">⏭</button>' +
     '<input class="audio-volume site-player-volume" type="range" min="0" max="1" step="0.01" aria-label="Volume">' +
     "</div>" +
-    '<ul class="site-player-playlist"></ul>';
+    '<ul class="site-player-playlist"></ul>' +
+    "</div>";
   document.body.appendChild(widget);
 
   const els = {
+    miniBar: widget.querySelector(".site-player-mini"),
+    miniPlay: widget.querySelector(".site-player-mini-play"),
+    miniTitle: widget.querySelector(".site-player-mini-title"),
+    miniNext: widget.querySelector(".site-player-mini-next"),
+    collapse: widget.querySelector(".site-player-collapse"),
     close: widget.querySelector(".site-player-close"),
     title: widget.querySelector(".site-player-title"),
     date: widget.querySelector(".site-player-date"),
@@ -104,6 +123,7 @@
   function playIndex(i) {
     if (i < 0 || i >= playlist.length) return;
     const changingTrack = i !== currentIndex;
+    const wasHidden = widget.hidden;
     const prevRow = playlistRow(currentIndex);
     if (prevRow) prevRow.classList.remove("is-current");
     currentIndex = i;
@@ -115,7 +135,13 @@
     audioEl.play();
     els.title.textContent = photo.title || "Untitled";
     els.date.textContent = photo.date || "";
+    els.miniTitle.textContent = photo.title || "Untitled";
     widget.hidden = false;
+    // Default to the compact mini bar (mobile only -- see styles.css)
+    // whenever the player is newly appearing, so starting a track
+    // never blocks browsing. Doesn't re-collapse an already-open
+    // player just because the track changed underneath it.
+    if (wasHidden) widget.classList.add("is-collapsed");
     const row = playlistRow(i);
     if (row) {
       row.classList.add("is-current");
@@ -162,12 +188,15 @@
     syncActiveTile();
   }
 
-  els.close.addEventListener("click", closePlayer);
-  els.playpause.addEventListener("click", () => {
+  function togglePlayPause() {
     if (currentIndex === -1) return;
     if (audioEl.paused) audioEl.play();
     else audioEl.pause();
-  });
+  }
+
+  els.close.addEventListener("click", closePlayer);
+  els.collapse.addEventListener("click", () => widget.classList.add("is-collapsed"));
+  els.playpause.addEventListener("click", togglePlayPause);
   els.prev.addEventListener("click", prev);
   els.next.addEventListener("click", next);
   els.volume.addEventListener("input", () => setVolume(parseFloat(els.volume.value)));
@@ -176,12 +205,27 @@
     seek((e.clientX - rect.left) / rect.width);
   });
 
+  // Tapping the mini bar expands it; its own play/pause and next stay
+  // directly usable without expanding first, so they stop the tap from
+  // also bubbling up to the expand handler.
+  els.miniBar.addEventListener("click", () => widget.classList.remove("is-collapsed"));
+  els.miniPlay.addEventListener("click", (e) => {
+    e.stopPropagation();
+    togglePlayPause();
+  });
+  els.miniNext.addEventListener("click", (e) => {
+    e.stopPropagation();
+    next();
+  });
+
   audioEl.addEventListener("play", () => {
     els.playpause.textContent = "❚❚";
+    els.miniPlay.textContent = "❚❚";
     syncActiveTile();
   });
   audioEl.addEventListener("pause", () => {
     els.playpause.textContent = "▶";
+    els.miniPlay.textContent = "▶";
     syncActiveTile();
   });
   audioEl.addEventListener("ended", next);
