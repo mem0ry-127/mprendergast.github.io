@@ -272,6 +272,7 @@ button {
 .gallery {
   display: grid;
   grid-template-columns: repeat(15, 1fr);
+  align-items: start;
   gap: var(--gap);
   background: var(--hairline);
   padding: var(--gap) var(--edge) 0;
