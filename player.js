@@ -50,7 +50,7 @@
     '<div class="site-player-mini">' +
     '<button class="audio-play site-player-mini-play" type="button" aria-label="Play">▶</button>' +
     '<span class="site-player-mini-title"></span>' +
-    '<button class="site-player-mini-next" type="button" aria-label="Next track">⏭</button>' +
+    '<button class="site-player-mini-next" type="button" aria-label="Next track">▸▸</button>' +
     "</div>" +
     '<div class="site-player-full">' +
     '<div class="site-player-header">' +
@@ -67,9 +67,9 @@
     '<div class="audio-progress site-player-progress"><div class="audio-progress-fill"></div></div>' +
     '<div class="audio-time site-player-time">0:00 / 0:00</div>' +
     '<div class="site-player-transport">' +
-    '<button class="site-player-prev" type="button" aria-label="Previous track">⏮</button>' +
+    '<button class="site-player-prev" type="button" aria-label="Previous track">◂◂</button>' +
     '<button class="audio-play site-player-playpause" type="button" aria-label="Play">▶</button>' +
-    '<button class="site-player-next" type="button" aria-label="Next track">⏭</button>' +
+    '<button class="site-player-next" type="button" aria-label="Next track">▸▸</button>' +
     '<input class="audio-volume site-player-volume" type="range" min="0" max="1" step="0.01" aria-label="Volume">' +
     "</div>" +
     '<ul class="site-player-playlist"></ul>' +
