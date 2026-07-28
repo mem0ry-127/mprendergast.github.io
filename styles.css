@@ -104,10 +104,19 @@ button {
 }
 
 .site-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 14px;
   letter-spacing: 0.03em;
+}
+.site-name-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
 }
 
 .header-right {
