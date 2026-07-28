@@ -926,6 +926,26 @@ button {
   margin: 10px 12px 0;
 }
 
+/* Tiny kHz reference marks under the visualizer -- positioned via
+   inline left% computed in player.js from the same log frequency
+   scale the bars use, so they land under the right bar regardless of
+   width. */
+.site-player-viz-scale {
+  position: relative;
+  height: 9px;
+  margin: 2px 12px 0;
+}
+.site-player-viz-scale span {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  line-height: 1;
+  color: rgba(242, 241, 236, 0.4);
+  white-space: nowrap;
+}
+
 .site-player-progress {
   /* .audio-progress sets flex: 1 for its original row-flex context
      (.tile-audio-player) — here it's a direct child of the widget's

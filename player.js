@@ -65,6 +65,7 @@
     '<span class="site-player-date"></span>' +
     "</div>" +
     '<canvas class="site-player-visualizer" width="400" height="40"></canvas>' +
+    '<div class="site-player-viz-scale"></div>' +
     '<div class="audio-progress site-player-progress"><div class="audio-progress-fill"></div></div>' +
     '<div class="audio-time site-player-time">0:00 / 0:00</div>' +
     '<div class="site-player-transport">' +
@@ -95,6 +96,7 @@
     volume: widget.querySelector(".site-player-volume"),
     list: widget.querySelector(".site-player-playlist"),
     visualizer: widget.querySelector(".site-player-visualizer"),
+    vizScale: widget.querySelector(".site-player-viz-scale"),
   };
   els.volume.value = String(audioEl.volume);
 
@@ -106,15 +108,64 @@
      re-measure or redraw on resize. The AudioContext is created lazily
      on first play, since browsers keep it suspended until a user
      gesture resumes it, and createMediaElementSource can only ever be
-     called once per <audio> element. */
+     called once per <audio> element.
+
+     Bars are mapped to log-spaced frequency bands (20Hz-20kHz, like a
+     real EQ/visualizer) rather than raw FFT bins spread linearly --
+     linear spacing puts equal Hz width behind every bar, but music's
+     energy (and octave structure) is logarithmic, so a linear layout
+     crams almost everything into the first few bars and leaves the
+     rest nearly flat. fftSize is 4096 (vs. a smaller default) so
+     there's enough raw bin resolution to bucket meaningfully even
+     down at the low end, where a bar can span just a handful of Hz. */
   const VIZ_WIDTH = 400;
   const VIZ_HEIGHT = 40;
-  const BAR_COUNT = 28;
+  const BAR_COUNT = 32;
+  const MIN_FREQ = 20;
+  const MAX_FREQ = 20000;
+  const SCALE_MARKERS = [
+    { freq: 100, label: "100" },
+    { freq: 1000, label: "1k" },
+    { freq: 10000, label: "10k" },
+  ];
   let audioCtx = null;
   let analyser = null;
   let freqData = null;
   let vizFrame = null;
+  let barBinRanges = null;
   const vizCtx = els.visualizer.getContext("2d");
+
+  function freqToX(freq, maxFreq) {
+    const clamped = Math.min(Math.max(freq, MIN_FREQ), maxFreq);
+    return (VIZ_WIDTH * Math.log(clamped / MIN_FREQ)) / Math.log(maxFreq / MIN_FREQ);
+  }
+
+  // Precomputes which FFT bins feed each bar, and positions the tiny
+  // kHz markers underneath -- both need audioCtx.sampleRate, which
+  // only exists once the graph is set up, so this runs once from
+  // ensureAudioGraph() rather than on every frame.
+  function layoutVisualizer() {
+    const nyquist = audioCtx.sampleRate / 2;
+    const maxFreq = Math.min(MAX_FREQ, nyquist);
+    const binHz = audioCtx.sampleRate / analyser.fftSize;
+    barBinRanges = [];
+    for (let i = 0; i < BAR_COUNT; i++) {
+      const f0 = MIN_FREQ * Math.pow(maxFreq / MIN_FREQ, i / BAR_COUNT);
+      const f1 = MIN_FREQ * Math.pow(maxFreq / MIN_FREQ, (i + 1) / BAR_COUNT);
+      let bin0 = Math.floor(f0 / binHz);
+      let bin1 = Math.max(bin0 + 1, Math.ceil(f1 / binHz));
+      bin1 = Math.min(bin1, analyser.frequencyBinCount);
+      barBinRanges.push([bin0, bin1]);
+    }
+
+    els.vizScale.innerHTML = "";
+    SCALE_MARKERS.filter((m) => m.freq <= maxFreq).forEach((m) => {
+      const span = document.createElement("span");
+      span.textContent = m.label;
+      span.style.left = (freqToX(m.freq, maxFreq) / VIZ_WIDTH) * 100 + "%";
+      els.vizScale.appendChild(span);
+    });
+  }
 
   function ensureAudioGraph() {
     if (audioCtx) return;
@@ -123,11 +174,12 @@
     audioCtx = new Ctx();
     const source = audioCtx.createMediaElementSource(audioEl);
     analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 128;
+    analyser.fftSize = 4096;
     analyser.smoothingTimeConstant = 0.8;
     freqData = new Uint8Array(analyser.frequencyBinCount);
     source.connect(analyser);
     analyser.connect(audioCtx.destination);
+    layoutVisualizer();
   }
 
   function fullViewVisible() {
@@ -140,13 +192,13 @@
     if (fullViewVisible()) {
       analyser.getByteFrequencyData(freqData);
       vizCtx.clearRect(0, 0, VIZ_WIDTH, VIZ_HEIGHT);
-      const binsPerBar = Math.floor(freqData.length / BAR_COUNT);
       const barWidth = VIZ_WIDTH / BAR_COUNT;
       vizCtx.fillStyle = "rgba(226, 145, 74, 0.85)";
       for (let i = 0; i < BAR_COUNT; i++) {
+        const [bin0, bin1] = barBinRanges[i];
         let sum = 0;
-        for (let j = 0; j < binsPerBar; j++) sum += freqData[i * binsPerBar + j];
-        const avg = sum / binsPerBar;
+        for (let j = bin0; j < bin1; j++) sum += freqData[j];
+        const avg = sum / (bin1 - bin0);
         const barHeight = Math.max(2, (avg / 255) * VIZ_HEIGHT);
         vizCtx.fillRect(i * barWidth + 1, VIZ_HEIGHT - barHeight, barWidth - 2, barHeight);
       }
