@@ -363,23 +363,23 @@ const PHOTOS = [
     film: "Kodak Portra 400",
     alt: "A window covered by bars painted in bright colors, layered with graffiti and a faded 1973 tag" },
 
-  { file: "images/fort-weatherill-ri/2019-11-newport-bridge-blur.jpg", title: "Bridge, from the car", date: "2019-11",
+  { file: "images/fort-weatherill-ri/2019-11-newport-bridge-blur.jpg", title: "Claiborne Pell Bridge", date: "2019-11",
     location: "Fort Weatherill State Park, RI", size: "lg", tags: ["travel", "landscape"],
     alt: "A motion-blurred road sign in the foreground with a suspension bridge crossing a bay under an overcast sky, shot from a moving car" },
 
-  { file: "images/fort-weatherill-ri/2019-11-night-light-trails.jpg", title: "Night drive", date: "2019-11",
+  { file: "images/fort-weatherill-ri/2019-11-night-light-trails.jpg", title: "", date: "2019-11",
     location: "Fort Weatherill State Park, RI", size: "md", tags: ["travel"],
     alt: "A heavily motion-blurred night scene with streaking light trails and dark tree silhouettes framing a glowing horizon" },
 
-  { file: "images/fort-weatherill-ri/2019-11-cliff-arms-raised.jpg", title: "Arms raised, cliffside", date: "2019-11",
+  { file: "images/fort-weatherill-ri/2019-11-cliff-arms-raised.jpg", title: "Cliffside", date: "2019-11",
     location: "Fort Weatherill State Park, RI", size: "lg", tags: ["coast", "portrait"],
     alt: "A person standing partway up a rocky cliff face with arms raised in triumph, waves breaking on the rocks below" },
 
-  { file: "images/fort-weatherill-ri/2019-11-cliff-climb.jpg", title: "Climbing the rocks", date: "2019-11",
+  { file: "images/fort-weatherill-ri/2019-11-cliff-climb.jpg", title: "", date: "2019-11",
     location: "Fort Weatherill State Park, RI", size: "md", tags: ["coast", "portrait"],
     alt: "A person climbing along a jagged rocky coastal cliff face as waves break below" },
 
-  { file: "images/fort-weatherill-ri/2019-11-rocks-sitting.jpg", title: "Sitting by the bay", date: "2019-11",
+  { file: "images/fort-weatherill-ri/2019-11-rocks-sitting.jpg", title: "", date: "2019-11",
     location: "Fort Weatherill State Park, RI", size: "md", tags: ["coast", "portrait"],
     alt: "A woman in a knit beanie sitting on rocks along a calm, tree-lined bay shoreline" },
 
@@ -387,7 +387,7 @@ const PHOTOS = [
     location: "Fort Weatherill State Park, RI", size: "md", tags: ["coast", "portrait"],
     alt: "A woman standing on coastal rocks with arms outstretched toward the open water, a small rocky islet in the distance" },
 
-  { file: "images/fort-weatherill-ri/2019-11-rock-scramble.jpg", title: "Rock scramble", date: "2019-11",
+  { file: "images/fort-weatherill-ri/2019-11-rock-scramble.jpg", title: "", date: "2019-11",
     location: "Fort Weatherill State Park, RI", size: "sm", tags: ["coast", "portrait"],
     alt: "A man seen from behind, mid-stride with arms out for balance while crossing a rocky slope" },
 
