@@ -31,6 +31,7 @@ function initIndexPage() {
   const closeBtn = document.getElementById("lightbox-close");
   const prevBtn = document.getElementById("lightbox-prev");
   const nextBtn = document.getElementById("lightbox-next");
+  const copyLinkBtn = document.getElementById("lightbox-copy-link");
 
   const allPhotos = (typeof PHOTOS !== "undefined" && Array.isArray(PHOTOS) ? PHOTOS : []).filter(
     (p) => !p.hidden
@@ -522,6 +523,21 @@ function initIndexPage() {
   closeBtn.addEventListener("click", closeLightbox);
   prevBtn.addEventListener("click", () => step(-1));
   nextBtn.addEventListener("click", () => step(1));
+  let copyLinkTimer = null;
+  copyLinkBtn.addEventListener("click", () => {
+    navigator.clipboard
+      .writeText(window.location.href)
+      .then(() => {
+        copyLinkBtn.textContent = "Copied";
+        copyLinkBtn.classList.add("is-copied");
+        clearTimeout(copyLinkTimer);
+        copyLinkTimer = setTimeout(() => {
+          copyLinkBtn.textContent = "Copy link";
+          copyLinkBtn.classList.remove("is-copied");
+        }, 1500);
+      })
+      .catch(() => {});
+  });
   plainTextToggle.addEventListener("click", () => {
     isPlainText = !isPlainText;
     plainTextToggle.textContent = isPlainText ? "Styled" : "Plain text";

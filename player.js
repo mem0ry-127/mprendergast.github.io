@@ -64,6 +64,7 @@
     '<span class="site-player-title"></span>' +
     '<span class="site-player-date"></span>' +
     "</div>" +
+    '<canvas class="site-player-visualizer" width="400" height="40"></canvas>' +
     '<div class="audio-progress site-player-progress"><div class="audio-progress-fill"></div></div>' +
     '<div class="audio-time site-player-time">0:00 / 0:00</div>' +
     '<div class="site-player-transport">' +
@@ -93,8 +94,79 @@
     next: widget.querySelector(".site-player-next"),
     volume: widget.querySelector(".site-player-volume"),
     list: widget.querySelector(".site-player-playlist"),
+    visualizer: widget.querySelector(".site-player-visualizer"),
   };
   els.volume.value = String(audioEl.volume);
+
+  /* ---------------- Visualizer ----------------
+     Web Audio API frequency bars, drawn in a fixed 400x40 coordinate
+     space regardless of the canvas's displayed CSS size (full-width
+     corner widget on desktop, edge-to-edge bar on mobile) -- the
+     browser handles the visual scaling, so there's no need to
+     re-measure or redraw on resize. The AudioContext is created lazily
+     on first play, since browsers keep it suspended until a user
+     gesture resumes it, and createMediaElementSource can only ever be
+     called once per <audio> element. */
+  const VIZ_WIDTH = 400;
+  const VIZ_HEIGHT = 40;
+  const BAR_COUNT = 28;
+  let audioCtx = null;
+  let analyser = null;
+  let freqData = null;
+  let vizFrame = null;
+  const vizCtx = els.visualizer.getContext("2d");
+
+  function ensureAudioGraph() {
+    if (audioCtx) return;
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+    audioCtx = new Ctx();
+    const source = audioCtx.createMediaElementSource(audioEl);
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 128;
+    analyser.smoothingTimeConstant = 0.8;
+    freqData = new Uint8Array(analyser.frequencyBinCount);
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+  }
+
+  function fullViewVisible() {
+    return getComputedStyle(widget.querySelector(".site-player-full")).display !== "none";
+  }
+
+  function drawVisualizer() {
+    vizFrame = null;
+    if (audioEl.paused || !analyser) return;
+    if (fullViewVisible()) {
+      analyser.getByteFrequencyData(freqData);
+      vizCtx.clearRect(0, 0, VIZ_WIDTH, VIZ_HEIGHT);
+      const binsPerBar = Math.floor(freqData.length / BAR_COUNT);
+      const barWidth = VIZ_WIDTH / BAR_COUNT;
+      vizCtx.fillStyle = "rgba(226, 145, 74, 0.85)";
+      for (let i = 0; i < BAR_COUNT; i++) {
+        let sum = 0;
+        for (let j = 0; j < binsPerBar; j++) sum += freqData[i * binsPerBar + j];
+        const avg = sum / binsPerBar;
+        const barHeight = Math.max(2, (avg / 255) * VIZ_HEIGHT);
+        vizCtx.fillRect(i * barWidth + 1, VIZ_HEIGHT - barHeight, barWidth - 2, barHeight);
+      }
+    }
+    vizFrame = requestAnimationFrame(drawVisualizer);
+  }
+
+  function startVisualizer() {
+    ensureAudioGraph();
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    if (!vizFrame) vizFrame = requestAnimationFrame(drawVisualizer);
+  }
+
+  function stopVisualizer() {
+    if (vizFrame) {
+      cancelAnimationFrame(vizFrame);
+      vizFrame = null;
+    }
+    vizCtx.clearRect(0, 0, VIZ_WIDTH, VIZ_HEIGHT);
+  }
 
   playlist.forEach((photo, i) => {
     const li = document.createElement("li");
@@ -181,6 +253,7 @@
   }
   function closePlayer() {
     audioEl.pause();
+    stopVisualizer();
     widget.hidden = true;
     const row = playlistRow(currentIndex);
     if (row) row.classList.remove("is-current");
@@ -221,11 +294,13 @@
   audioEl.addEventListener("play", () => {
     els.playpause.textContent = "❚❚";
     els.miniPlay.textContent = "❚❚";
+    startVisualizer();
     syncActiveTile();
   });
   audioEl.addEventListener("pause", () => {
     els.playpause.textContent = "▶";
     els.miniPlay.textContent = "▶";
+    stopVisualizer();
     syncActiveTile();
   });
   audioEl.addEventListener("ended", next);

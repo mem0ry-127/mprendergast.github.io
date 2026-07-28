@@ -595,6 +595,8 @@ button {
 --------------------------------------------------------- */
 .site-footer {
   display: flex;
+  flex-wrap: wrap;
+  row-gap: 6px;
   align-items: center;
   gap: 18px;
   padding: 22px var(--edge) 40px;
@@ -876,6 +878,16 @@ button {
   color: rgba(242, 241, 236, 0.55);
 }
 
+/* Drawn in a fixed 400x40 canvas coordinate space (see player.js) --
+   this display size is just how that gets stretched/shrunk to fit,
+   the browser handles the scaling. */
+.site-player-visualizer {
+  display: block;
+  width: calc(100% - 24px);
+  height: 36px;
+  margin: 10px 12px 0;
+}
+
 .site-player-progress {
   /* .audio-progress sets flex: 1 for its original row-flex context
      (.tile-audio-player) — here it's a direct child of the widget's
@@ -984,6 +996,22 @@ button {
 .lightbox-close { top: 18px; right: var(--edge); }
 .lightbox-prev { left: var(--edge); }
 .lightbox-next { right: var(--edge); }
+
+.lightbox-copy-link {
+  position: absolute;
+  top: 18px;
+  right: calc(var(--edge) + 52px);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  padding: 15px 8px;
+  z-index: 1;
+  white-space: nowrap;
+}
+.lightbox-copy-link:hover { color: var(--accent); }
+.lightbox-copy-link.is-copied { color: var(--accent); }
 .lightbox-nav { top: 50%; transform: translateY(-50%); font-size: 22px; }
 
 .lightbox-hint {
