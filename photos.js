@@ -363,6 +363,38 @@ const PHOTOS = [
     film: "Kodak Portra 400",
     alt: "A window covered by bars painted in bright colors, layered with graffiti and a faded 1973 tag" },
 
+  { file: "images/fort-weatherill-ri/2019-11-newport-bridge-blur.jpg", title: "Bridge, from the car", date: "2019-11",
+    location: "Fort Weatherill State Park, RI", size: "lg", tags: ["travel", "landscape"],
+    alt: "A motion-blurred road sign in the foreground with a suspension bridge crossing a bay under an overcast sky, shot from a moving car" },
+
+  { file: "images/fort-weatherill-ri/2019-11-night-light-trails.jpg", title: "Night drive", date: "2019-11",
+    location: "Fort Weatherill State Park, RI", size: "md", tags: ["travel"],
+    alt: "A heavily motion-blurred night scene with streaking light trails and dark tree silhouettes framing a glowing horizon" },
+
+  { file: "images/fort-weatherill-ri/2019-11-cliff-arms-raised.jpg", title: "Arms raised, cliffside", date: "2019-11",
+    location: "Fort Weatherill State Park, RI", size: "lg", tags: ["coast", "portrait"],
+    alt: "A person standing partway up a rocky cliff face with arms raised in triumph, waves breaking on the rocks below" },
+
+  { file: "images/fort-weatherill-ri/2019-11-cliff-climb.jpg", title: "Climbing the rocks", date: "2019-11",
+    location: "Fort Weatherill State Park, RI", size: "md", tags: ["coast", "portrait"],
+    alt: "A person climbing along a jagged rocky coastal cliff face as waves break below" },
+
+  { file: "images/fort-weatherill-ri/2019-11-rocks-sitting.jpg", title: "Sitting by the bay", date: "2019-11",
+    location: "Fort Weatherill State Park, RI", size: "md", tags: ["coast", "portrait"],
+    alt: "A woman in a knit beanie sitting on rocks along a calm, tree-lined bay shoreline" },
+
+  { file: "images/fort-weatherill-ri/2019-11-arms-outstretched.jpg", title: "Arms out, open water", date: "2019-11",
+    location: "Fort Weatherill State Park, RI", size: "md", tags: ["coast", "portrait"],
+    alt: "A woman standing on coastal rocks with arms outstretched toward the open water, a small rocky islet in the distance" },
+
+  { file: "images/fort-weatherill-ri/2019-11-rock-scramble.jpg", title: "Rock scramble", date: "2019-11",
+    location: "Fort Weatherill State Park, RI", size: "sm", tags: ["coast", "portrait"],
+    alt: "A man seen from behind, mid-stride with arms out for balance while crossing a rocky slope" },
+
+  { file: "images/fort-weatherill-ri/2019-11-colonial-house.jpg", title: "Gambrel roof", date: "2019-11",
+    location: "Fort Weatherill State Park, RI", size: "sm", tags: ["architecture", "travel"],
+    alt: "A gambrel-roofed colonial house with a brick chimney and columned entrance porch, seen from below against an overcast sky" },
+
   { file: "images/spain/2017-madrid-plaza.jpg", title: "Plaza crowd", date: "2017",
     location: "Madrid, Spain", size: "lg", tags: ["street"],
     alt: "A crowd gathered in a Madrid plaza at dusk, surrounded by ornate apartment buildings and a Starbucks storefront" },
@@ -430,6 +462,10 @@ const PHOTOS = [
   { file: "images/philadelphia/2017-crane.jpg", title: "Crane, between buildings", date: "2017",
     location: "Philadelphia, PA", size: "md", tags: ["architecture"],
     alt: "A construction crane boom seen from below, framed between a brick apartment building and a beige high-rise" },
+
+  { file: "images/2015-05-color-study.jpg", title: "Color study", date: "2015-05-30",
+    size: "md", tags: ["abstract"],
+    alt: "Abstract blurred vertical bands of vivid orange and green with heavy film grain" },
 
   { type: "text", date: "2026-07", size: "sm", format: "verse",
     body: `It twas an individual fine March dawn I bid New Orleans goodbye
