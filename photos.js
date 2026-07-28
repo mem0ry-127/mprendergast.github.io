@@ -48,7 +48,7 @@ const PHOTOS = [
     location: "Barcelona, Spain", size: "lg", tags: ["street"],
     alt: "A narrow Barcelona alley strung with colorful bunting, bikes and laundry along the walls" },
 
-  { file: "images/honeymoon/spain/2024-07-barcelona-tower.jpg", title: "Gothic tower", date: "2024-07",
+  { file: "images/honeymoon/spain/2024-07-barcelona-tower.jpg", title: "Edificio de Correos", date: "2024-07",
     location: "Barcelona, Spain", size: "md", tags: ["architecture"],
     alt: "A Gothic tower glimpsed through trees in central Barcelona" },
 
@@ -81,19 +81,19 @@ const PHOTOS = [
     location: "Barcelona, Spain", size: "sm", tags: ["street"],
     alt: "A torn hole in a painted mural revealing a quiet courtyard beyond" },
 
-  { file: "images/honeymoon/spain/2024-07-cathedral-spire.jpg", title: "Cathedral spire", date: "2024-07",
+  { file: "images/honeymoon/spain/2024-07-cathedral-spire.jpg", title: "Catedral de la Santa Creu i Santa Eulàlia", date: "2024-07",
     location: "Barcelona, Spain", size: "md", tags: ["architecture"],
     alt: "The Gothic spire of Barcelona Cathedral against a dusk sky" },
 
-  { file: "images/honeymoon/france/2024-07-alpine-lake.jpg", title: "Alpine lake", date: "2024-07",
+  { file: "images/honeymoon/france/2024-07-alpine-lake.jpg", title: "Embalse de Búbal", date: "2024-07",
     location: "Pyrenees, France", size: "lg", tags: ["landscape"],
     alt: "A woman standing in a grassy field overlooking a turquoise alpine lake ringed by mountains" },
 
-  { file: "images/honeymoon/france/2024-07-lake-panorama.jpg", title: "Lake panorama", date: "2024-07",
+  { file: "images/honeymoon/france/2024-07-lake-panorama.jpg", title: "", date: "2024-07",
     location: "Pyrenees, France", size: "md", tags: ["landscape"],
     alt: "A wide turquoise alpine lake bordered by forested slopes, a rocky peak rising behind" },
 
-  { file: "images/honeymoon/france/2024-07-alpine-lake-film.jpg", title: "Alpine lake, on film", date: "2024-07",
+  { file: "images/honeymoon/france/2024-07-alpine-lake-film.jpg", title: "", date: "2024-07",
     location: "Pyrenees, France", size: "md", tags: ["landscape"],
     alt: "A turquoise alpine lake and forested slopes" },
 
@@ -101,15 +101,15 @@ const PHOTOS = [
     location: "Pyrenees, France", size: "md", tags: ["landscape"],
     alt: "A green mountain valley with a distant ridge, seen through drifting fog" },
 
-  { file: "images/honeymoon/france/2024-07-summit-view.jpg", title: "Summit view", date: "2024-07",
+  { file: "images/honeymoon/france/2024-07-summit-view.jpg", title: "Cirque de Gourette and the Massif du Ger", date: "2024-07",
     location: "Pyrenees, France", size: "lg", tags: ["landscape"],
     alt: "Bare rock summits streaked with late snow above a forested valley" },
 
-  { file: "images/honeymoon/france/2024-07-mountain-panorama.jpg", title: "Mountain panorama", date: "2024-07",
+  { file: "images/honeymoon/france/2024-07-mountain-panorama.jpg", title: "", date: "2024-07",
     location: "Pyrenees, France", size: "lg", tags: ["landscape"],
     alt: "A wide panorama of Pyrenees peaks and grassy slopes under a partly cloudy sky" },
 
-  { file: "images/honeymoon/france/2024-07-mountain-vista.jpg", title: "Mountain vista", date: "2024-07",
+  { file: "images/honeymoon/france/2024-07-mountain-vista.jpg", title: "Blonde d'Aquitaine with bell", date: "2024-07",
     location: "Pyrenees, France", size: "md", tags: ["landscape"],
     alt: "Jagged green peaks rising above a valley" },
 
@@ -117,7 +117,7 @@ const PHOTOS = [
     location: "Pyrenees, France", size: "sm", tags: ["landscape"],
     alt: "Layered green mountain slopes fading into haze" },
 
-  { file: "images/honeymoon/france/2024-07-roadside-view.jpg", title: "Roadside view", date: "2024-07",
+  { file: "images/honeymoon/france/2024-07-roadside-view.jpg", title: "Charolais blockade", date: "2024-07",
     location: "Pyrenees, France", size: "sm", tags: ["landscape"],
     alt: "A green mountain valley seen from a roadside pull-off" },
 
@@ -125,7 +125,7 @@ const PHOTOS = [
     location: "Pyrenees, France", size: "lg", tags: ["landscape"],
     alt: "A rocky mountain stream cutting through a green valley, cattle grazing on the ridge above" },
 
-  { file: "images/honeymoon/france/2024-07-road-cattle.jpg", title: "Road cattle", date: "2024-07",
+  { file: "images/honeymoon/france/2024-07-road-cattle.jpg", title: "Oisans massif", date: "2024-07",
     location: "Pyrenees, France", size: "sm", tags: ["landscape"],
     alt: "Cattle with bells standing in the road on a high mountain pass" },
 
@@ -141,15 +141,15 @@ const PHOTOS = [
     location: "Pyrenees, France", size: "md", tags: ["landscape"],
     alt: "Cattle resting near parked cars at a high mountain pass" },
 
-  { file: "images/honeymoon/france/2024-07-mountain-road.jpg", title: "Mountain road", date: "2024-07",
+  { file: "images/honeymoon/france/2024-07-mountain-road.jpg", title: "Cormet de Roselend ", date: "2024-07",
     location: "Pyrenees, France", size: "md", tags: ["landscape"],
     alt: "A parking area overlooking layered green peaks, cars pulled off along a mountain pass" },
 
-  { file: "images/honeymoon/france/2024-07-hilltop-chapel.jpg", title: "Hilltop chapel", date: "2024-07",
+  { file: "images/honeymoon/france/2024-07-hilltop-chapel.jpg", title: "", date: "2024-07",
     location: "Pyrenees, France", size: "md", tags: ["landscape", "architecture"],
     alt: "A stone chapel and cluster of houses on a hilltop, framed by two peaks behind" },
 
-  { file: "images/honeymoon/france/2024-07-chapel-distant.jpg", title: "Chapel, distant", date: "2024-07",
+  { file: "images/honeymoon/france/2024-07-chapel-distant.jpg", title: "Chapelle Notre-Dame de Piétat", date: "2024-07",
     location: "Pyrenees, France", size: "sm", tags: ["landscape", "architecture"],
     alt: "A distant hilltop chapel above a wooded valley" },
 
@@ -161,15 +161,15 @@ const PHOTOS = [
     location: "Pyrenees, France", size: "lg", tags: ["architecture"],
     alt: "A grand hotel facade beneath a fog-covered mountainside, flower boxes in bloom" },
 
-  { file: "images/honeymoon/france/2024-07-village-drive-by.jpg", title: "Village, drive-by", date: "2024-07",
+  { file: "images/honeymoon/france/2024-07-village-drive-by.jpg", title: "Dani on bridge", date: "2024-07",
     location: "Pyrenees, France", size: "sm", tags: ["landscape"],
     alt: "A mountainside village of stone-roofed houses and a church, seen in motion from a moving car" },
 
-  { file: "images/honeymoon/france/2024-07-village-window.jpg", title: "Village, through glass", date: "2024-07",
+  { file: "images/honeymoon/france/2024-07-village-window.jpg", title: "Saligos, through glass", date: "2024-07",
     location: "Pyrenees, France", size: "md", tags: ["landscape"],
     alt: "A stone village seen through a car window on a foggy mountain road" },
 
-  { file: "images/honeymoon/france/2024-07-village-blur.jpg", title: "Village, in motion", date: "2024-07",
+  { file: "images/honeymoon/france/2024-07-village-blur.jpg", title: "", date: "2024-07",
     location: "Pyrenees, France", size: "sm", tags: ["landscape"],
     alt: "A mountainside village blurred by motion, seen from a moving car" },
 
@@ -194,6 +194,7 @@ const PHOTOS = [
     alt: "Chillida's rusted iron sculptures gripping the rocks at the edge of the sea" },
 
   { file: "images/honeymoon/spain/2024-07-sailboat-sunset.jpg", title: "Sailboat, sunset", date: "2024-07",
+    hidden: true,
     location: "San Sebastian, Spain", size: "md", tags: ["coast"],
     alt: "A lone sailboat silhouetted against the setting sun over open water" },
 
@@ -205,7 +206,7 @@ const PHOTOS = [
     location: "San Sebastian, Spain", size: "sm", tags: ["architecture"],
     alt: "A rooftop antenna tower silhouetted at dusk above San Sebastian's old town" },
 
-  { file: "images/honeymoon/spain/2024-07-tiled-villa.jpg", title: "Tiled villa", date: "2024-07",
+  { file: "images/honeymoon/spain/2024-07-tiled-villa.jpg", title: "Casa Portuguesa de Ondarreta", date: "2024-07",
     location: "San Sebastian, Spain", size: "md", tags: ["architecture"],
     alt: "A white villa with blue tile medallions and green shutters on a Basque coastal street" },
 
@@ -218,12 +219,12 @@ const PHOTOS = [
     film: "Ilford HP5",
     alt: "A person standing in tall grass on a fog-covered cliff top, pine trees emerging from the mist" },
 
-  { file: "images/oregon/2022-10-sea-stack.jpg", title: "Sea stack", date: "2022-10",
+  { file: "images/oregon/2022-10-sea-stack.jpg", title: "Cape Falcon", date: "2022-10",
     location: "Oregon", size: "md", tags: ["landscape", "coast"],
     film: "Ilford HP5",
     alt: "A rocky sea stack and cliff face above rough surf, seen from above in overcast light" },
 
-  { file: "images/oregon/2022-10-falls-below.jpg", title: "Falls, from below", date: "2022-10",
+  { file: "images/oregon/2022-10-falls-below.jpg", title: "Trail of Ten Falls", date: "2022-10",
     location: "Oregon", size: "lg", tags: ["landscape"],
     alt: "A waterfall spilling over a moss-covered cliff, seen from a rocky pool below" },
 
@@ -239,7 +240,7 @@ const PHOTOS = [
     location: "Oregon", size: "sm", tags: ["landscape", "coast"],
     alt: "A fog-shrouded cliff edge overlooking the ocean, framed by a dark conifer" },
 
-  { file: "images/oregon/2022-10-beach-flare.jpg", title: "Light leak, beach", date: "2022-10",
+  { file: "images/oregon/2022-10-beach-flare.jpg", title: "", date: "2022-10",
     location: "Oregon", size: "sm", tags: ["beach", "coast"],
     alt: "A foggy beach scene with birds overhead, warm light leaks washing across the frame" },
 
@@ -247,7 +248,7 @@ const PHOTOS = [
     location: "Oregon", size: "md", tags: ["coast"],
     alt: "Mossy tidepool rocks along a rugged stretch of coastline" },
 
-  { file: "images/oregon/2022-10-waterfall.jpg", title: "Behind the falls", date: "2022-10",
+  { file: "images/oregon/2022-10-waterfall.jpg", title: "", date: "2022-10",
     location: "Oregon", size: "lg", tags: ["landscape"],
     film: "Ilford HP5",
     alt: "A waterfall seen from within a rock alcove, overlooking a mossy forest canyon" },
@@ -287,17 +288,17 @@ const PHOTOS = [
     film: "Ilford HP5",
     alt: "A small glass greenhouse behind a wrought iron fence, surrounded by trees in heavy fog" },
 
-  { file: "images/oregon/2022-10-storefront.jpg", title: "Storefront", date: "2022-10",
+  { file: "images/oregon/2022-10-storefront.jpg", title: "Portland", date: "2022-10",
     location: "Oregon", size: "sm", tags: ["street"],
     film: "Ilford HP5",
     alt: "A vacant single-story commercial building with boarded windows and closed garage doors, across an empty street" },
 
-  { file: "images/cape-may-point/2022-07-beach-portrait.jpg", title: "Beach portrait", date: "2022-07",
+  { file: "images/cape-may-point/2022-07-beach-portrait.jpg", title: "", date: "2022-07",
     location: "Cape May Point, NJ", size: "md", tags: ["beach", "portrait"],
     film: "Kodak Portra 400",
     alt: "A woman smiling at the camera on a beach, dune grass and a distant house behind her" },
 
-  { file: "images/cape-may-point/2022-07-volleyball.jpg", title: "Evening volleyball", date: "2022-07",
+  { file: "images/cape-may-point/2022-07-volleyball.jpg", title: "", date: "2022-07",
     location: "Cape May Point, NJ", size: "sm", tags: ["beach"],
     film: "Kodak Portra 400",
     alt: "Three friends playing beach volleyball at dusk, one leaping to hit the ball" },
@@ -312,12 +313,12 @@ const PHOTOS = [
     film: "Kodak Portra 400",
     alt: "A weathered hanging sign reading Bar Polvorin next to a faded Coca-Cola panel, photographed from below against a blue sky" },
 
-  { file: "images/spain/2022-06-hillside-village.jpg", title: "Hillside village", date: "2022-06",
+  { file: "images/spain/2022-06-hillside-village.jpg", title: "Bolbaite", date: "2022-06",
     location: "Spain", size: "md", tags: ["landscape"],
     film: "Kodak Portra 400",
     alt: "A hillside Spanish village of stone and whitewashed houses above a river, flowering oleander in the foreground" },
 
-  { file: "images/spain/2022-06-mountain-road.jpg", title: "Mountain road", date: "2022-06",
+  { file: "images/spain/2022-06-mountain-road.jpg", title: "", date: "2022-06",
     location: "Spain", size: "sm", tags: ["landscape"],
     film: "Kodak Portra 400",
     alt: "A winding road through scrubland toward a rocky ridge, seen from a moving car" },
@@ -352,7 +353,7 @@ const PHOTOS = [
     film: "Kodak Portra 400",
     alt: "Sheets and clothing hanging from a wrought iron balcony to dry against a clear blue sky" },
 
-  { file: "images/spain/2022-06-lattice.jpg", title: "Lattice", date: "2022-06",
+  { file: "images/spain/2022-06-lattice.jpg", title: "Àgora València", date: "2022-06",
     location: "Valencia, Spain", size: "md", tags: ["architecture"],
     film: "Kodak Portra 400",
     alt: "A white geometric lattice screen on a building facade, woven material visible behind it" },
@@ -366,11 +367,11 @@ const PHOTOS = [
     location: "Madrid, Spain", size: "lg", tags: ["street"],
     alt: "A crowd gathered in a Madrid plaza at dusk, surrounded by ornate apartment buildings and a Starbucks storefront" },
 
-  { file: "images/spain/2017-street-performer.jpg", title: "Falling", date: "2017",
+  { file: "images/spain/2017-street-performer.jpg", title: "", date: "2017",
     location: "Spain", size: "lg", tags: ["street"],
     alt: "A street performer in mid-fall pose on a red carpet in a stone plaza, onlookers watching nearby" },
 
-  { file: "images/spain/2017-hillside.jpg", title: "Hillside monastery", date: "2017",
+  { file: "images/spain/2017-hillside.jpg", title: "Silla del Moro", date: "2017",
     location: "Spain", size: "lg", tags: ["landscape"],
     alt: "A hillside monastery and village among dry hills and cypress trees" },
 
@@ -386,7 +387,7 @@ const PHOTOS = [
     location: "Spain", size: "md", tags: ["street", "architecture"],
     alt: "Apartment balconies along a narrow street, laundry and awnings hanging in the sun" },
 
-  { file: "images/spain/2017-beach-hoops.jpg", title: "Beach hoops", date: "2017",
+  { file: "images/spain/2017-beach-hoops.jpg", title: "", date: "2017",
     location: "Spain", size: "md", tags: ["beach"],
     alt: "Two basketball backboards seen from behind on a crowded beach, a volleyball net and umbrellas beyond" },
 
@@ -398,7 +399,7 @@ const PHOTOS = [
     location: "Spain", size: "sm", tags: ["landscape"],
     alt: "Two palm trees silhouetted against a partly cloudy sky above a garden wall" },
 
-  { file: "images/spain/2017-airport.jpg", title: "Tarmac", date: "2017",
+  { file: "images/spain/2017-airport.jpg", title: "", date: "2017",
     location: "Spain", size: "sm", tags: ["travel"],
     alt: "An airport tarmac with a jet and ground equipment, seen through a terminal window" },
 
@@ -406,11 +407,11 @@ const PHOTOS = [
     location: "Avalon, NJ", size: "lg", tags: ["landscape"],
     alt: "A muted, moody view of salt marsh and winding tidal water under an overcast sky" },
 
-  { file: "images/avalon-nj/2017-running-from-waves.jpg", title: "Running the shoreline", date: "2017",
+  { file: "images/avalon-nj/2017-running-from-waves.jpg", title: "", date: "2017",
     location: "Avalon, NJ", size: "lg", tags: ["beach"],
     alt: "A person wrapped in a pink blanket running along the shoreline as waves roll in, gulls nearby" },
 
-  { file: "images/avalon-nj/2017-walking.jpg", title: "Walking the tideline", date: "2017",
+  { file: "images/avalon-nj/2017-walking.jpg", title: "", date: "2017",
     location: "Avalon, NJ", size: "md", tags: ["beach"],
     alt: "A person in a pink knit poncho walking along the tideline on an overcast beach" },
 
@@ -418,7 +419,7 @@ const PHOTOS = [
     location: "Avalon, NJ", size: "md", tags: ["portrait", "beach"],
     alt: "A double-exposure portrait of a woman sitting on a boardwalk railing over stormy surf" },
 
-  { file: "images/avalon-nj/2017-pink-blanket.jpg", title: "Pink blanket", date: "2017",
+  { file: "images/avalon-nj/2017-pink-blanket.jpg", title: "", date: "2017",
     location: "Avalon, NJ", size: "sm", tags: ["beach", "portrait"],
     alt: "A person wrapped head to toe in a pink woven blanket standing on the beach" },
 
