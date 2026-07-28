@@ -386,6 +386,14 @@ button {
   text-rendering: optimizeLegibility;
 }
 
+.tile-audio-toggle .tile-text-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .tile-text-excerpt {
   margin: 0;
   font-family: var(--font-serif);
@@ -413,6 +421,15 @@ button {
 }
 .tile-audio-toggle:hover .tile-text-title { color: var(--accent); }
 .tile-audio.is-expanded .tile-audio-mark { color: var(--accent); }
+
+.tile-audio-duration {
+  flex: none;
+  margin-left: auto;
+  padding-left: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
 
 .tile-audio-player {
   display: flex;

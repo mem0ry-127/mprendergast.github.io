@@ -694,74 +694,74 @@ somewhere in the sickening Wide-Open
 and I stand here, in this orange glow
 looking, and looking, and looking` },
 
-  { type: "audio", file: "audio/music/worried-man-blues.mp3", title: "Worried Man Blues_3_Master", date: "2026-03", size: "md" },
+  { type: "audio", file: "audio/music/worried-man-blues.mp3", duration: "4:57", title: "Worried Man Blues_3_Master", date: "2026-03", size: "md" },
 
-  { type: "audio", file: "audio/music/cabin.mp3", title: "cabin_2_Master", date: "2026-03", size: "sm" },
+  { type: "audio", file: "audio/music/cabin.mp3", duration: "1:25", title: "cabin_2_Master", date: "2026-03", size: "sm" },
 
-  { type: "audio", file: "audio/music/2025-08-28.mp3", title: "8.28.25_Master", date: "2025-08-28", size: "md" },
+  { type: "audio", file: "audio/music/2025-08-28.mp3", duration: "3:27", title: "8.28.25_Master", date: "2025-08-28", size: "md" },
 
-  { type: "audio", file: "audio/music/2025-08-21.mp3", title: "8.21.2025_Master", date: "2025-08-21", size: "sm" },
+  { type: "audio", file: "audio/music/2025-08-21.mp3", duration: "2:07", title: "8.21.2025_Master", date: "2025-08-21", size: "sm" },
 
-  { type: "audio", file: "audio/music/2024-11-01.mp3", title: "11.1.2024_Master", date: "2024-11-01", size: "sm" },
+  { type: "audio", file: "audio/music/2024-11-01.mp3", duration: "1:40", title: "11.1.2024_Master", date: "2024-11-01", size: "sm" },
 
-  { type: "audio", file: "audio/music/2024-10-31.mp3", title: "10.31.24 4_Master", date: "2024-10-31", size: "sm" },
+  { type: "audio", file: "audio/music/2024-10-31.mp3", duration: "0:58", title: "10.31.24 4_Master", date: "2024-10-31", size: "sm" },
 
-  { type: "audio", file: "audio/music/2024-10-18.mp3", title: "10.18.2024_Master", date: "2024-10-18", size: "sm" },
+  { type: "audio", file: "audio/music/2024-10-18.mp3", duration: "0:16", title: "10.18.2024_Master", date: "2024-10-18", size: "sm" },
 
-  { type: "audio", file: "audio/music/2024-10-17b.mp3", title: "10.17.2024 3_Master", date: "2024-10-17", size: "sm" },
+  { type: "audio", file: "audio/music/2024-10-17b.mp3", duration: "1:28", title: "10.17.2024 3_Master", date: "2024-10-17", size: "sm" },
 
-  { type: "audio", file: "audio/music/2024-10-17.mp3", title: "10.17.2024_Master", date: "2024-10-17", size: "md" },
+  { type: "audio", file: "audio/music/2024-10-17.mp3", duration: "2:02", title: "10.17.2024_Master", date: "2024-10-17", size: "md" },
 
-  { type: "audio", file: "audio/music/2024-10-15b.mp3", title: "10.15.2024 2_5_Master", date: "2024-10-15", size: "md" },
+  { type: "audio", file: "audio/music/2024-10-15b.mp3", duration: "2:29", title: "10.15.2024 2_5_Master", date: "2024-10-15", size: "md" },
 
-  { type: "audio", file: "audio/music/2024-09-29.mp3", title: "9.29.2024_2_Master", date: "2024-09-29", size: "md" },
+  { type: "audio", file: "audio/music/2024-09-29.mp3", duration: "3:30", title: "9.29.2024_2_Master", date: "2024-09-29", size: "md" },
 
-  { type: "audio", file: "audio/music/2024-09-23.mp3", title: "9.23.2024_2_Master", date: "2024-09-23", size: "md" },
+  { type: "audio", file: "audio/music/2024-09-23.mp3", duration: "2:05", title: "9.23.2024_2_Master", date: "2024-09-23", size: "md" },
 
-  { type: "audio", file: "audio/music/2024-09-23b.mp3", title: "9.23.2024_Master", date: "2024-09-23", size: "sm" },
+  { type: "audio", file: "audio/music/2024-09-23b.mp3", duration: "2:04", title: "9.23.2024_Master", date: "2024-09-23", size: "sm" },
 
-  { type: "audio", file: "audio/music/2024-09-20.mp3", title: "9.20.2024_Master", date: "2024-09-20", size: "sm" },
+  { type: "audio", file: "audio/music/2024-09-20.mp3", duration: "2:02", title: "9.20.2024_Master", date: "2024-09-20", size: "sm" },
 
-  { type: "audio", file: "audio/music/2024-09-12c.mp3", title: "9.12.24 3_Master", date: "2024-09-12", size: "md" },
+  { type: "audio", file: "audio/music/2024-09-12c.mp3", duration: "2:21", title: "9.12.24 3_Master", date: "2024-09-12", size: "md" },
 
-  { type: "audio", file: "audio/music/2024-09-12b.mp3", title: "9.12.24 2_Master", date: "2024-09-12", size: "sm" },
+  { type: "audio", file: "audio/music/2024-09-12b.mp3", duration: "1:08", title: "9.12.24 2_Master", date: "2024-09-12", size: "sm" },
 
-  { type: "audio", file: "audio/music/2024-09-12.mp3", title: "9.12.2024_Master", date: "2024-09-12", size: "sm" },
+  { type: "audio", file: "audio/music/2024-09-12.mp3", duration: "0:47", title: "9.12.2024_Master", date: "2024-09-12", size: "sm" },
 
-  { type: "audio", file: "audio/music/2024-02-15.mp3", title: "2.15.2024_Master", date: "2024-02-15", size: "md" },
+  { type: "audio", file: "audio/music/2024-02-15.mp3", duration: "1:58", title: "2.15.2024_Master", date: "2024-02-15", size: "md" },
 
-  { type: "audio", file: "audio/music/2024-02-12.mp3", title: "2.12.24_Master", date: "2024-02-12", size: "md" },
+  { type: "audio", file: "audio/music/2024-02-12.mp3", duration: "3:18", title: "2.12.24_Master", date: "2024-02-12", size: "md" },
 
-  { type: "audio", file: "audio/music/2024-02-08.mp3", title: "2.8.24_Master", date: "2024-02-08", size: "sm" },
+  { type: "audio", file: "audio/music/2024-02-08.mp3", duration: "1:22", title: "2.8.24_Master", date: "2024-02-08", size: "sm" },
 
-  { type: "audio", file: "audio/music/2022-01-10.mp3", title: "1.10.2022", date: "2022-01-10", size: "sm" },
+  { type: "audio", file: "audio/music/2022-01-10.mp3", duration: "1:19", title: "1.10.2022", date: "2022-01-10", size: "sm" },
 
-  { type: "audio", file: "audio/music/2021-12-22.mp3", title: "12.22.2021", date: "2021-12-22", size: "sm" },
+  { type: "audio", file: "audio/music/2021-12-22.mp3", duration: "0:27", title: "12.22.2021", date: "2021-12-22", size: "sm" },
 
-  { type: "audio", file: "audio/music/2021-12-13.mp3", title: "12.13.2021", date: "2021-12-13", size: "md" },
+  { type: "audio", file: "audio/music/2021-12-13.mp3", duration: "0:55", title: "12.13.2021", date: "2021-12-13", size: "md" },
 
-  { type: "audio", file: "audio/music/2021-12-10.mp3", title: "12.10.2021", date: "2021-12-10", size: "sm" },
+  { type: "audio", file: "audio/music/2021-12-10.mp3", duration: "0:15", title: "12.10.2021", date: "2021-12-10", size: "sm" },
 
-  { type: "audio", file: "audio/music/2021-10-05.mp3", title: "10.5.2021", date: "2021-10-05", size: "md" },
+  { type: "audio", file: "audio/music/2021-10-05.mp3", duration: "1:27", title: "10.5.2021", date: "2021-10-05", size: "md" },
 
-  { type: "audio", file: "audio/music/2021-09-02.mp3", title: "9.2.2021", date: "2021-09-02", size: "sm" },
+  { type: "audio", file: "audio/music/2021-09-02.mp3", duration: "0:32", title: "9.2.2021", date: "2021-09-02", size: "sm" },
 
-  { type: "audio", file: "audio/music/2021-08-09.mp3", title: "8.9.2021", date: "2021-08-09", size: "sm" },
+  { type: "audio", file: "audio/music/2021-08-09.mp3", duration: "0:14", title: "8.9.2021", date: "2021-08-09", size: "sm" },
 
-  { type: "audio", file: "audio/music/2021-08-05.mp3", title: "8.5.2021", date: "2021-08-05", size: "md" },
+  { type: "audio", file: "audio/music/2021-08-05.mp3", duration: "0:55", title: "8.5.2021", date: "2021-08-05", size: "md" },
 
-  { type: "audio", file: "audio/music/2021-07-01.mp3", title: "7.1.2021", date: "2021-07-01", size: "sm" },
+  { type: "audio", file: "audio/music/2021-07-01.mp3", duration: "1:22", title: "7.1.2021", date: "2021-07-01", size: "sm" },
 
-  { type: "audio", file: "audio/music/2021-06-28.mp3", title: "6.28.2021_2_Master", date: "2021-06-28", size: "md" },
+  { type: "audio", file: "audio/music/2021-06-28.mp3", duration: "2:47", title: "6.28.2021_2_Master", date: "2021-06-28", size: "md" },
 
-  { type: "audio", file: "audio/music/2021-05-28.mp3", title: "5.28.21_2_Master", date: "2021-05-28", size: "sm" },
+  { type: "audio", file: "audio/music/2021-05-28.mp3", duration: "2:40", title: "5.28.21_2_Master", date: "2021-05-28", size: "sm" },
 
-  { type: "audio", file: "audio/music/2021-04-05.mp3", title: "4.5.2021", date: "2021-04-05", size: "sm" },
+  { type: "audio", file: "audio/music/2021-04-05.mp3", duration: "0:20", title: "4.5.2021", date: "2021-04-05", size: "sm" },
 
-  { type: "audio", file: "audio/music/2020-12-02.mp3", title: "12.2.2020 3_4", date: "2020-12-02", size: "md" },
+  { type: "audio", file: "audio/music/2020-12-02.mp3", duration: "2:17", title: "12.2.2020 3_4", date: "2020-12-02", size: "md" },
 
-  { type: "audio", file: "audio/music/video-store.mp3", title: "video store_Master", date: "2019-06", size: "md" },
+  { type: "audio", file: "audio/music/video-store.mp3", duration: "2:16", title: "video store_Master", date: "2019-06", size: "md" },
 
-  { type: "audio", file: "audio/music/2014-02-13.mp3", title: "2.13.2014_Current", date: "2014-02-13", size: "sm" },
+  { type: "audio", file: "audio/music/2014-02-13.mp3", duration: "1:11", title: "2.13.2014_Current", date: "2014-02-13", size: "sm" },
 
 ];

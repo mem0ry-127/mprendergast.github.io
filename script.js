@@ -159,6 +159,12 @@
     previewTitle.textContent = photo.title || "Untitled";
     toggle.appendChild(mark);
     toggle.appendChild(previewTitle);
+    if (photo.duration) {
+      const previewDuration = document.createElement("span");
+      previewDuration.className = "tile-audio-duration";
+      previewDuration.textContent = photo.duration;
+      toggle.appendChild(previewDuration);
+    }
 
     const player = document.createElement("div");
     player.className = "tile-audio-player";
