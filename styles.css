@@ -111,7 +111,7 @@ button {
   border-bottom-color: var(--accent);
 }
 
-.theme-toggle {
+.header-toggle {
   font-family: var(--font-mono);
   font-size: 11px;
   text-transform: uppercase;
@@ -120,7 +120,27 @@ button {
   border: 1px solid var(--hairline);
   padding: 5px 10px;
 }
-.theme-toggle:hover { color: var(--ink); border-color: var(--accent); }
+.header-toggle:hover { color: var(--ink); border-color: var(--accent); }
+.header-toggle.is-active { color: var(--accent); border-color: var(--accent); }
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Ambient pixel-snow overlay — fixed over the whole viewport, purely
+   decorative, never intercepts clicks. Sits below the lightbox (z-index
+   10) so it disappears behind the scrim while a photo is open. */
+#snow-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+#snow-canvas[hidden] { display: none; }
 
 .header-meta {
   display: flex;
