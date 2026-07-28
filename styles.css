@@ -386,7 +386,12 @@ button {
   text-rendering: optimizeLegibility;
 }
 
-.tile-audio-toggle .tile-text-title {
+.tile-audio-title {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--ink);
   flex: 1 1 auto;
   min-width: 0;
   white-space: nowrap;
@@ -419,7 +424,7 @@ button {
   padding: 0;
   text-align: left;
 }
-.tile-audio-toggle:hover .tile-text-title { color: var(--accent); }
+.tile-audio-toggle:hover .tile-audio-title { color: var(--accent); }
 .tile-audio.is-expanded .tile-audio-mark { color: var(--accent); }
 
 .tile-audio-duration {

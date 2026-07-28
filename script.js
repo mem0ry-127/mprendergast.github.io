@@ -155,7 +155,7 @@
     mark.className = "tile-audio-mark";
     mark.textContent = "▸";
     const previewTitle = document.createElement("span");
-    previewTitle.className = "tile-text-title";
+    previewTitle.className = "tile-audio-title";
     previewTitle.textContent = photo.title || "Untitled";
     toggle.appendChild(mark);
     toggle.appendChild(previewTitle);
@@ -483,15 +483,20 @@
       }
 
       const caption = document.createElement("figcaption");
-      const title = document.createElement("span");
-      title.className = "tile-title";
-      title.textContent = photo.title || "Untitled";
-
       const meta = document.createElement("span");
       meta.className = "tile-meta";
       meta.textContent = metaLine(photo);
 
-      caption.appendChild(title);
+      if (isAudio) {
+        // The title already appears in the expandable toggle above —
+        // showing it again here would just be a duplicate.
+        caption.appendChild(document.createElement("span"));
+      } else {
+        const title = document.createElement("span");
+        title.className = "tile-title";
+        title.textContent = photo.title || "Untitled";
+        caption.appendChild(title);
+      }
       caption.appendChild(meta);
 
       figure.appendChild(caption);
