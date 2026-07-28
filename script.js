@@ -1,4 +1,4 @@
-(function () {
+function initIndexPage() {
   "use strict";
 
   const gallery = document.getElementById("gallery");
@@ -45,7 +45,6 @@
   let touchStartX = null;
   let isZoomed = false;
   let isPlainText = false;
-  let activeAudioTile = null; // { pause, collapse } for whichever audio tile is expanded
 
   function itemType(p) {
     return p.type || "photo";
@@ -123,28 +122,24 @@
     return haystack.includes(q);
   }
 
-  function formatAudioTime(seconds) {
-    if (!isFinite(seconds) || seconds < 0) return "0:00";
-    const m = Math.floor(seconds / 60);
-    const s = Math.floor(seconds % 60);
-    return m + ":" + pad(s);
-  }
-
   const VOLUME_KEY = "photo-site-audio-volume";
   function getStoredVolume() {
     const v = parseFloat(localStorage.getItem(VOLUME_KEY));
     return isFinite(v) && v >= 0 && v <= 1 ? v : 0.8;
   }
-  function setStoredVolume(v) {
-    localStorage.setItem(VOLUME_KEY, String(v));
-  }
 
   // Audio plays inline within its own grid tile rather than opening the
   // lightbox — there's nothing to navigate prev/next between, so the
-  // modal doesn't apply. Only one tile's player is expanded at a time.
+  // modal doesn't apply. The tile itself holds no playback state; it's
+  // a thin control surface over window.SitePlayer (player.js), which
+  // owns the one persistent <audio> element and keeps playing across
+  // page navigation. player.js mirrors its state back onto whichever
+  // tile matches the current track, looked up fresh by data-file each
+  // time rather than a kept reference.
   function buildAudioTile(photo, indexTag) {
     const container = document.createElement("div");
     container.className = "tile-audio";
+    container.dataset.file = photo.file;
 
     const toggle = document.createElement("button");
     toggle.className = "tile-audio-toggle";
@@ -170,10 +165,6 @@
     player.className = "tile-audio-player";
     player.hidden = true;
 
-    const audioEl = document.createElement("audio");
-    audioEl.preload = "none";
-    audioEl.volume = getStoredVolume();
-
     const playBtn = document.createElement("button");
     playBtn.className = "audio-play";
     playBtn.type = "button";
@@ -196,80 +187,40 @@
     volume.min = "0";
     volume.max = "1";
     volume.step = "0.01";
-    volume.value = String(audioEl.volume);
+    volume.value = String(getStoredVolume());
     volume.setAttribute("aria-label", "Volume");
     volume.addEventListener("input", () => {
-      audioEl.volume = parseFloat(volume.value);
-      setStoredVolume(audioEl.volume);
+      if (window.SitePlayer) window.SitePlayer.setVolume(parseFloat(volume.value));
     });
     volume.addEventListener("click", (e) => e.stopPropagation());
 
-    player.appendChild(audioEl);
     player.appendChild(playBtn);
     player.appendChild(progress);
     player.appendChild(time);
     player.appendChild(volume);
 
-    function collapse() {
-      audioEl.pause();
-      audioEl.removeAttribute("src");
-      audioEl.load();
-      playBtn.textContent = "▶";
-      progressFill.style.width = "0%";
-      time.textContent = "0:00 / 0:00";
-      player.hidden = true;
-      container.classList.remove("is-expanded");
-    }
-
-    function expand() {
-      if (activeAudioTile && activeAudioTile.collapse !== collapse) {
-        activeAudioTile.collapse();
-      }
-      activeAudioTile = { collapse };
-      audioEl.volume = getStoredVolume();
-      volume.value = String(audioEl.volume);
-      player.hidden = false;
-      container.classList.add("is-expanded");
-      if (!audioEl.getAttribute("src")) audioEl.src = photo.file;
-      audioEl.play();
-    }
-
     toggle.addEventListener("click", () => {
-      if (player.hidden) expand();
-      else if (audioEl.paused) audioEl.play();
-      else audioEl.pause();
+      if (window.SitePlayer) window.SitePlayer.playOrToggle(photo);
     });
     playBtn.addEventListener("click", () => {
-      if (audioEl.paused) audioEl.play();
-      else audioEl.pause();
-    });
-    audioEl.addEventListener("play", () => {
-      playBtn.textContent = "❚❚";
-    });
-    audioEl.addEventListener("pause", () => {
-      playBtn.textContent = "▶";
-    });
-    audioEl.addEventListener("ended", () => {
-      playBtn.textContent = "▶";
-    });
-    audioEl.addEventListener("timeupdate", () => {
-      const pct = audioEl.duration ? (audioEl.currentTime / audioEl.duration) * 100 : 0;
-      progressFill.style.width = pct + "%";
-      time.textContent = formatAudioTime(audioEl.currentTime) + " / " + formatAudioTime(audioEl.duration);
-    });
-    audioEl.addEventListener("loadedmetadata", () => {
-      time.textContent = formatAudioTime(audioEl.currentTime) + " / " + formatAudioTime(audioEl.duration);
+      if (window.SitePlayer) window.SitePlayer.playOrToggle(photo);
     });
     progress.addEventListener("click", (e) => {
-      if (!audioEl.duration) return;
+      if (!window.SitePlayer) return;
       const rect = progress.getBoundingClientRect();
-      const pct = (e.clientX - rect.left) / rect.width;
-      audioEl.currentTime = pct * audioEl.duration;
+      window.SitePlayer.seek((e.clientX - rect.left) / rect.width);
     });
 
     container.appendChild(indexTag);
     container.appendChild(toggle);
     container.appendChild(player);
+
+    // Reflects an already-playing track immediately rather than
+    // waiting for the next player tick — matters when this tile is
+    // built (gallery re-render, or landing on this page) while a
+    // track is already going.
+    if (window.SitePlayer) window.SitePlayer.syncTile(container);
+
     return container;
   }
 
@@ -423,10 +374,6 @@
   /* ---------------- Gallery ---------------- */
 
   function renderGallery() {
-    if (activeAudioTile) {
-      activeAudioTile.collapse();
-      activeAudioTile = null;
-    }
     gallery.innerHTML = "";
     indexCount.textContent = "N\u00b0 " + pad(visiblePhotos.length);
 
@@ -697,4 +644,7 @@
     const idx = visiblePhotos.indexOf(allPhotos[pendingOpenIndex]);
     if (idx !== -1) openLightbox(idx);
   }
-})();
+}
+
+window.initIndexPage = initIndexPage;
+if (document.getElementById("gallery")) initIndexPage();

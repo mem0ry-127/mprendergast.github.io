@@ -1,4 +1,4 @@
-(function () {
+function initArchivePage() {
   "use strict";
 
   const container = document.getElementById("archive-container");
@@ -75,4 +75,7 @@
     });
     container.appendChild(list);
   });
-})();
+}
+
+window.initArchivePage = initArchivePage;
+if (document.getElementById("archive-container")) initArchivePage();
