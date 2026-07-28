@@ -462,13 +462,15 @@
         if (isText) {
           const preview = document.createElement("div");
           preview.className = "tile-text-preview";
-          const previewTitle = document.createElement("span");
-          previewTitle.className = "tile-text-title";
-          previewTitle.textContent = photo.title || "Untitled";
+          if (photo.title) {
+            const previewTitle = document.createElement("span");
+            previewTitle.className = "tile-text-title";
+            previewTitle.textContent = photo.title;
+            preview.appendChild(previewTitle);
+          }
           const excerpt = document.createElement("p");
           excerpt.className = "tile-text-excerpt";
           excerpt.textContent = photo.body || "";
-          preview.appendChild(previewTitle);
           preview.appendChild(excerpt);
           button.appendChild(preview);
         } else {
@@ -487,9 +489,9 @@
       meta.className = "tile-meta";
       meta.textContent = metaLine(photo);
 
-      if (isAudio) {
-        // The title already appears in the expandable toggle above —
-        // showing it again here would just be a duplicate.
+      if (isAudio || (isText && photo.title)) {
+        // The title already appears above (audio toggle, or the poem's
+        // own heading) — showing it again here would just be a duplicate.
         caption.appendChild(document.createElement("span"));
       } else {
         const title = document.createElement("span");
