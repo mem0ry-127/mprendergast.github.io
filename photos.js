@@ -437,19 +437,19 @@ I detest all unfamiliar money, no credit managed I to gain,
 That filled my essence accompanying longing for the Ponds of Lewes.` },
 
   { type: "text", date: "2026-05", size: "md", format: "prose",
-    body: `Your gleaming beak hides a madman's smile. As I congratulate you for making it back on time, the cloud rolls in over the mountain and the cycle starts again – rain – foolishness – understanding. Your gleaming beak hides a madman's smile. And teach me the way forward without judgement of my character. And don't let me fall behind.` },
+    body: `Your gleaming beak hides a madman's smile. As I congratulate you for making it back on time, the cloud rolls in over the mountain and the cycle starts again – rain – tardiness – understanding. Your gleaming beak hides a madman's smile. And teach me the way forward without judgement of my character. And don't let me fall behind.` },
 
   { type: "text", date: "2026-02", size: "md", format: "verse",
-    body: `though the schooner took her home
+    body: `though the sail took her home
 felt, not I, a breeze of having enough
-though the port swung below the horizon
-felt, not I, a fell ounce of wanting to quit
+though the port swung low the horizon
+felt, not I, a fell ounce of wanting
 there the cold day came, the winter, blowing Northwest but
 felt, not I, a simple thread of readiness
-for distance, despite some instinct to avoid suffering` },
+for distance, despite instinct to avoid suffering` },
 
   { type: "text", date: "2025-11", size: "sm", format: "verse",
-    body: `hadst the water risen
+    body: `hadst your eyes risen
 above my neck
 then the fear would have beset
 be set in mind
@@ -462,9 +462,9 @@ O'er anchor and swamp and many a mire,
 His spurs of fortify were angry to wait
 And from the woman's extremities fleed the fire.
 The woman fleed on o'er anchor and swamp
-And when she'd achieved the loch,
+And when she'd achieved the borderline,
 She couldn't have oppressed a furlong more
-Had a thousand whips existed betted upon her.` },
+Had a thousand whips existed upon her.` },
 
   { type: "text", date: "2025-04", size: "sm", format: "verse",
     body: `the pipe on the side was broken because of that
@@ -472,7 +472,7 @@ That's ridiculous!
 Absolutely ridiculous.` },
 
   { type: "text", date: "2025-02", size: "lg", format: "prose",
-    body: `I unintentionally drop upon my first singing gathering in Ballyvaughan in 1683. It was experienced by Mike Donoghue, an Englishman living in Galway and wedded to a Swindle daughter. He and his companions from Ribs of fabric sang excellent airs. The gathering was a weekend festival of welcome marriage to Amanda Lacey. Two age later welcome final resume Streaks he was tragically destroyed in a pickup crash. Amanda was immorally injured. I determined this chant on the day I heard about welcome demise. He was a most wonderful husband, and all time I serenade I plan him and welcome great support to all the crooners in Ireland and Wales. I selected no supplement in welcome honour.` },
+    body: `I unintentionally drop upon my first singing gathering in Ballyvaughan in 1683. It was experienced by yourself, an Englishman living in Galway and wedded to a Swindle daughter. He and his companions from Ribs of fabric sang excellent airs. The gathering was a weekend festival of welcome marriage to Amanda. Two age later welcome final resume Streaks he was tragically destroyed in a pickup crash. Amanda was immorally injured. I determined this chant on the day I heard about welcome demise. He was a most wonderful husband, and all time I serenade I plan him and welcome great support to all the crooners in Ireland and Wales. I selected no supplement in welcome honour.` },
 
   { type: "text", date: "2024-08-21", size: "lg", format: "verse",
     body: `I stand watching the stream;
@@ -511,22 +511,18 @@ bartenders—yes, what if I did have my friend
 in my holster, and to take
 five shots because it only
 fits five shots. Hell now everyone in this
-dive is dead, further from exacting revenge
+dive is further from exacting revenge
 than they'll ever be and see the way she
 kicks down the street smiling.` },
 
   { type: "text", title: "Cut", date: "2017", size: "md", format: "verse",
     body: `you've noticed that all the digits are 0
 it's confusing at the beginning because there are a lot of flashbacks
-wandering aimlessly around at night!
+while wandering aimlessly around at night!
 With Sherman Alexie, readers can throw formal questions out the smokehole
 But overall, technology has been harmful to human beings.
-What if I should fall from grace with god
-Where no doctor can relieve me?
-Does it mean I should take my machete
-To chop my way through the path of life?
-my daddy was a bankrobber
-but he never hurt nobody` },
+What if I should fall
+Wouldst though not relieve me?` },
 
   { type: "text", title: "Carsick", date: "2017", size: "lg", format: "verse",
     body: `co-op apartment in San Francisco
@@ -534,14 +530,11 @@ am I fucking nuts?
 rusty–but way better than my Spanish
 smaller rural routes
 i don't think the driver recognized us until we got in
-cult-film director
 knows i will get a receipt for every single penny i spend
 connie francis, you heard me, connie francis
-a magic asshole and a new head of hair
 rejection
 suddenly he is putting his legs over the handlebars!
 i pray he doesn't notice our obvious arousal
-confederacy of dunces type
 knows he looks like the real thing` },
 
   { type: "text", title: "Don't Ever Bother Me", date: "2017", size: "lg", format: "prose",
@@ -578,16 +571,14 @@ songs' meanings and contexts` },
   { type: "text", title: "Bonehead, Cretin", date: "2017", size: "md", format: "verse",
     body: `a baby is being birthed in duluth
 as a caterpillar dies to a parasite in denver
-as a joke fails to make the defiant audience laugh and a comedian feels that darkness again
-as the tire of a car explodes on the minivan of a family of four travelling on 80 west somewhere near the platte river
+as the tire of a car explodes on 80 west somewhere near the platte river
 as the sun hides behind the horizon in brighton
-as the confident facade finally falls and she breaks down and weeps in her apartment in paterson
-as some des moines child speaks their first word and that word is "fuck"
-as some writer in iowa falls is rejected for the last time
+as the confident facade finally falls and she breaks down and weeps in her apartment
+as some des moines child speaks their first word
+as some writer is rejected
 as the rain falls yet again on an old woman in seattle who forgot to bring her umbrella
-as the bacon fries on the stovetop left unattended in houston
-as the alarms go off simultaneously in two adjacent units in johannesburg
-as the child is tucked in in quito
+as the alarms go off simultaneously in two adjacent units
+as the child is tucked in
 as the last bus leaves the station in tulsa and he can see it driving away but now he'll have to sleep on the bench again` },
 
   { type: "text", title: "Multiplies, After", date: "2017", size: "sm", format: "verse",
@@ -599,15 +590,13 @@ A centered sex toy pumps a heart.
 
 How will a secular matter shift over any changeover?
 
-I/you/we/he/she/they/anyone can cry quietly,
+I can cry quietly,
 watching the top of the hill.
 
 That hill that you climbed and smelled August
 Augustus creeks follow you into blackness outside of the mar
-Join an army headed for a righteous orgasm
-But find out something not known by the light of the other tree
-
-A behavior splits with the visual abuse below a spoof.` },
+Join an army headed for righteous
+But find out something not known by the light of the other tree` },
 
   { type: "text", title: "Advertisement", date: "2017", size: "md", format: "verse",
     body: `practically, juxtaposition only highlights overlapping registers
@@ -629,13 +618,13 @@ here, take this example:
 
 "I decided to submit to conformity because of a big mud pile in my back yard"
 
-self-explanatory, isn't it?
+self-explanatory
 
 the ragged beast
 the vile signal
 the anti-God sentiment
 the unfortunate error
-the context is true.` },
+the context.` },
 
   { type: "text", title: "Three, in Response to Roberto Montenegro's 1950 Painting, “The Double”", date: "2017", size: "lg", format: "verse",
     body: `1.
