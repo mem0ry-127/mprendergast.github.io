@@ -382,7 +382,13 @@ button {
   position: relative;
   text-align: left;
 }
-.tile-button--text::before {
+/* The fade only makes sense when a poem is actually being clamped by
+   max-height above -- script.js measures this after render and adds
+   is-clamped. Without that check, the gradient would fall at a fixed
+   distance from the bottom of every tile regardless of where the text
+   actually ends, dimming the last line of plenty of short, complete
+   poems that were never being cut off. */
+.tile-button--text.is-clamped::before {
   content: "";
   position: absolute;
   left: 0;

@@ -454,6 +454,14 @@ function initIndexPage() {
     });
 
     gallery.appendChild(frag);
+
+    // The fade-out at the bottom of a text tile (styles.css) only
+    // makes sense when the excerpt is actually being cut off by the
+    // tile's max-height -- measure that post-layout rather than
+    // assuming every poem tile is clamped.
+    gallery.querySelectorAll(".tile-button--text").forEach((el) => {
+      if (el.scrollHeight > el.clientHeight + 1) el.classList.add("is-clamped");
+    });
   }
 
   /* ---------------- Lightbox ---------------- */
