@@ -829,7 +829,19 @@ button {
   color: rgba(242, 241, 236, 0.55);
 }
 
-.site-player-progress { margin: 10px 12px 0; }
+.site-player-progress {
+  /* .audio-progress sets flex: 1 for its original row-flex context
+     (.tile-audio-player) — here it's a direct child of the widget's
+     column flex layout, where flex: 1 would grow it along the
+     vertical axis instead of behaving as a thin horizontal bar.
+     Background also needs a fixed override: .audio-progress uses
+     var(--hairline), which is tuned per-theme against the page's own
+     background, not this widget's fixed-dark one — in light theme
+     that resolves to a dark, near-invisible track. */
+  flex: none;
+  margin: 10px 12px 0;
+  background: rgba(242, 241, 236, 0.14);
+}
 .site-player-time {
   margin: 6px 12px 0;
   color: rgba(242, 241, 236, 0.55);
