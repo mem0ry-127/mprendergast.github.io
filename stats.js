@@ -12,9 +12,9 @@
   const items = allPhotos.filter((p) => !p.hidden);
 
   const LABELS = {
-    photo: ["photograph", "photographs"],
-    text: ["poem", "poems"],
-    audio: ["track", "tracks"],
+    photo: ["image", "images"],
+    text: ["text file", "text files"],
+    audio: ["audio file", "audio files"],
     ceramics: ["ceramic piece", "ceramic pieces"],
   };
   const ORDER = ["photo", "text", "audio", "ceramics"];
