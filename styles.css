@@ -38,10 +38,21 @@
   --overlay: rgba(0, 0, 0, 0.05);
 }
 
-/* Playful — a third, independently-toggled theme (the "Playful"
-   header button, separate from the light/dark toggle). Same restrained
-   layout and single fixed --accent as everywhere else; just a bright,
-   saturated palette in place of dark/light's neutral ones. */
+/* Playful — a third, independently-toggled theme (the "Alt" header
+   button, separate from the light/dark toggle). Same restrained layout
+   and single fixed --accent as everywhere else; just a bright,
+   saturated palette in place of dark/light's neutral ones.
+
+   --overlay is near-opaque here rather than the light/dark washes
+   (5-70% over a neutral paper): text/audio tile cards are meant to
+   read as a distinct warm off-white surface floating on the green, in
+   the spirit of the reference site's cream/tan panels on its green
+   background. A translucent wash at that same low opacity would
+   optically mix with the saturated green paper underneath instead of
+   sitting on top of it, producing a muddy, desaturated yellow-green
+   rather than a clean card -- transparency reads as "layered surface"
+   against a neutral backdrop, but against a saturated one it just
+   blends, which is the muddiness this avoids. */
 :root[data-theme="playful"] {
   --paper: #c9e26a;
   --ink: #1c1a12;
@@ -49,7 +60,7 @@
   --muted: #5c6b3a;
   --muted-dim: #8a9569;
   --hairline: rgba(28, 26, 18, 0.16);
-  --overlay: rgba(255, 250, 235, 0.6);
+  --overlay: rgba(255, 250, 235, 0.94);
 }
 
 * { box-sizing: border-box; }
