@@ -471,13 +471,13 @@ const PHOTOS = [
     body: `It twas an individual fine March dawn I bid New Orleans goodbye
 And I took the artery to Jackson, my possessions to renew.
 I detest all unfamiliar money, no credit managed I to gain,
-That filled my essence accompanying longing for the Ponds of Lewes.` },
+That filled my essence, longing for the Ponds of Lewes.` },
 
   { type: "text", date: "2026-05", size: "md", format: "prose",
     body: `Your gleaming beak hides a madman's smile. As I congratulate you for making it back on time, the cloud rolls in over the mountain and the cycle starts again – rain – tardiness – understanding. Your gleaming beak hides a madman's smile. And teach me the way forward without judgement of my character. And don't let me fall behind.` },
 
   { type: "text", date: "2026-02", size: "md", format: "verse",
-    body: `though the sail took her home
+    body: `though the sails took her home
 felt, not I, a breeze of having enough
 though the port swung low the horizon
 felt, not I, a fell ounce of wanting
@@ -562,6 +562,7 @@ What if I should fall
 Wouldst though not relieve me?` },
 
   { type: "text", title: "Carsick", date: "2017", size: "lg", format: "verse",
+   hidden: true,
     body: `co-op apartment in San Francisco
 am I fucking nuts?
 rusty–but way better than my Spanish
@@ -574,22 +575,27 @@ suddenly he is putting his legs over the handlebars!
 i pray he doesn't notice our obvious arousal
 knows he looks like the real thing` },
 
+  { type: "text", title: "Carsick", date: "2017", size: "lg", format: "verse",
+    body: `smaller rural routes
+i don't think the driver recognized us until we got in
+knows i will get a receipt for every single penny i spend
+connie francis, you heard me, connie francis
+suddenly he is putting his legs over the handlebars!
+"rust sky, though we can polish it"` },
+
   { type: "text", title: "Don't Ever Bother Me", date: "2017", size: "lg", format: "prose",
     hidden: true,
     body: `i have a painting in my window that i bought from a thrift store and it looks like it could be painted by a 10 year old or a 70 year old there's a head underneath the ground so what does that symbolize it's dark and there's strange lights in the sky and there's a potted plant above the head so the head is a root and maybe it's to symbolize a higher plane of existence that our heads are only the roots of and there's something more to life than just what we see and feel and there's something above us in a different dimension growing as our brains grow fuck i got distracted what if people who accept nonlogical writing as valid are like jesus coming out of the cave performing a miracle and oh boy now im thinking about the cave philosophical cave actually it's also fun thinking about it in real terms like wouldn't it be very strange to live your whole life in darkness and suddenly you come out what the fuck i guess that's very messed up i'm sure it's happened somewhere i'm sure things that i could never even imagine have happened places horrible things i don't want to know about` },
 
   { type: "text", title: "Southern Thematics", date: "2017", size: "md", format: "verse",
     body: `What else can I think about
-what else have I monomaniac about
-The braggart
-turned from the stricture.
+what else have I monomaniaced about
+The braggart turned from the stricture.
 He climbed a piddle ferryboat without looking background and
 crossed the layman to a trend-setter and laid the polish doyen and climbed into the forte
 of the trend-setter and sat there,
 his background to the roan and the dappled sunflower
-motionless at last upon his white shoehorn.
-else have I thriller about I cant
-even cucumber` },
+motionless at last upon his white shoehorn.` },
 
   { type: "text", title: "Unknown Sequences of Code and Complex Algorithmic Processes", date: "2017", size: "lg", format: "prose",
     body: `you are the book in the spirit machine, are not going to find it in a tiny little particle that began with your parents, are in love (and you are loved), are losing your sense of self, are not suffering, are my God (I will exalt you,) are able to change it, are responsible for what happens next in your life, are juggling so many balls that you just drop all of them and panic about the failure, are going to have both, are explaining something to a trusted friend, are my best friend, are reliable and dependable (and you crave the same thing from your BFF), are drawn to him like a bee to honey, are quite right about bees (all animals, for that matter,) are the only thing among many, in a different category from any person I have ever` },
@@ -619,6 +625,7 @@ as the child is tucked in
 as the last bus leaves the station in tulsa and he can see it driving away but now he'll have to sleep on the bench again` },
 
   { type: "text", title: "Multiplies, After", date: "2017", size: "sm", format: "verse",
+   hidden: true,
     body: `The shooter said goodnight to his love.
 However that cowardly genius split the sea leading to Crete and gained
 Fall fiction tells stories about Quiet moans
@@ -633,6 +640,20 @@ watching the top of the hill.
 That hill that you climbed and smelled August
 Augustus creeks follow you into blackness outside of the mar
 Join an army headed for righteous
+But find out something not known by the light of the other tree` },
+  
+   { type: "text", title: "Multiplies, After", date: "2017", size: "sm", format: "verse",
+    body: `He said goodnight to his love.
+However that cowardly genius split the sea leading to Crete and gained
+to be a part of the fiction that tells stories about Quiet moans
+Does a divine discriminate behind the partial gown?
+
+I can cry quietly,
+watching the top of the hill.
+
+That hill that you climbed and smelled of August
+Augustus creeks followed you into blackness outside of the mar
+Join an army headed by southeasterly winds
 But find out something not known by the light of the other tree` },
 
   { type: "text", title: "Advertisement", date: "2017", size: "md", format: "verse",
