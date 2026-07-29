@@ -179,13 +179,14 @@ button {
   position: relative;
   display: inline-flex;
   align-items: center;
+  gap: 8px;
 }
 .snow-settings-toggle {
   font-family: var(--font-mono);
   font-size: 9px;
   line-height: 1;
   color: var(--muted);
-  padding: 4px 3px 4px 1px;
+  padding: 4px;
 }
 .snow-settings-toggle:hover { color: var(--ink); }
 .snow-settings-toggle[aria-expanded="true"] { color: var(--accent); }
