@@ -170,6 +170,72 @@ button {
   flex: none;
 }
 
+/* Snow settings — a small arrow next to the Snow toggle opens a
+   dropdown with Speed/Amount/Wind sliders (snow.js). Sits in the
+   header's normal theme-aware colors (unlike the always-dark player
+   widget) since it's part of the header itself, not a floating
+   overlay elsewhere on the page. */
+.snow-settings {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.snow-settings-toggle {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1;
+  color: var(--muted);
+  padding: 4px 3px 4px 1px;
+}
+.snow-settings-toggle:hover { color: var(--ink); }
+.snow-settings-toggle[aria-expanded="true"] { color: var(--accent); }
+
+.snow-settings-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 15;
+  width: 170px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+}
+.snow-settings-panel[hidden] { display: none; }
+
+.snow-settings-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.snow-settings-row span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+.snow-settings-row input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.snow-wind-track {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.snow-wind-track input[type="range"] { flex: 1; }
+.snow-wind-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted-dim);
+}
+
 /* Ambient pixel-snow overlay — fixed over the whole viewport, purely
    decorative, never intercepts clicks. Sits below the lightbox (z-index
    10) so it disappears behind the scrim while a photo is open. */

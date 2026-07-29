@@ -5,14 +5,43 @@
   // the on/off state persists across pages and sessions like the theme.
   // Shared by every page (index, about, archive) that includes it.
   const SNOW_KEY = "photo-site-snow";
+  const SPEED_KEY = "photo-site-snow-speed";
+  const AMOUNT_KEY = "photo-site-snow-amount";
+  const WIND_KEY = "photo-site-snow-wind";
+
   const toggle = document.getElementById("snow-toggle");
   if (!toggle) return;
 
+  const settingsToggle = document.getElementById("snow-settings-toggle");
+  const settingsPanel = document.getElementById("snow-settings-panel");
+  const speedInput = document.getElementById("snow-speed");
+  const amountInput = document.getElementById("snow-amount");
+  const windInput = document.getElementById("snow-wind");
+
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const FLAKE_COUNT = 90;
+  // BASE_FLAKE_COUNT is how many flakes show at Amount's default (1x).
+  // POOL_SIZE is pre-generated once and just partially drawn/updated
+  // each frame -- Math.round(BASE_FLAKE_COUNT * amount) of them -- so
+  // changing Amount doesn't need to resize any array, just draw more
+  // or fewer of the same pool.
+  const BASE_FLAKE_COUNT = 90;
+  const POOL_SIZE = 180;
   const SIZES = [2, 2, 2, 3, 3, 4];
   const COLORS = ["#ffffff", "#f1f6fb", "#cfe0ee"];
+  const WIND_STRENGTH = 0.6;
+
+  function clamp(v, min, max) {
+    return Math.min(Math.max(v, min), max);
+  }
+  function storedNumber(key, fallback, min, max) {
+    const v = parseFloat(localStorage.getItem(key));
+    return isFinite(v) ? clamp(v, min, max) : fallback;
+  }
+
+  let speedSetting = storedNumber(SPEED_KEY, 1, 0.3, 2.5);
+  let amountSetting = storedNumber(AMOUNT_KEY, 1, 0.2, 2);
+  let windSetting = storedNumber(WIND_KEY, 0, -1, 1);
 
   let canvas = null;
   let ctx = null;
@@ -54,17 +83,25 @@
     document.body.appendChild(canvas);
     ctx = canvas.getContext("2d");
     resize();
-    flakes = Array.from({ length: FLAKE_COUNT }, () => randomFlake(true));
+    flakes = Array.from({ length: POOL_SIZE }, () => randomFlake(true));
     window.addEventListener("resize", resize);
+  }
+
+  function activeFlakeCount() {
+    return Math.round(clamp(BASE_FLAKE_COUNT * amountSetting, 1, POOL_SIZE));
   }
 
   function step() {
     ctx.clearRect(0, 0, width, height);
     windPhase += 0.0025;
-    const wind = Math.sin(windPhase) * 0.35;
-    for (let i = 0; i < flakes.length; i++) {
+    // Wind is mostly the user's directional slider now -- the sine
+    // term is just a small residual wobble so a fixed slider position
+    // still feels a little alive rather than perfectly static.
+    const wind = windSetting * WIND_STRENGTH + Math.sin(windPhase) * 0.1;
+    const count = activeFlakeCount();
+    for (let i = 0; i < count; i++) {
       const f = flakes[i];
-      f.y += f.speed;
+      f.y += f.speed * speedSetting;
       f.phase += 0.015;
       f.x += f.drift + wind + Math.sin(f.phase) * 0.25;
       if (f.y > height + f.size) {
@@ -112,4 +149,51 @@
     localStorage.setItem(SNOW_KEY, next ? "on" : "off");
     applyState(next);
   });
+
+  /* ---------------- Settings dropdown ----------------
+     Speed/Amount/Wind sliders, opened from the small arrow next to
+     the Snow toggle. All three persist independently of the on/off
+     state and of each other, same pattern as volume/theme. */
+  if (settingsToggle && settingsPanel && speedInput && amountInput && windInput) {
+    speedInput.value = String(speedSetting);
+    amountInput.value = String(amountSetting);
+    windInput.value = String(windSetting);
+
+    function closePanel() {
+      settingsPanel.hidden = true;
+      settingsToggle.setAttribute("aria-expanded", "false");
+    }
+    function openPanel() {
+      settingsPanel.hidden = false;
+      settingsToggle.setAttribute("aria-expanded", "true");
+    }
+
+    settingsToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (settingsPanel.hidden) openPanel();
+      else closePanel();
+    });
+    // Interacting with the panel itself (dragging a slider) shouldn't
+    // bubble up to the document click listener that closes it.
+    settingsPanel.addEventListener("click", (e) => e.stopPropagation());
+    document.addEventListener("click", () => {
+      if (!settingsPanel.hidden) closePanel();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !settingsPanel.hidden) closePanel();
+    });
+
+    speedInput.addEventListener("input", () => {
+      speedSetting = clamp(parseFloat(speedInput.value), 0.3, 2.5);
+      localStorage.setItem(SPEED_KEY, String(speedSetting));
+    });
+    amountInput.addEventListener("input", () => {
+      amountSetting = clamp(parseFloat(amountInput.value), 0.2, 2);
+      localStorage.setItem(AMOUNT_KEY, String(amountSetting));
+    });
+    windInput.addEventListener("input", () => {
+      windSetting = clamp(parseFloat(windInput.value), -1, 1);
+      localStorage.setItem(WIND_KEY, String(windSetting));
+    });
+  }
 })();
