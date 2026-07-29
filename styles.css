@@ -394,6 +394,29 @@ button {
   border-bottom-color: var(--accent);
 }
 
+/* Wraps the active type/location chip together with the tag-filter
+   dropdown arrow so the two sit tight against each other, regardless
+   of the row's own (much larger) gap between chips. */
+.type-chip-group,
+.location-chip-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filters-toggle {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1;
+  color: var(--muted);
+  padding: 2px 4px;
+}
+.filters-toggle:hover { color: var(--ink); }
+/* Active both when the row is actually open, and whenever a specific
+   tag is applied even while it's collapsed -- an applied filter
+   should never be silently invisible. */
+.filters-toggle.is-active { color: var(--accent); }
+
 /* ---------------------------------------------------------
    Gallery grid
 --------------------------------------------------------- */

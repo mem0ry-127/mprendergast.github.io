@@ -39,6 +39,7 @@ function initIndexPage() {
   let activeType = DEFAULT_TYPE;
   let activeLocation = "all";
   let activeTag = "all";
+  let filtersExpanded = false;
   let searchQuery = "";
   let visiblePhotos = [];
   let currentIndex = 0;
@@ -235,6 +236,30 @@ function initIndexPage() {
       .join(" \u00b7 ");
   }
 
+  /* ---------------- Tag filter dropdown arrow ----------------
+     One arrow ever renders, attached to whichever nav item currently
+     "owns" the tag row below it: the active location chip in
+     Photography (since that row already narrows the tag set), or the
+     active type chip itself for sections with no location row
+     (Text/Audio/Ceramics). Collapsed by default; picks up an accent
+     tint whenever a non-"all" tag is applied, even while collapsed,
+     so an active filter is never silently hidden. */
+  function makeFiltersToggle() {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "filters-toggle" + (filtersExpanded || activeTag !== "all" ? " is-active" : "");
+    btn.setAttribute("aria-label", filtersExpanded ? "Hide tag filters" : "Show tag filters");
+    btn.setAttribute("aria-expanded", String(filtersExpanded));
+    btn.textContent = "⌄";
+    btn.addEventListener("click", () => {
+      filtersExpanded = !filtersExpanded;
+      renderTypeNav();
+      renderLocationNav();
+      renderFilters();
+    });
+    return btn;
+  }
+
   /* ---------------- Type nav (top-level sections) ---------------- */
 
   function renderTypeNav() {
@@ -247,7 +272,23 @@ function initIndexPage() {
       btn.className = "type-chip" + (activeType === t && !searching ? " is-active" : "");
       btn.textContent = TYPE_LABELS[t];
       btn.addEventListener("click", () => setActiveType(t));
-      typeNav.appendChild(btn);
+
+      // The arrow lives here instead of on location-nav whenever this
+      // is the active type and location-nav won't be the one showing
+      // it -- normally that just means "not Photography", but it also
+      // covers Photography itself in the edge case where it has no
+      // locations to build a location-nav from at all.
+      const isActive = activeType === t && !searching && t !== "all";
+      const locationNavHandlesIt = t === "photo" && collectLocations().length > 0;
+      if (isActive && !locationNavHandlesIt && collectTags().length > 0) {
+        const wrap = document.createElement("span");
+        wrap.className = "type-chip-group";
+        wrap.appendChild(btn);
+        wrap.appendChild(makeFiltersToggle());
+        typeNav.appendChild(wrap);
+      } else {
+        typeNav.appendChild(btn);
+      }
     });
   }
 
@@ -255,6 +296,7 @@ function initIndexPage() {
     activeType = type;
     activeLocation = "all";
     activeTag = "all";
+    filtersExpanded = false;
     if (lightbox.classList.contains("is-open")) closeLightbox();
     renderTypeNav();
     renderLocationNav();
@@ -273,11 +315,13 @@ function initIndexPage() {
   function renderLocationNav() {
     if (activeType !== "photo" || searchQuery.trim()) {
       locationNav.hidden = true;
+      locationNav.innerHTML = "";
       return;
     }
     const places = collectLocations();
     if (places.length === 0) {
       locationNav.hidden = true;
+      locationNav.innerHTML = "";
       return;
     }
     locationNav.hidden = false;
@@ -292,13 +336,25 @@ function initIndexPage() {
       return btn;
     };
 
-    locationNav.appendChild(makeChip("All", "all"));
-    places.forEach((place) => locationNav.appendChild(makeChip(place, place)));
+    const entries = [["All", "all"]].concat(places.map((place) => [place, place]));
+    entries.forEach(([label, place]) => {
+      const chip = makeChip(label, place);
+      if (place === activeLocation && collectTags().length > 0) {
+        const wrap = document.createElement("span");
+        wrap.className = "location-chip-group";
+        wrap.appendChild(chip);
+        wrap.appendChild(makeFiltersToggle());
+        locationNav.appendChild(wrap);
+      } else {
+        locationNav.appendChild(chip);
+      }
+    });
   }
 
   function setActiveLocation(place) {
     activeLocation = place;
     activeTag = "all";
+    filtersExpanded = false;
     if (lightbox.classList.contains("is-open")) closeLightbox();
     renderLocationNav();
     renderFilters();
@@ -317,15 +373,18 @@ function initIndexPage() {
 
   function renderFilters() {
     // "All" is the merged view across every section — no sub-tag row.
-    // A specific section only gets a tag row when it actually has tags.
+    // A specific section only gets a tag row when it actually has tags,
+    // and even then only once its dropdown arrow has been opened.
     // Search bypasses type/location/tag entirely, so it hides this too.
-    if (activeType === "all" || searchQuery.trim()) {
+    if (activeType === "all" || searchQuery.trim() || !filtersExpanded) {
       filtersNav.hidden = true;
+      filtersNav.innerHTML = "";
       return;
     }
     const tags = collectTags();
     if (tags.length === 0) {
       filtersNav.hidden = true;
+      filtersNav.innerHTML = "";
       return;
     }
     filtersNav.hidden = false;
@@ -347,6 +406,8 @@ function initIndexPage() {
   function setActiveTag(tag) {
     activeTag = tag;
     if (lightbox.classList.contains("is-open")) closeLightbox();
+    renderLocationNav();
+    renderTypeNav();
     renderFilters();
     applyFilter();
   }
@@ -653,7 +714,10 @@ function initIndexPage() {
     const place = params.get("location");
     if (place) activeLocation = place;
     const tag = params.get("tag");
-    if (tag) activeTag = tag;
+    if (tag) {
+      activeTag = tag;
+      filtersExpanded = true;
+    }
     return null;
   }
 
