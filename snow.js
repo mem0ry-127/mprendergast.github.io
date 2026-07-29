@@ -42,7 +42,7 @@
     return isFinite(v) ? clamp(v, min, max) : fallback;
   }
 
-  let speedSetting = storedNumber(SPEED_KEY, 1, 0.3, 2.5);
+  let speedSetting = storedNumber(SPEED_KEY, 0.2, 0.1, 2.5);
   let amountSetting = storedNumber(AMOUNT_KEY, 1, MIN_AMOUNT, MAX_AMOUNT);
   let windSetting = storedNumber(WIND_KEY, 0, -1, 1);
 
@@ -187,7 +187,7 @@
     });
 
     speedInput.addEventListener("input", () => {
-      speedSetting = clamp(parseFloat(speedInput.value), 0.3, 2.5);
+      speedSetting = clamp(parseFloat(speedInput.value), 0.1, 2.5);
       localStorage.setItem(SPEED_KEY, String(speedSetting));
     });
     amountInput.addEventListener("input", () => {
