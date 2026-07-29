@@ -24,9 +24,12 @@
   // POOL_SIZE is pre-generated once and just partially drawn/updated
   // each frame -- Math.round(BASE_FLAKE_COUNT * amount) of them -- so
   // changing Amount doesn't need to resize any array, just draw more
-  // or fewer of the same pool.
+  // or fewer of the same pool. Sized to MAX_AMOUNT so the slider can
+  // reach a genuinely blizzard-dense top end.
   const BASE_FLAKE_COUNT = 90;
-  const POOL_SIZE = 180;
+  const MIN_AMOUNT = 0.2;
+  const MAX_AMOUNT = 6;
+  const POOL_SIZE = Math.round(BASE_FLAKE_COUNT * MAX_AMOUNT);
   const SIZES = [2, 2, 2, 3, 3, 4];
   const COLORS = ["#ffffff", "#f1f6fb", "#cfe0ee"];
   const WIND_STRENGTH = 0.6;
@@ -40,7 +43,7 @@
   }
 
   let speedSetting = storedNumber(SPEED_KEY, 1, 0.3, 2.5);
-  let amountSetting = storedNumber(AMOUNT_KEY, 1, 0.2, 2);
+  let amountSetting = storedNumber(AMOUNT_KEY, 1, MIN_AMOUNT, MAX_AMOUNT);
   let windSetting = storedNumber(WIND_KEY, 0, -1, 1);
 
   let canvas = null;
@@ -188,7 +191,7 @@
       localStorage.setItem(SPEED_KEY, String(speedSetting));
     });
     amountInput.addEventListener("input", () => {
-      amountSetting = clamp(parseFloat(amountInput.value), 0.2, 2);
+      amountSetting = clamp(parseFloat(amountInput.value), MIN_AMOUNT, MAX_AMOUNT);
       localStorage.setItem(AMOUNT_KEY, String(amountSetting));
     });
     windInput.addEventListener("input", () => {
