@@ -350,6 +350,14 @@ button {
   font-weight: 500;
   font-size: 13px;
 }
+/* No bottom padding above: when .filters is expanded right below,
+   its own top padding is meant to be the only gap, so the two read as
+   one continuous panel. But .filters collapses by default now, and
+   without it there's nothing supplying that breathing room -- add it
+   back here specifically for when that's the case. */
+.location-nav:has(+ .filters[hidden]) {
+  padding-bottom: 14px;
+}
 
 .location-chip {
   padding-bottom: 4px;
