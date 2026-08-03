@@ -156,6 +156,14 @@ button {
   image-rendering: pixelated;
 }
 
+/* A small hand-drawn flourish next to the name -- pure decoration,
+   sized to sit quietly at text height rather than compete with it. */
+.site-name-flourish {
+  display: block;
+  height: 11px;
+  width: auto;
+}
+
 .header-right {
   display: flex;
   align-items: center;
