@@ -66,20 +66,31 @@
 <div class="beta-layout">
   <div class="beta-bg-col">
     <img class="beta-bg-image" src="images/bg/background.jpg" alt="">
-    <div class="beta-detail" id="beta-detail" hidden>
-      <button class="beta-detail-close" id="beta-detail-close" type="button" aria-label="Close">&#10005;</button>
-      <button class="beta-detail-image-btn" id="beta-detail-image-btn" type="button" aria-label="Open full size">
-        <img id="beta-detail-image" src="" alt="">
-      </button>
-      <div class="beta-detail-caption">
-        <span class="beta-detail-title" id="beta-detail-title"></span>
-        <span class="beta-detail-meta" id="beta-detail-meta"></span>
-        <span class="beta-detail-specs" id="beta-detail-specs"></span>
-      </div>
+  </div>
+
+  <div class="beta-detail" id="beta-detail" hidden>
+    <button class="beta-detail-close" id="beta-detail-close" type="button" aria-label="Close">&#10005;</button>
+    <button class="beta-detail-image-btn" id="beta-detail-image-btn" type="button" aria-label="Open full size">
+      <img id="beta-detail-image" src="" alt="">
+    </button>
+    <div class="beta-detail-text" id="beta-detail-text" hidden>
+      <div class="beta-detail-text-body" id="beta-detail-text-body"></div>
+    </div>
+    <div class="beta-detail-caption">
+      <span class="beta-detail-title" id="beta-detail-title"></span>
+      <span class="beta-detail-meta" id="beta-detail-meta"></span>
+      <span class="beta-detail-specs" id="beta-detail-specs"></span>
     </div>
   </div>
 
   <div class="beta-content-col">
+    <div class="nav-row">
+      <nav class="type-nav" id="beta-type-nav" aria-label="Filter by section"></nav>
+      <div class="nav-utility">
+        <input class="search-input" id="beta-search-input" type="search" placeholder="Search" aria-label="Search everything on the site">
+        <button class="shuffle-btn" id="beta-random-btn" type="button" aria-label="Open a random entry">Random</button>
+      </div>
+    </div>
     <nav class="location-nav" id="beta-location-nav" aria-label="Filter photographs by location"></nav>
     <nav class="filters" id="beta-filters" aria-label="Filter photographs by tag"></nav>
     <div class="gallery beta-gallery" id="beta-gallery" aria-label="Photograph index"></div>

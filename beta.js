@@ -1,25 +1,40 @@
 (function () {
   "use strict";
 
-  // Standalone controller for beta.html — a separate, photos-only
-  // layout experiment. Deliberately not wired into script.js/router.js:
-  // this page isn't part of the PJAX-swapped set (see router.js's
-  // ROUTES), so it's a plain full page load in and out, and it owns a
-  // simplified copy of just the location/tag-filter and lightbox logic
-  // it actually needs rather than sharing initIndexPage's larger,
-  // multi-section machinery.
+  // Standalone controller for beta.html — a separate layout experiment
+  // covering every section (photos, text, audio, ceramics). Deliberately
+  // not wired into script.js/router.js: this page isn't part of the
+  // PJAX-swapped set (see router.js's ROUTES), so it's a plain full
+  // page load in and out, and it owns its own copy of the type/location
+  // /tag nav and lightbox logic rather than sharing initIndexPage's.
+  //
+  // Left column (.beta-detail): a fixed panel that shows whichever item
+  // was last clicked — the enlarged photo/ceramic piece with its
+  // caption, or a poem's full text. At 900px+ it sits beside the
+  // background image, at the width of that image; below 900px it's a
+  // full-width modal instead (see beta.css). Audio never touches it —
+  // audio plays inline in its own tile, same as everywhere else on the
+  // site, via window.SitePlayer.
 
-  const bgCol = document.querySelector(".beta-bg-col");
+  const TYPES = ["photo", "text", "audio", "ceramics", "all"];
+  const TYPE_LABELS = { all: "All", photo: "Photography", text: "Text", audio: "Audio", ceramics: "Ceramics" };
+  const DEFAULT_TYPE = "photo";
+
   const bgImage = document.querySelector(".beta-bg-image");
   const detail = document.getElementById("beta-detail");
   const detailClose = document.getElementById("beta-detail-close");
   const detailImageBtn = document.getElementById("beta-detail-image-btn");
   const detailImage = document.getElementById("beta-detail-image");
+  const detailText = document.getElementById("beta-detail-text");
+  const detailTextBody = document.getElementById("beta-detail-text-body");
   const detailTitle = document.getElementById("beta-detail-title");
   const detailMeta = document.getElementById("beta-detail-meta");
   const detailSpecs = document.getElementById("beta-detail-specs");
+  const typeNav = document.getElementById("beta-type-nav");
   const locationNav = document.getElementById("beta-location-nav");
   const filtersNav = document.getElementById("beta-filters");
+  const searchInput = document.getElementById("beta-search-input");
+  const randomBtn = document.getElementById("beta-random-btn");
   const gallery = document.getElementById("beta-gallery");
   const emptyState = document.getElementById("beta-empty-state");
 
@@ -34,21 +49,22 @@
   const prevBtn = document.getElementById("lightbox-prev");
   const nextBtn = document.getElementById("lightbox-next");
 
-  const allPhotos = (typeof PHOTOS !== "undefined" && Array.isArray(PHOTOS) ? PHOTOS : []).filter(
-    (p) => !p.hidden && (p.type || "photo") === "photo"
-  );
+  const allItems = (typeof PHOTOS !== "undefined" && Array.isArray(PHOTOS) ? PHOTOS : []).filter((p) => !p.hidden);
 
-  // Kept in sync with beta.css's own breakpoint (see the comment there).
-  const splitViewQuery = window.matchMedia("(min-width: 900px)");
-
+  let activeType = DEFAULT_TYPE;
   let activeLocation = "all";
   let activeTag = "all";
   let filtersExpanded = false;
+  let searchQuery = "";
   let visiblePhotos = [];
   let selectedIndex = null;
   let currentIndex = 0;
   let isZoomed = false;
   let touchStartX = null;
+
+  function itemType(p) {
+    return p.type || "photo";
+  }
 
   function pad(n) {
     return String(n).padStart(2, "0");
@@ -70,25 +86,29 @@
       .join(" · ");
   }
 
-  /* ---------------- Location + tag nav (same pattern as script.js) ---------------- */
-
-  function collectLocations() {
-    const places = new Set();
-    allPhotos.forEach((p) => places.add(placeGroup(p)));
-    return Array.from(places).sort();
+  function matchesSearch(photo, query) {
+    const q = query.trim().toLowerCase();
+    if (!q) return true;
+    const haystack = [
+      photo.title,
+      photo.location,
+      photo.date,
+      photo.body,
+      Array.isArray(photo.tags) ? photo.tags.join(" ") : "",
+    ]
+      .filter(Boolean)
+      .join(" · ")
+      .toLowerCase();
+    return haystack.includes(q);
   }
 
-  function itemsForLocation() {
-    return activeLocation === "all" ? allPhotos.slice() : allPhotos.filter((p) => placeGroup(p) === activeLocation);
+  const VOLUME_KEY = "photo-site-audio-volume";
+  function getStoredVolume() {
+    const v = parseFloat(localStorage.getItem(VOLUME_KEY));
+    return isFinite(v) && v >= 0 && v <= 1 ? v : 0.8;
   }
 
-  function collectTags() {
-    const tags = new Set();
-    itemsForLocation().forEach((p) => {
-      if (Array.isArray(p.tags)) p.tags.forEach((t) => tags.add(t));
-    });
-    return Array.from(tags).sort();
-  }
+  /* ---------------- Type nav ---------------- */
 
   function makeFiltersToggle() {
     const btn = document.createElement("button");
@@ -99,13 +119,71 @@
     btn.textContent = "⌄";
     btn.addEventListener("click", () => {
       filtersExpanded = !filtersExpanded;
+      renderTypeNav();
       renderLocationNav();
       renderFilters();
     });
     return btn;
   }
 
+  function renderTypeNav() {
+    typeNav.innerHTML = "";
+    const searching = searchQuery.trim().length > 0;
+    TYPES.forEach((t) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "type-chip" + (activeType === t && !searching ? " is-active" : "");
+      btn.textContent = TYPE_LABELS[t];
+      btn.addEventListener("click", () => setActiveType(t));
+
+      const isActive = activeType === t && !searching && t !== "all";
+      const locationNavHandlesIt = t === "photo" && collectLocations().length > 0;
+      if (isActive && !locationNavHandlesIt && collectTags().length > 0) {
+        const wrap = document.createElement("span");
+        wrap.className = "type-chip-group";
+        wrap.appendChild(btn);
+        wrap.appendChild(makeFiltersToggle());
+        typeNav.appendChild(wrap);
+      } else {
+        typeNav.appendChild(btn);
+      }
+    });
+  }
+
+  function setActiveType(type) {
+    activeType = type;
+    activeLocation = "all";
+    activeTag = "all";
+    filtersExpanded = false;
+    closeDetail();
+    renderTypeNav();
+    renderLocationNav();
+    renderFilters();
+    applyFilter();
+  }
+
+  /* ---------------- Location nav (Photography only) ---------------- */
+
+  function collectLocations() {
+    const places = new Set();
+    allItems.filter((p) => itemType(p) === "photo").forEach((p) => places.add(placeGroup(p)));
+    return Array.from(places).sort();
+  }
+
+  function itemsOfActiveType() {
+    let items = activeType === "all" ? allItems.slice() : allItems.filter((p) => itemType(p) === activeType);
+    if (activeType === "photo" && activeLocation !== "all") {
+      items = items.filter((p) => placeGroup(p) === activeLocation);
+    }
+    return items;
+  }
+
   function renderLocationNav() {
+    if (activeType !== "photo" || searchQuery.trim()) {
+      locationNav.hidden = true;
+      locationNav.innerHTML = "";
+      return;
+    }
     const places = collectLocations();
     if (places.length === 0) {
       locationNav.hidden = true;
@@ -149,8 +227,18 @@
     applyFilter();
   }
 
+  /* ---------------- Tag filters ---------------- */
+
+  function collectTags() {
+    const tags = new Set();
+    itemsOfActiveType().forEach((p) => {
+      if (Array.isArray(p.tags)) p.tags.forEach((t) => tags.add(t));
+    });
+    return Array.from(tags).sort();
+  }
+
   function renderFilters() {
-    if (!filtersExpanded) {
+    if (activeType === "all" || searchQuery.trim() || !filtersExpanded) {
       filtersNav.hidden = true;
       filtersNav.innerHTML = "";
       return;
@@ -181,14 +269,114 @@
     activeTag = tag;
     closeDetail();
     renderLocationNav();
+    renderTypeNav();
+    renderFilters();
+    applyFilter();
+  }
+
+  function setSearchQuery(query) {
+    searchQuery = query;
+    closeDetail();
+    renderTypeNav();
+    renderLocationNav();
     renderFilters();
     applyFilter();
   }
 
   function applyFilter() {
-    const base = itemsForLocation();
-    visiblePhotos = activeTag === "all" ? base.slice() : base.filter((p) => Array.isArray(p.tags) && p.tags.includes(activeTag));
+    if (searchQuery.trim()) {
+      visiblePhotos = allItems.filter((p) => matchesSearch(p, searchQuery));
+    } else {
+      const base = itemsOfActiveType();
+      visiblePhotos = activeTag === "all" ? base.slice() : base.filter((p) => Array.isArray(p.tags) && p.tags.includes(activeTag));
+    }
     renderGallery();
+  }
+
+  /* ---------------- Audio tile (mirrors script.js's buildAudioTile) ---------------- */
+
+  function buildAudioTile(photo, indexTag) {
+    const container = document.createElement("div");
+    container.className = "tile-audio";
+    container.dataset.file = photo.file;
+
+    const toggle = document.createElement("button");
+    toggle.className = "tile-audio-toggle";
+    toggle.type = "button";
+    toggle.setAttribute("aria-label", "Play " + (photo.title || "track"));
+
+    const mark = document.createElement("span");
+    mark.className = "tile-audio-mark";
+    mark.textContent = "▸";
+    const previewTitle = document.createElement("span");
+    previewTitle.className = "tile-audio-title";
+    previewTitle.textContent = photo.title || "Untitled";
+    toggle.appendChild(mark);
+    toggle.appendChild(previewTitle);
+    if (photo.duration) {
+      const previewDuration = document.createElement("span");
+      previewDuration.className = "tile-audio-duration";
+      previewDuration.textContent = photo.duration;
+      toggle.appendChild(previewDuration);
+    }
+
+    const player = document.createElement("div");
+    player.className = "tile-audio-player";
+    player.hidden = true;
+
+    const playBtn = document.createElement("button");
+    playBtn.className = "audio-play";
+    playBtn.type = "button";
+    playBtn.setAttribute("aria-label", "Play");
+    playBtn.textContent = "▶";
+
+    const progress = document.createElement("div");
+    progress.className = "audio-progress";
+    const progressFill = document.createElement("div");
+    progressFill.className = "audio-progress-fill";
+    progress.appendChild(progressFill);
+
+    const time = document.createElement("span");
+    time.className = "audio-time";
+    time.textContent = "0:00 / 0:00";
+
+    const volume = document.createElement("input");
+    volume.className = "audio-volume";
+    volume.type = "range";
+    volume.min = "0";
+    volume.max = "1";
+    volume.step = "0.01";
+    volume.value = String(getStoredVolume());
+    volume.setAttribute("aria-label", "Volume");
+    volume.addEventListener("input", () => {
+      if (window.SitePlayer) window.SitePlayer.setVolume(parseFloat(volume.value));
+    });
+    volume.addEventListener("click", (e) => e.stopPropagation());
+
+    player.appendChild(playBtn);
+    player.appendChild(progress);
+    player.appendChild(time);
+    player.appendChild(volume);
+
+    toggle.addEventListener("click", () => {
+      if (window.SitePlayer) window.SitePlayer.playOrToggle(photo);
+    });
+    playBtn.addEventListener("click", () => {
+      if (window.SitePlayer) window.SitePlayer.playOrToggle(photo);
+    });
+    progress.addEventListener("click", (e) => {
+      if (!window.SitePlayer) return;
+      const rect = progress.getBoundingClientRect();
+      window.SitePlayer.seek((e.clientX - rect.left) / rect.width);
+    });
+
+    container.appendChild(indexTag);
+    container.appendChild(toggle);
+    container.appendChild(player);
+
+    if (window.SitePlayer) window.SitePlayer.syncTile(container);
+
+    return container;
   }
 
   /* ---------------- Gallery (right column) ---------------- */
@@ -204,63 +392,130 @@
     const frag = document.createDocumentFragment();
     visiblePhotos.forEach((photo, i) => {
       const size = ["lg", "md", "sm"].includes(photo.size) ? photo.size : "md";
+      const isText = itemType(photo) === "text";
+      const isAudio = itemType(photo) === "audio";
+
       const figure = document.createElement("figure");
       figure.className = "tile tile--" + size;
-
-      const button = document.createElement("button");
-      button.className = "tile-button";
-      button.type = "button";
-      button.setAttribute("aria-label", "View " + (photo.title || "photograph"));
-      button.addEventListener("click", () => {
-        // Below the split-view breakpoint there's no left column to show
-        // detail in, so a tap goes straight to the lightbox instead of
-        // the desktop's two-step (detail panel, then lightbox) flow.
-        if (splitViewQuery.matches) showDetail(i);
-        else openLightbox(i);
-      });
-
-      const img = document.createElement("img");
-      img.src = photo.file;
-      img.alt = photo.alt || "";
-      img.loading = "lazy";
-      button.appendChild(img);
 
       const indexTag = document.createElement("span");
       indexTag.className = "tile-index";
       indexTag.textContent = "N° " + pad(i + 1);
-      button.appendChild(indexTag);
-      figure.appendChild(button);
+
+      if (isAudio) {
+        figure.appendChild(buildAudioTile(photo, indexTag));
+      } else {
+        const button = document.createElement("button");
+        button.className = "tile-button" + (isText ? " tile-button--text" : "");
+        button.type = "button";
+        button.setAttribute("aria-label", "View " + (photo.title || (isText ? "text" : "photograph")));
+        button.addEventListener("click", () => showDetail(i));
+
+        if (isText) {
+          const preview = document.createElement("div");
+          preview.className = "tile-text-preview";
+          if (photo.title) {
+            const previewTitle = document.createElement("span");
+            previewTitle.className = "tile-text-title";
+            previewTitle.textContent = photo.title;
+            preview.appendChild(previewTitle);
+          }
+          const excerpt = document.createElement("p");
+          excerpt.className = "tile-text-excerpt";
+          excerpt.textContent = photo.body || "";
+          preview.appendChild(excerpt);
+          button.appendChild(preview);
+        } else {
+          const img = document.createElement("img");
+          img.src = photo.file;
+          img.alt = photo.alt || "";
+          img.loading = "lazy";
+          button.appendChild(img);
+        }
+        button.appendChild(indexTag);
+        if (selectedIndex === i) figure.classList.add("is-selected");
+        figure.appendChild(button);
+      }
 
       const caption = document.createElement("figcaption");
-      const title = document.createElement("span");
-      title.className = "tile-title";
-      title.textContent = photo.title || "Untitled";
       const meta = document.createElement("span");
       meta.className = "tile-meta";
       meta.textContent = metaLine(photo);
-      caption.appendChild(title);
+
+      if (isAudio || (isText && photo.title)) {
+        caption.appendChild(document.createElement("span"));
+      } else {
+        const title = document.createElement("span");
+        title.className = "tile-title";
+        title.textContent = photo.title || "Untitled";
+        caption.appendChild(title);
+      }
       caption.appendChild(meta);
+
       figure.appendChild(caption);
-
-      if (selectedIndex === i) figure.classList.add("is-selected");
-
       frag.appendChild(figure);
     });
+
     gallery.appendChild(frag);
+
+    gallery.querySelectorAll(".tile-button--text").forEach((el) => {
+      if (el.scrollHeight > el.clientHeight + 1) el.classList.add("is-clamped");
+    });
   }
 
   /* ---------------- Left column: background <-> detail ---------------- */
 
+  function renderDetailText(item) {
+    detailTextBody.innerHTML = "";
+    if (item.title) {
+      const heading = document.createElement("p");
+      heading.className = "text-title";
+      heading.textContent = item.title;
+      detailTextBody.appendChild(heading);
+    }
+    const body = item.body || "";
+    const stanzas = body.split(/\n\s*\n/);
+    stanzas.forEach((stanza) => {
+      const p = document.createElement("p");
+      if (item.format === "prose") {
+        p.className = "text-prose";
+        p.textContent = stanza.replace(/\n/g, " ").trim();
+      } else {
+        p.className = "text-verse";
+        stanza.split("\n").forEach((line, idx) => {
+          if (idx > 0) p.appendChild(document.createElement("br"));
+          p.appendChild(document.createTextNode(line));
+        });
+      }
+      detailTextBody.appendChild(p);
+    });
+  }
+
   function showDetail(i) {
     selectedIndex = i;
     const photo = visiblePhotos[i];
-    detailImage.src = photo.file;
-    detailImage.alt = photo.alt || "";
-    detailTitle.textContent = photo.title || "Untitled";
+    const isText = itemType(photo) === "text";
+
+    detailImageBtn.hidden = isText;
+    detailText.hidden = !isText;
+
+    if (isText) {
+      renderDetailText(photo);
+      // The heading (if any) already lives inside the text body, styled
+      // to match — showing it again in the outer caption would just
+      // duplicate it, unlike photos where the caption is its only home.
+      detailTitle.hidden = true;
+    } else {
+      detailImage.src = photo.file;
+      detailImage.alt = photo.alt || "";
+      detailTitle.hidden = false;
+      detailTitle.textContent = photo.title || "Untitled";
+    }
+
     detailMeta.textContent = metaLine(photo);
     const specs = specLine(photo);
     detailSpecs.textContent = specs;
-    detailSpecs.hidden = specs.length === 0;
+    detailSpecs.hidden = isText || specs.length === 0;
 
     detail.hidden = false;
     bgImage.classList.add("is-dimmed");
@@ -275,12 +530,35 @@
     renderGallery();
   }
 
+  // The single entry point for "activating" a clicked/random item —
+  // dispatches per type since audio has no left-column representation
+  // (it plays inline in its own tile, same as everywhere on the site)
+  // while photos/ceramics/text all use showDetail.
+  function activateItem(i) {
+    const item = visiblePhotos[i];
+    if (itemType(item) === "audio") {
+      if (window.SitePlayer) window.SitePlayer.playOrToggle(item);
+      const tile = gallery.querySelector('.tile-audio[data-file="' + CSS.escape(item.file) + '"]');
+      if (tile) tile.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    showDetail(i);
+  }
+
   detailClose.addEventListener("click", closeDetail);
   detailImageBtn.addEventListener("click", () => {
     if (selectedIndex !== null) openLightbox(selectedIndex);
   });
 
-  /* ---------------- Lightbox (photos only — no text/audio branches needed) ---------------- */
+  randomBtn.addEventListener("click", () => {
+    if (!visiblePhotos.length) return;
+    activateItem(Math.floor(Math.random() * visiblePhotos.length));
+  });
+
+  searchInput.addEventListener("input", () => setSearchQuery(searchInput.value));
+
+  /* ---------------- Lightbox (photos/ceramics only — text has no
+     zoomed view, it's already fully shown in the detail panel) ---------------- */
 
   function openLightbox(i) {
     if (!visiblePhotos.length) return;
@@ -364,6 +642,7 @@
     { passive: true }
   );
 
+  renderTypeNav();
   renderLocationNav();
   renderFilters();
   applyFilter();
