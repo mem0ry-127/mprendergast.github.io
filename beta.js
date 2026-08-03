@@ -1,12 +1,13 @@
-(function () {
+function initBetaPage() {
   "use strict";
 
-  // Standalone controller for beta.html — a separate layout experiment
-  // covering every section (photos, text, audio, ceramics). Deliberately
-  // not wired into script.js/router.js: this page isn't part of the
-  // PJAX-swapped set (see router.js's ROUTES), so it's a plain full
-  // page load in and out, and it owns its own copy of the type/location
-  // /tag nav and lightbox logic rather than sharing initIndexPage's.
+  // Controller for beta.html — a separate layout experiment covering
+  // every section (photos, text, audio, ceramics). It IS part of the
+  // PJAX-swapped set (see router.js's ROUTES), so like initIndexPage
+  // and initArchivePage this runs both on a hard page load (guarded
+  // call at the bottom of this file) and again on every router-driven
+  // navigation into beta.html -- all state below is local to a single
+  // call and rebuilt fresh each time, same as those two.
   //
   // Left column (.beta-detail): a fixed panel that shows whichever item
   // was last clicked — the enlarged photo/ceramic piece with its
@@ -303,6 +304,68 @@
       visiblePhotos = activeTag === "all" ? base.slice() : base.filter((p) => Array.isArray(p.tags) && p.tags.includes(activeTag));
     }
     renderGallery();
+    syncUrl();
+  }
+
+  /* ---------------- URL state — mirrors script.js's syncUrl/readUrlState.
+     Reflects the active type/location/tag/search plus whichever item the
+     left panel is showing, via replaceState (no history entries pushed).
+     ---------------- */
+
+  function syncUrl() {
+    const params = new URLSearchParams();
+    if (searchQuery.trim()) {
+      params.set("q", searchQuery.trim());
+    } else {
+      if (activeType !== DEFAULT_TYPE) params.set("type", activeType);
+      if (activeType === "photo" && activeLocation !== "all") params.set("location", activeLocation);
+      if (activeTag !== "all") params.set("tag", activeTag);
+    }
+    if (detailItem) {
+      const globalIndex = allItems.indexOf(detailItem);
+      if (globalIndex !== -1) params.set("item", String(globalIndex));
+    }
+    const qs = params.toString();
+    history.replaceState(null, "", window.location.pathname + (qs ? "?" + qs : ""));
+  }
+
+  // Returns the item to open in the detail panel once the initial
+  // render completes, or null. An `item` link always wins over
+  // type/location/tag/search and derives its own section context from
+  // the item itself, same as script.js's version.
+  function readUrlState() {
+    const params = new URLSearchParams(window.location.search);
+
+    const itemParam = params.get("item");
+    if (itemParam !== null && /^\d+$/.test(itemParam)) {
+      const globalIndex = parseInt(itemParam, 10);
+      const item = allItems[globalIndex];
+      if (item) {
+        const type = itemType(item);
+        activeType = TYPES.includes(type) && type !== "all" ? type : DEFAULT_TYPE;
+        activeLocation = type === "photo" ? placeGroup(item) : "all";
+        activeTag = "all";
+        return item;
+      }
+    }
+
+    const q = params.get("q");
+    if (q) {
+      searchQuery = q;
+      searchInput.value = q;
+      return null;
+    }
+
+    const type = params.get("type");
+    if (type && TYPES.includes(type)) activeType = type;
+    const place = params.get("location");
+    if (place) activeLocation = place;
+    const tag = params.get("tag");
+    if (tag) {
+      activeTag = tag;
+      filtersExpanded = true;
+    }
+    return null;
   }
 
   /* ---------------- Audio tile (mirrors script.js's buildAudioTile) ---------------- */
@@ -479,6 +542,21 @@
     });
   }
 
+  // Re-locates item's tile in the *current* gallery render and focuses
+  // its trigger. A plain saved DOM-node reference doesn't survive here
+  // -- renderGallery rebuilds every tile from scratch on every call,
+  // including the one showDetail() itself triggers right after a click
+  // -- so this looks the tile up fresh by identity instead. Returns
+  // false (and focuses nothing) if item isn't part of what's currently
+  // visible, e.g. the active section has since moved on from it.
+  function focusTileFor(item) {
+    const idx = visiblePhotos.indexOf(item);
+    const figure = idx !== -1 ? gallery.children[idx] : null;
+    const target = figure ? figure.querySelector(".tile-button, .tile-audio-toggle") : null;
+    if (target) target.focus();
+    return !!target;
+  }
+
   /* ---------------- Left column: background <-> detail ---------------- */
 
   function renderDetailText(item) {
@@ -507,8 +585,16 @@
     });
   }
 
+  function onDetailKeydown(e) {
+    if (e.key === "Escape") closeDetail();
+  }
+
   function showDetail(i) {
     const photo = visiblePhotos[i];
+    // Only attach Escape on the closed -> open transition, not on every
+    // subsequent click that just swaps the panel's content while it's
+    // already open.
+    if (!detailItem) document.addEventListener("keydown", onDetailKeydown);
     detailItem = photo;
     detailList = visiblePhotos.slice();
     detailListIndex = i;
@@ -537,15 +623,30 @@
 
     detail.hidden = false;
     bgImage.classList.add("is-dimmed");
+    // Whoever triggered this click is likely still far down the tab
+    // order (the panel sits earlier in the DOM than the gallery), so a
+    // keyboard user has no forward-Tab path to the close button
+    // without this -- move focus in explicitly, same as the lightbox
+    // already does for itself.
+    detailClose.focus();
     renderGallery();
+    syncUrl();
   }
 
   function closeDetail() {
     if (!detailItem) return;
+    const closingItem = detailItem;
     detailItem = null;
     detail.hidden = true;
     bgImage.classList.remove("is-dimmed");
+    document.removeEventListener("keydown", onDetailKeydown);
     renderGallery();
+    // Only lands somewhere if closingItem is still part of the
+    // currently active section/filter -- if the active tab has since
+    // moved on to something else there's no sensible tile to return
+    // to, so focus is just left wherever the browser puts it.
+    focusTileFor(closingItem);
+    syncUrl();
   }
 
   // The single entry point for "activating" a clicked/random item —
@@ -661,8 +762,22 @@
     { passive: true }
   );
 
+  const pendingItem = readUrlState();
+
   renderTypeNav();
   renderLocationNav();
   renderFilters();
   applyFilter();
-})();
+
+  if (pendingItem) {
+    const idx = visiblePhotos.indexOf(pendingItem);
+    // Audio has no detail-panel representation (see activateItem) and
+    // autoplaying from a link would be blocked by the browser anyway,
+    // so a linked audio item just lands on its scrolled-to tile rather
+    // than trying to open or play anything.
+    if (idx !== -1 && itemType(pendingItem) !== "audio") showDetail(idx);
+  }
+}
+
+window.initBetaPage = initBetaPage;
+if (document.getElementById("beta-gallery")) initBetaPage();

@@ -2,7 +2,7 @@
   "use strict";
 
   // Lightweight PJAX-style navigation: intercepts clicks on internal
-  // links between the site's three pages, fetches the target HTML,
+  // links between the site's pages, fetches the target HTML,
   // and swaps just the #view region instead of doing a full page load.
   // The header, footer, theme/snow toggles, and the persistent audio
   // player (player.js) all live outside #view, so they're untouched by
@@ -13,7 +13,7 @@
   // #view region for some reason, it just falls back to a real
   // navigation rather than breaking.
 
-  const ROUTES = new Set(["", "index.html", "about.html", "archive.html"]);
+  const ROUTES = new Set(["", "index.html", "about.html", "archive.html", "beta.html"]);
 
   function pageName(pathname) {
     return pathname.split("/").pop() || "index.html";
@@ -33,6 +33,8 @@
       if (window.initArchivePage) window.initArchivePage();
     } else if (page === "about.html") {
       // static content, nothing to initialize
+    } else if (page === "beta.html") {
+      if (window.initBetaPage) window.initBetaPage();
     } else {
       if (window.initIndexPage) window.initIndexPage();
     }
