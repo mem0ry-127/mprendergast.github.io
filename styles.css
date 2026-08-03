@@ -1,10 +1,12 @@
 /* ---------------------------------------------------------
-   Tokens — dark (default) and light. --accent, --scrim, and the
-   --badge-* pair stay fixed across themes: the accent is the site's
-   one brand color regardless of chrome, the lightbox stays a dark
-   viewing environment in either theme, and the tile-index badge sits
-   on top of arbitrary photo content so it needs guaranteed contrast
-   independent of the page theme.
+   Tokens — dark (default) and light. --scrim and the --badge-* pair
+   stay fixed across every theme: the lightbox stays a dark viewing
+   environment regardless of theme, and the tile-index badge sits on
+   top of arbitrary photo content so it needs guaranteed contrast
+   independent of the page theme. --accent is the site's one brand
+   color everywhere too, with a single deliberate exception: Mono
+   overrides it to a warmer red (oxblood) rather than pairing true
+   black/white with the same orange used against every warm palette.
 --------------------------------------------------------- */
 :root {
   --paper: #4d5566;
@@ -38,21 +40,56 @@
   --overlay: rgba(0, 0, 0, 0.05);
 }
 
-/* Playful — a third, independently-toggled theme (the "Alt" header
-   button, separate from the light/dark toggle). Same restrained layout
-   and single fixed --accent as everywhere else; just a bright,
-   saturated palette in place of dark/light's neutral ones.
+/* Alt themes — a cycle of independently-selected themes behind the
+   "Alt" header button, separate from the light/dark toggle (theme.js
+   advances through these in order on each click; the base toggle
+   always clears back to plain dark/light regardless of which of
+   these was active). Same restrained layout and single fixed --accent
+   as everywhere else in every one of them; only --paper/--ink/
+   --muted/--hairline/--grid-line/--overlay vary. */
 
-   --overlay is near-opaque here rather than the light/dark washes
-   (5-70% over a neutral paper): text/audio tile cards are meant to
-   read as a distinct warm off-white surface floating on the green, in
-   the spirit of the reference site's cream/tan panels on its green
-   background. A translucent wash at that same low opacity would
-   optically mix with the saturated green paper underneath instead of
-   sitting on top of it, producing a muddy, desaturated yellow-green
-   rather than a clean card -- transparency reads as "layered surface"
-   against a neutral backdrop, but against a saturated one it just
-   blends, which is the muddiness this avoids. */
+:root[data-theme="walnut"] {
+  --paper: #3a352e;
+  --ink: #f2ece0;
+  --grid-line: rgba(232, 220, 200, 0.08);
+  --muted: #a89a85;
+  --muted-dim: #7d7262;
+  --hairline: rgba(232, 220, 200, 0.14);
+  --overlay: rgba(28, 24, 18, 0.7);
+}
+
+:root[data-theme="forest"] {
+  --paper: #2e332a;
+  --ink: #eee8d8;
+  --grid-line: rgba(220, 225, 200, 0.08);
+  --muted: #93997e;
+  --muted-dim: #656b52;
+  --hairline: rgba(220, 225, 200, 0.14);
+  --overlay: rgba(18, 22, 15, 0.7);
+}
+
+:root[data-theme="mono"] {
+  --paper: #141414;
+  --ink: #f4f4f0;
+  --grid-line: rgba(255, 255, 255, 0.08);
+  --accent: #a13d2f;
+  --muted: #999999;
+  --muted-dim: #666666;
+  --hairline: rgba(255, 255, 255, 0.14);
+  --overlay: rgba(10, 10, 10, 0.7);
+}
+
+/* --overlay is near-opaque here rather than the light/dark/walnut/
+   forest/mono washes (5-70% over a neutral paper): text/audio tile
+   cards are meant to read as a distinct warm off-white surface
+   floating on the green, in the spirit of the reference site's
+   cream/tan panels on its green background. A translucent wash at
+   that same low opacity would optically mix with the saturated green
+   paper underneath instead of sitting on top of it, producing a
+   muddy, desaturated yellow-green rather than a clean card --
+   transparency reads as "layered surface" against a neutral backdrop,
+   but against a saturated one it just blends, which is the muddiness
+   this avoids. */
 :root[data-theme="playful"] {
   --paper: #c9e26a;
   --ink: #1c1a12;

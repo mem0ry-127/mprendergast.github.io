@@ -8,8 +8,9 @@
 <meta name="color-scheme" content="dark light" id="color-scheme-meta">
 <link rel="icon" href="favicon.ico" sizes="16x16">
 <script>
-  if (localStorage.getItem("photo-site-playful") === "on") {
-    document.documentElement.setAttribute("data-theme", "playful");
+  var altTheme = localStorage.getItem("photo-site-alt");
+  if (altTheme === "walnut" || altTheme === "forest" || altTheme === "mono" || altTheme === "playful") {
+    document.documentElement.setAttribute("data-theme", altTheme);
   } else if (localStorage.getItem("photo-site-theme") === "light") {
     document.documentElement.setAttribute("data-theme", "light");
   }
