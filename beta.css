@@ -125,6 +125,11 @@
   padding: 0;
   cursor: zoom-in;
 }
+/* Without this, the unconditional display:block above outranks the
+   browser's own [hidden] rule (same specificity, author styles load
+   after the UA stylesheet) -- switching to a text item would set the
+   hidden attribute via JS but the image button stayed visible anyway. */
+.beta-detail-image-btn[hidden] { display: none; }
 .beta-detail-image-btn img {
   max-width: 100%;
   max-height: 62vh;
