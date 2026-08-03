@@ -19,9 +19,9 @@
   --badge-bg: rgba(10, 11, 15, 0.7);
   --badge-ink: #f2f1ec;
 
-  --font-display: 'Archivo', sans-serif;
+  --font-display: 'EB Garamond', serif;
   --font-body: 'IBM Plex Sans', sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
+  --font-meta: 'EB Garamond', serif;
   --font-serif: Baskerville, 'Baskervville', 'Times New Roman', serif;
 
   --gap: 1px;
@@ -128,7 +128,7 @@ button {
 .site-nav {
   display: flex;
   gap: 16px;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -146,7 +146,7 @@ button {
 }
 
 .header-toggle {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -182,7 +182,7 @@ button {
   gap: 8px;
 }
 .snow-settings-toggle {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 9px;
   line-height: 1;
   color: var(--muted);
@@ -213,7 +213,7 @@ button {
   gap: 6px;
 }
 .snow-settings-row span {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -232,7 +232,7 @@ button {
 }
 .snow-wind-track input[type="range"] { flex: 1; }
 .snow-wind-label {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 10px;
   color: var(--muted-dim);
 }
@@ -254,7 +254,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 12px;
   color: var(--muted);
   text-align: right;
@@ -296,7 +296,7 @@ button {
 }
 
 .search-input {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 12px;
   color: var(--ink);
   background: none;
@@ -310,7 +310,7 @@ button {
 .search-input::-webkit-search-cancel-button { -webkit-appearance: none; }
 
 .shuffle-btn {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -384,7 +384,7 @@ button {
   padding: 14px var(--edge);
   background: rgba(0, 0, 0, 0.14);
   border-bottom: 1px solid var(--hairline);
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -413,7 +413,7 @@ button {
 }
 
 .filters-toggle {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 11px;
   line-height: 1;
   color: var(--muted);
@@ -499,7 +499,7 @@ button {
   position: absolute;
   top: 12px;
   left: 12px;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 11px;
   color: var(--badge-ink);
   background: var(--badge-bg);
@@ -597,7 +597,7 @@ button {
   flex: none;
   margin-left: auto;
   padding-left: 12px;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 11px;
   color: var(--muted);
 }
@@ -619,7 +619,7 @@ button {
 
 .tile-audio-mark {
   flex: none;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 18px;
   color: var(--accent);
 }
@@ -633,12 +633,13 @@ button {
 }
 
 .tile-title {
-  font-size: 14px;
-  font-weight: 500;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 15px;
 }
 
 .tile-meta {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 11px;
   color: var(--muted);
   white-space: nowrap;
@@ -646,7 +647,7 @@ button {
 }
 
 .empty-state {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 13px;
   color: var(--muted);
   text-align: center;
@@ -678,7 +679,7 @@ button {
    to action, per the request to keep it "out of the way." */
 .about-content p.about-beta-link {
   margin-top: 2.4em;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 12px;
 }
 .about-beta-link a {
@@ -697,13 +698,13 @@ button {
   max-width: 800px;
 }
 .archive-empty {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 13px;
   color: var(--muted);
 }
 .archive-year {
   font-family: var(--font-display);
-  font-weight: 900;
+  font-weight: 800;
   font-size: 26px;
   margin: 48px 0 12px;
   color: var(--ink);
@@ -731,7 +732,7 @@ button {
 .archive-type {
   flex: none;
   width: 64px;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -744,7 +745,7 @@ button {
 }
 .archive-date {
   flex: none;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 11px;
   color: var(--muted);
 }
@@ -759,7 +760,7 @@ button {
   align-items: center;
   gap: 18px;
   padding: 22px var(--edge) 40px;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 11px;
   color: var(--muted);
   text-transform: uppercase;
@@ -832,7 +833,7 @@ button {
 .plain-text-toggle {
   display: block;
   margin: 0 0 24px auto;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -865,7 +866,7 @@ button {
 
 .lightbox-text-body.is-plain .text-verse,
 .lightbox-text-body.is-plain .text-prose {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 13px;
   line-height: 1.6;
   text-align: left;
@@ -908,7 +909,7 @@ button {
 
 .audio-time {
   flex: none;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 11px;
   color: var(--muted);
   white-space: nowrap;
@@ -992,7 +993,7 @@ button {
   border-bottom: 1px solid rgba(242, 241, 236, 0.12);
 }
 .site-player-now {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1032,7 +1033,7 @@ button {
   text-overflow: ellipsis;
 }
 .site-player-date {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 10px;
   color: rgba(242, 241, 236, 0.55);
 }
@@ -1060,7 +1061,7 @@ button {
   position: absolute;
   top: 0;
   transform: translateX(-50%);
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 8px;
   line-height: 1;
   color: rgba(242, 241, 236, 0.4);
@@ -1132,7 +1133,7 @@ button {
 }
 .site-player-playlist-duration {
   flex: none;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 10px;
   color: rgba(242, 241, 236, 0.5);
 }
@@ -1149,17 +1150,17 @@ button {
   align-items: baseline;
   justify-content: center;
   flex-wrap: wrap;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
-.lightbox-title { font-family: var(--font-body); text-transform: none; font-size: 14px; }
+.lightbox-title { font-family: var(--font-serif); font-style: italic; text-transform: none; font-size: 16px; }
 .lightbox-meta { color: var(--muted); }
 
 .lightbox-specs {
   margin-top: 6px;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 11px;
   color: var(--muted-dim);
   letter-spacing: 0.02em;
@@ -1180,7 +1181,7 @@ button {
   position: absolute;
   top: 18px;
   right: calc(var(--edge) + 52px);
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -1200,7 +1201,7 @@ button {
   right: 0;
   margin: 0;
   text-align: center;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
