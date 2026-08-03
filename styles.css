@@ -1,22 +1,21 @@
 /* ---------------------------------------------------------
-   Tokens — dark (default) and light. --scrim and the --badge-* pair
-   stay fixed across every theme: the lightbox stays a dark viewing
-   environment regardless of theme, and the tile-index badge sits on
-   top of arbitrary photo content so it needs guaranteed contrast
-   independent of the page theme. --accent is the site's one brand
-   color everywhere too, with a single deliberate exception: Mono
-   overrides it to a warmer red (oxblood) rather than pairing true
-   black/white with the same orange used against every warm palette.
+   Tokens — Mono (dark, default) and light. --scrim and the --badge-*
+   pair stay fixed across every theme: the lightbox stays a dark
+   viewing environment regardless of theme, and the tile-index badge
+   sits on top of arbitrary photo content so it needs guaranteed
+   contrast independent of the page theme. Every other theme below
+   shares one --accent (orange); Mono is the deliberate exception,
+   pairing true black/white with a warmer red (oxblood) instead.
 --------------------------------------------------------- */
 :root {
-  --paper: #4d5566;
-  --ink: #f1ede3;
-  --grid-line: rgba(225, 228, 236, 0.08);
-  --accent: #e2914a;
-  --muted: #9298a9;
-  --muted-dim: #6b7182;
-  --hairline: rgba(225, 228, 236, 0.14);
-  --overlay: rgba(20, 22, 28, 0.7);
+  --paper: #141414;
+  --ink: #f4f4f0;
+  --grid-line: rgba(255, 255, 255, 0.08);
+  --accent: #a13d2f;
+  --muted: #999999;
+  --muted-dim: #666666;
+  --hairline: rgba(255, 255, 255, 0.14);
+  --overlay: rgba(10, 10, 10, 0.7);
   --scrim: rgba(10, 11, 15, 0.97);
   --badge-bg: rgba(10, 11, 15, 0.7);
   --badge-ink: #f2f1ec;
@@ -34,6 +33,7 @@
   --paper: #eef0e6;
   --ink: #363b30;
   --grid-line: rgba(40, 45, 30, 0.08);
+  --accent: #e2914a;
   --muted: #7c8371;
   --muted-dim: #a3a897;
   --hairline: rgba(40, 45, 30, 0.14);
@@ -43,15 +43,27 @@
 /* Alt themes — a cycle of independently-selected themes behind the
    "Alt" header button, separate from the light/dark toggle (theme.js
    advances through these in order on each click; the base toggle
-   always clears back to plain dark/light regardless of which of
-   these was active). Same restrained layout and single fixed --accent
-   as everywhere else in every one of them; only --paper/--ink/
-   --muted/--hairline/--grid-line/--overlay vary. */
+   always clears back to plain Mono/light regardless of which of
+   these was active). Each one explicitly restores the shared orange
+   --accent, since Mono (the bare :root default above) is the one
+   theme that overrides it. */
+
+:root[data-theme="slate"] {
+  --paper: #4d5566;
+  --ink: #f1ede3;
+  --grid-line: rgba(225, 228, 236, 0.08);
+  --accent: #e2914a;
+  --muted: #9298a9;
+  --muted-dim: #6b7182;
+  --hairline: rgba(225, 228, 236, 0.14);
+  --overlay: rgba(20, 22, 28, 0.7);
+}
 
 :root[data-theme="walnut"] {
   --paper: #3a352e;
   --ink: #f2ece0;
   --grid-line: rgba(232, 220, 200, 0.08);
+  --accent: #e2914a;
   --muted: #a89a85;
   --muted-dim: #7d7262;
   --hairline: rgba(232, 220, 200, 0.14);
@@ -62,38 +74,28 @@
   --paper: #2e332a;
   --ink: #eee8d8;
   --grid-line: rgba(220, 225, 200, 0.08);
+  --accent: #e2914a;
   --muted: #93997e;
   --muted-dim: #656b52;
   --hairline: rgba(220, 225, 200, 0.14);
   --overlay: rgba(18, 22, 15, 0.7);
 }
 
-:root[data-theme="mono"] {
-  --paper: #141414;
-  --ink: #f4f4f0;
-  --grid-line: rgba(255, 255, 255, 0.08);
-  --accent: #a13d2f;
-  --muted: #999999;
-  --muted-dim: #666666;
-  --hairline: rgba(255, 255, 255, 0.14);
-  --overlay: rgba(10, 10, 10, 0.7);
-}
-
-/* --overlay is near-opaque here rather than the light/dark/walnut/
-   forest/mono washes (5-70% over a neutral paper): text/audio tile
-   cards are meant to read as a distinct warm off-white surface
-   floating on the green, in the spirit of the reference site's
-   cream/tan panels on its green background. A translucent wash at
-   that same low opacity would optically mix with the saturated green
-   paper underneath instead of sitting on top of it, producing a
-   muddy, desaturated yellow-green rather than a clean card --
-   transparency reads as "layered surface" against a neutral backdrop,
-   but against a saturated one it just blends, which is the muddiness
-   this avoids. */
+/* --overlay is near-opaque here rather than the other themes' washes
+   (5-70% over a neutral paper): text/audio tile cards are meant to
+   read as a distinct warm off-white surface floating on the green, in
+   the spirit of the reference site's cream/tan panels on its green
+   background. A translucent wash at that same low opacity would
+   optically mix with the saturated green paper underneath instead of
+   sitting on top of it, producing a muddy, desaturated yellow-green
+   rather than a clean card -- transparency reads as "layered surface"
+   against a neutral backdrop, but against a saturated one it just
+   blends, which is the muddiness this avoids. */
 :root[data-theme="playful"] {
   --paper: #c9e26a;
   --ink: #1c1a12;
   --grid-line: rgba(28, 26, 18, 0.08);
+  --accent: #e2914a;
   --muted: #5c6b3a;
   --muted-dim: #8a9569;
   --hairline: rgba(28, 26, 18, 0.16);

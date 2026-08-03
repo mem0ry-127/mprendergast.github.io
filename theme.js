@@ -6,7 +6,8 @@
   // syncs the toggle buttons' labels and handles switching + persistence.
   // Shared by every page (index, about, archive, classic) that includes it.
   //
-  // Two independent toggles: a base light/dark preference (THEME_KEY),
+  // Two independent toggles: a base light/dark preference (THEME_KEY,
+  // where "dark" means Mono -- the bare :root default in styles.css),
   // and an alt-theme cycle (ALT_KEY) that takes over the full color
   // scheme when active. Each click of the Alt button advances to the
   // next entry in ALT_THEMES, looping back to "off" (plain base) after
@@ -16,9 +17,9 @@
   const THEME_KEY = "photo-site-theme";
   const ALT_KEY = "photo-site-alt";
   const ALT_THEMES = [
+    { value: "slate", label: "Slate" },
     { value: "walnut", label: "Walnut" },
     { value: "forest", label: "Forest" },
-    { value: "mono", label: "Mono" },
     { value: "playful", label: "Playful" },
   ];
   const themeToggle = document.getElementById("theme-toggle");
