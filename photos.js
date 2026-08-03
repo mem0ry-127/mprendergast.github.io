@@ -74,6 +74,7 @@ const PHOTOS = [
     alt: "A bare tree full of wild monk parakeets, a red-brick building behind" },
 
   { file: "images/honeymoon/spain/2024-07-feeding-parakeets.jpg", title: "Feeding parakeets", date: "2024-07",
+    hidden: true,
     location: "Barcelona, Spain", size: "md", tags: ["portrait"],
     alt: "A man smiling as two monk parakeets perch on his hand in a city park" },
 
@@ -182,6 +183,7 @@ const PHOTOS = [
     alt: "A view across La Concha bay toward San Sebastian's beachfront hotels" },
 
   { file: "images/honeymoon/spain/2024-07-monte-urgull.jpg", title: "Monte Urgull", date: "2024-07",
+    hidden: true,
     location: "San Sebastian, Spain", size: "md", tags: ["coast"],
     alt: "Monte Urgull's silhouette above San Sebastian's harbor" },
 
