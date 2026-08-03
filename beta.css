@@ -60,7 +60,12 @@
 
 .beta-detail-close {
   position: absolute;
-  top: 20px;
+  /* .beta-detail is position:fixed from the very top of the viewport
+     (top:0), same as the background image behind it, so a plain 20px
+     offset sits underneath .site-header (73px tall, opaque, higher
+     z-index) until the page is scrolled and the header scrolls out of
+     the way. Clear the header outright instead. */
+  top: calc(73px + 20px);
   right: 20px;
   width: 32px;
   height: 32px;
