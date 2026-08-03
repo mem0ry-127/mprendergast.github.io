@@ -57,10 +57,26 @@
   let filtersExpanded = false;
   let searchQuery = "";
   let visiblePhotos = [];
-  let selectedIndex = null;
-  let currentIndex = 0;
   let isZoomed = false;
   let touchStartX = null;
+
+  // The left panel is deliberately independent of the current
+  // type/location/tag/search selection -- switching sections doesn't
+  // touch it, so it keeps showing the last item clicked (in any
+  // section) until either the close button or a new item replaces it.
+  // detailList/detailListIndex are a snapshot of whichever visiblePhotos
+  // the item was clicked from, kept around purely so the lightbox can
+  // still step prev/next through that original set even after the
+  // active section has since changed to something else.
+  let detailItem = null;
+  let detailList = [];
+  let detailListIndex = 0;
+
+  // The lightbox's own prev/next set — starts out as a copy of
+  // whatever list it was opened from (see detailImageBtn below), but
+  // is otherwise independent of detailList once open.
+  let lightboxList = [];
+  let currentIndex = 0;
 
   function itemType(p) {
     return p.type || "photo";
@@ -155,7 +171,6 @@
     activeLocation = "all";
     activeTag = "all";
     filtersExpanded = false;
-    closeDetail();
     renderTypeNav();
     renderLocationNav();
     renderFilters();
@@ -221,7 +236,6 @@
     activeLocation = place;
     activeTag = "all";
     filtersExpanded = false;
-    closeDetail();
     renderLocationNav();
     renderFilters();
     applyFilter();
@@ -267,7 +281,6 @@
 
   function setActiveTag(tag) {
     activeTag = tag;
-    closeDetail();
     renderLocationNav();
     renderTypeNav();
     renderFilters();
@@ -276,7 +289,6 @@
 
   function setSearchQuery(query) {
     searchQuery = query;
-    closeDetail();
     renderTypeNav();
     renderLocationNav();
     renderFilters();
@@ -433,7 +445,11 @@
           button.appendChild(img);
         }
         button.appendChild(indexTag);
-        if (selectedIndex === i) figure.classList.add("is-selected");
+        // Identity check rather than an index: the left panel can be
+        // showing an item from a different section than the one
+        // currently rendered, in which case nothing here should
+        // highlight at all.
+        if (detailItem === photo) figure.classList.add("is-selected");
         figure.appendChild(button);
       }
 
@@ -492,8 +508,10 @@
   }
 
   function showDetail(i) {
-    selectedIndex = i;
     const photo = visiblePhotos[i];
+    detailItem = photo;
+    detailList = visiblePhotos.slice();
+    detailListIndex = i;
     const isText = itemType(photo) === "text";
 
     detailImageBtn.hidden = isText;
@@ -523,8 +541,8 @@
   }
 
   function closeDetail() {
-    if (selectedIndex === null) return;
-    selectedIndex = null;
+    if (!detailItem) return;
+    detailItem = null;
     detail.hidden = true;
     bgImage.classList.remove("is-dimmed");
     renderGallery();
@@ -547,7 +565,7 @@
 
   detailClose.addEventListener("click", closeDetail);
   detailImageBtn.addEventListener("click", () => {
-    if (selectedIndex !== null) openLightbox(selectedIndex);
+    if (detailItem) openLightbox(detailList, detailListIndex);
   });
 
   randomBtn.addEventListener("click", () => {
@@ -560,8 +578,9 @@
   /* ---------------- Lightbox (photos/ceramics only — text has no
      zoomed view, it's already fully shown in the detail panel) ---------------- */
 
-  function openLightbox(i) {
-    if (!visiblePhotos.length) return;
+  function openLightbox(list, i) {
+    if (!list.length) return;
+    lightboxList = list;
     currentIndex = i;
     updateLightbox();
     lightbox.classList.add("is-open");
@@ -578,10 +597,10 @@
   }
 
   function updateLightbox() {
-    const photo = visiblePhotos[currentIndex];
+    const photo = lightboxList[currentIndex];
     lightboxImage.src = photo.file;
     lightboxImage.alt = photo.alt || "";
-    lightboxIndex.textContent = "N° " + pad(currentIndex + 1) + " / " + pad(visiblePhotos.length);
+    lightboxIndex.textContent = "N° " + pad(currentIndex + 1) + " / " + pad(lightboxList.length);
     lightboxTitle.textContent = photo.title || "Untitled";
     lightboxMeta.textContent = metaLine(photo);
     lightboxSpecs.textContent = specLine(photo);
@@ -590,7 +609,7 @@
 
   function step(delta) {
     setZoomed(false);
-    currentIndex = (currentIndex + delta + visiblePhotos.length) % visiblePhotos.length;
+    currentIndex = (currentIndex + delta + lightboxList.length) % lightboxList.length;
     updateLightbox();
   }
 
