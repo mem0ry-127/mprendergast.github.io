@@ -1,13 +1,17 @@
 function initBetaPage() {
   "use strict";
 
-  // Controller for beta.html — a separate layout experiment covering
-  // every section (photos, text, audio, ceramics). It IS part of the
-  // PJAX-swapped set (see router.js's ROUTES), so like initIndexPage
-  // and initArchivePage this runs both on a hard page load (guarded
-  // call at the bottom of this file) and again on every router-driven
-  // navigation into beta.html -- all state below is local to a single
-  // call and rebuilt fresh each time, same as those two.
+  // Controller for the homepage (index.html) — a fixed-background split
+  // layout covering every section (photos, text, audio, ceramics).
+  // Started as a separate beta.html experiment (hence the file/function
+  // names) before being promoted; the original gallery layout it
+  // replaced still lives at classic.html, run by script.js's
+  // initIndexPage. It's part of the PJAX-swapped set (see router.js's
+  // ROUTES), so like initIndexPage and initArchivePage this runs both
+  // on a hard page load (guarded call at the bottom of this file) and
+  // again on every router-driven navigation into index.html -- all
+  // state below is local to a single call and rebuilt fresh each time,
+  // same as those two.
   //
   // Left column (.beta-detail): a fixed panel that shows whichever item
   // was last clicked — the enlarged photo/ceramic piece with its

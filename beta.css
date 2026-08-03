@@ -1,13 +1,15 @@
 /* ---------------------------------------------------------
-   Beta layout — an alternate view of every section (photos, text,
-   audio, ceramics), styled after seydisfjordurcommunityradio.net's
-   fixed-background split page. Own breakpoint (900px) rather than the
-   rest of the site's 720px: below it there isn't room for a
-   half-viewport background column to mean anything, so the background
-   image is dropped and .beta-detail becomes a full-width modal
-   instead of a permanent split pane. Audio doesn't use .beta-detail
-   at all — it plays inline in its own tile, same as everywhere else
-   on the site.
+   Homepage layout (index.html) — every section (photos, text, audio,
+   ceramics) in a fixed-background split view, styled after
+   seydisfjordurcommunityradio.net. Started as a separate beta.html
+   experiment (hence the "beta" file names) before being promoted; the
+   original gallery layout now lives at classic.html, styled by
+   styles.css alone. Own breakpoint (900px) rather than the rest of the
+   site's 720px: below it there isn't room for a half-viewport
+   background column to mean anything, so the background image is
+   dropped and .beta-detail becomes a full-width modal instead of a
+   permanent split pane. Audio doesn't use .beta-detail at all — it
+   plays inline in its own tile, same as everywhere else on the site.
 --------------------------------------------------------- */
 
 .beta-layout {

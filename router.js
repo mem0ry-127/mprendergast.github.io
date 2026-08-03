@@ -13,7 +13,7 @@
   // #view region for some reason, it just falls back to a real
   // navigation rather than breaking.
 
-  const ROUTES = new Set(["", "index.html", "about.html", "archive.html", "beta.html"]);
+  const ROUTES = new Set(["", "index.html", "about.html", "archive.html", "classic.html"]);
 
   function pageName(pathname) {
     return pathname.split("/").pop() || "index.html";
@@ -33,10 +33,13 @@
       if (window.initArchivePage) window.initArchivePage();
     } else if (page === "about.html") {
       // static content, nothing to initialize
-    } else if (page === "beta.html") {
-      if (window.initBetaPage) window.initBetaPage();
-    } else {
+    } else if (page === "classic.html") {
+      // the original gallery layout, kept around at its own URL
       if (window.initIndexPage) window.initIndexPage();
+    } else {
+      // "" and "index.html" -- the fixed-background split layout
+      // (formerly beta.html) is the homepage now
+      if (window.initBetaPage) window.initBetaPage();
     }
   }
 
