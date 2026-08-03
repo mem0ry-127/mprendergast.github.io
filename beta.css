@@ -1,0 +1,149 @@
+/* ---------------------------------------------------------
+   Beta layout — a photos-only alternate view, styled after
+   seydisfjordurcommunityradio.net's fixed-background split page. Own
+   breakpoint (900px) rather than the rest of the site's 720px: below
+   it there isn't room for a half-viewport background column to mean
+   anything, so it's dropped in favor of the normal single-column list.
+   Keep this in sync with beta.js's splitViewQuery.
+--------------------------------------------------------- */
+
+.beta-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: calc(100vh - 74px);
+}
+
+@media (min-width: 900px) {
+  .beta-layout { grid-template-columns: 1fr 1fr; }
+}
+
+/* Empty spacer column — no visible box of its own. Its only job is to
+   occupy the left half of the grid row so the row (and therefore the
+   fixed image sitting behind it) stretches the full height of the
+   right column's content. The image and detail panel are both
+   position:fixed at width:50%, so they line up with this column
+   exactly without needing to be visually inside it. */
+.beta-bg-col { display: none; }
+
+@media (min-width: 900px) {
+  .beta-bg-col { display: block; }
+}
+
+.beta-bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 0;
+  transition: filter 0.3s ease;
+}
+.beta-bg-image.is-dimmed { filter: brightness(0.35) saturate(0.7); }
+
+.beta-detail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100vh;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 48px;
+  background: var(--scrim);
+}
+.beta-detail[hidden] { display: none; }
+
+.beta-detail-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--badge-ink);
+  border: 1px solid rgba(242, 241, 236, 0.2);
+}
+.beta-detail-close:hover { border-color: var(--accent); color: var(--accent); }
+
+.beta-detail-image-btn {
+  display: block;
+  max-width: 100%;
+  max-height: 62vh;
+  padding: 0;
+  cursor: zoom-in;
+}
+.beta-detail-image-btn img {
+  max-width: 100%;
+  max-height: 62vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.beta-detail-caption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  color: var(--badge-ink);
+  max-width: 90%;
+}
+.beta-detail-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 20px;
+}
+.beta-detail-meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(242, 241, 236, 0.6);
+}
+.beta-detail-specs {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(242, 241, 236, 0.45);
+}
+.beta-detail-specs[hidden] { display: none; }
+
+/* Right column — the actual page content, opaque so it reads as a
+   solid panel over the fixed background rather than letting it show
+   through the grid's hairline gaps. */
+.beta-content-col {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+}
+
+.beta-content-col .location-nav,
+.beta-content-col .filters {
+  padding-left: var(--edge);
+  padding-right: var(--edge);
+}
+
+.beta-gallery {
+  padding-left: var(--edge);
+  padding-right: var(--edge);
+}
+
+.tile.is-selected .tile-button::after {
+  opacity: 1;
+  inset: 7px;
+}
+
+/* The site header sits above the fixed background image in normal
+   document order, but as a non-positioned element that isn't enough
+   to guarantee paint order against a position:fixed sibling further
+   down the page — make it explicit. */
+.site-header {
+  position: relative;
+  z-index: 2;
+  background: var(--paper);
+}

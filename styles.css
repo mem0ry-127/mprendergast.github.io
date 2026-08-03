@@ -674,6 +674,20 @@ button {
 }
 .about-content p { margin: 0 0 1.2em; }
 
+/* Deliberately understated — a way in for anyone curious, not a call
+   to action, per the request to keep it "out of the way." */
+.about-content p.about-beta-link {
+  margin-top: 2.4em;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.about-beta-link a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hairline);
+}
+.about-beta-link a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
 /* ---------------------------------------------------------
    Archive page — a flat chronological list grouped by year,
    each row linking back to the gallery deep-linked to that entry.
