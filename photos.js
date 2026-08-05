@@ -91,6 +91,7 @@ const PHOTOS = [
     alt: "A woman standing in a grassy field overlooking a turquoise alpine lake ringed by mountains" },
 
   { file: "images/honeymoon/france/2024-07-lake-panorama.jpg", title: "", date: "2024-07",
+    hidden: true,
     location: "Pyrenees, France", size: "md", tags: ["landscape"],
     alt: "A wide turquoise alpine lake bordered by forested slopes, a rocky peak rising behind" },
 
