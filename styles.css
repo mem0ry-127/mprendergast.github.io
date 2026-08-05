@@ -682,8 +682,17 @@ button {
   font-family: var(--font-meta);
   font-size: 11px;
   color: var(--muted);
-  white-space: nowrap;
   text-transform: uppercase;
+  text-align: right;
+  /* Wraps instead of the old nowrap now that tiles can be meaningfully
+     narrower than before -- the split homepage layout gives the
+     gallery column roughly half the width classic.html's full-bleed
+     grid does, so a long date/location line that fit fine there can
+     overflow a small tile here. min-width:0 overrides the flex
+     default (min-width:auto), which otherwise keeps a flex item from
+     shrinking below its unwrapped content width regardless of
+     white-space. */
+  min-width: 0;
 }
 
 .empty-state {
