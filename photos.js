@@ -469,6 +469,25 @@ const PHOTOS = [
     size: "md", tags: ["abstract"],
     alt: "Abstract blurred vertical bands of vivid orange and green with heavy film grain" },
 
+  { type: "text", date: "2026-08-04", size: "lg", format: "verse",
+    body: `Hark, all maidens, near and distant, and attend to my ballad;
+Near Abersoch dwelled a maiden, she was both tidy and comely.
+Her beloved was conscripted and perished in some distanced land,
+And to her beloved she was bound.
+
+But ere long you shall learn of her downfall.
+Although her spirit never faltered, it was those turbulent winds and a winter tempest
+That overcame this lovely maiden, this dearest pale-faced visage.
+
+From field to field she navigated freely, to places she had frequented often;
+Her grip slipped and she plunged downwards; she placidly bid this world adieu.
+
+May the willows sway about her, and about the cultivated laurels,
+May the sweet roses blossom at the extremities of the maiden; for one was brave.
+Her physical form rests buried in the soil, allow us trust her spirit is in ecstasy.
+let us trust her spirit is in bliss.
+Shed a single tear as a definitive parting to the nomadic sparrow.` },
+
   { type: "text", date: "2026-07", size: "sm", format: "verse",
     body: `It twas an individual fine March dawn I bid New Orleans goodbye
 And I took the artery to Jackson, my possessions to renew.
