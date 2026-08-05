@@ -470,23 +470,88 @@ const PHOTOS = [
     alt: "Abstract blurred vertical bands of vivid orange and green with heavy film grain" },
 
   { type: "text", date: "2026-08-04", size: "lg", format: "verse",
-    body: `Hark, all maidens, near and distant, and attend to my ballad;
+    body: `Hark, all maids, near and distant, and attend to my ballad;
 Near Abersoch dwelled a maiden, she was both tidy and comely.
 Her beloved was conscripted and perished in some distanced land,
 And to her beloved she was bound.
+
+Clad in crimson and linen pale, much avowed of prim and hale,
+The road was the soul's elation of the maiden's direction.
+From street to street she ventures forth; she confronts all perils, scorns all wrath,
 
 But ere long you shall learn of her downfall.
 Although her spirit never faltered, it was those turbulent winds and a winter tempest
 That overcame this lovely maiden, this dearest pale-faced visage.
 
 From field to field she navigated freely, to places she had frequented often;
-Her grip slipped and she plunged downwards; she placidly bid this world adieu.
+Her grip slipped and she plunged downwards; she unjustly bid this world adieu.
 
 May the willows sway about her, and about the cultivated laurels,
 May the sweet roses blossom at the extremities of the maiden; for one was brave.
 Her physical form rests buried in the soil, allow us trust her spirit is in ecstasy.
 let us trust her spirit is in bliss.
-Shed a single tear as a definitive parting to the nomadic sparrow.` },
+Shed a single tear as a definitive parting to the nomadic weaverbird.` },
+
+  { type: "text", date: "2026-08-02", size: "md", format: "prose",
+    body: `However, if – oh! If you are able to grant me immunity and a longer reign, If my growth would spare me, I would be willing to stay and have a beautiful, fair child that I would love to see married. if my growing would spare me. I would prefer to be there if you could just grant me this.` },
+
+  { type: "text", date: "2026-08-01", size: "sm", format: "verse",
+    body: `The interior is the common ground place all must convene,
+Two together forested and destitute, also small and grand;
+If life were a possession,
+I'll give you all my wealth in store.` },
+
+  { type: "text", date: "2026-08-01", size: "sm", format: "verse",
+    body: `I'll have nobility gold/white, I'll have nobility pearl-cream-gold,
+I wantth nobility costly rich robins to wear.
+I cannot spare you a little whim
+Nor give you timekeeping your lifebelt to amend,
+Nor give you timekeeping your lifebelt to amend` },
+
+  { type: "text", date: "2026-07-17", size: "sm", format: "verse",
+    body: `As alone All
+merry
+lambs did
+I the
+birds met alone
+the month sang, walked
+alone As
+the
+way the month bids farewell` },
+
+  { type: "text", date: "2026-07-16", size: "sm", format: "verse",
+    body: `Ice trails the rock.
+Crystals hole up.
+Shapes pace the shape.
+Mists sweep the mood.
+Thickets rest.
+Mists hold.
+The cliff paces the sand.
+Pursuing courage pulls the sages.
+Tongues tastes the oozes.` },
+
+  { type: "text", date: "2026-07-04", size: "lg", format: "verse",
+    body: `against all willow
+all all willow
+my my
+my my
+up knock underneath underneath underneath garment underneath underneath underneath underneath
+the That the
+hammer he
+the Oh the
+No howl
+parsley hammer ward parsley snugly parsley parsley
+all or tucked underneath underneath
+the tucked tucked tucked garment tucked
+at or tucked underneath underneath
+against against That against against against garment
+the the the
+the the the
+the the the
+ward garment was
+howl No howl willow
+ward garment parsley ward
+parsley hammer ward parsley snugly parsley parsley` },
 
   { type: "text", date: "2026-07", size: "sm", format: "verse",
     body: `It twas an individual fine March dawn I bid New Orleans goodbye
