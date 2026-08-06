@@ -470,8 +470,16 @@ const PHOTOS = [
     size: "md", tags: ["abstract"],
     alt: "Abstract blurred vertical bands of vivid orange and green with heavy film grain" },
 
+  { type: "text", date: "2026-08-05", size: "sm", format: "verse",
+    body: `Two hours before the day,
+upon thine cold ground,
+I did not intend to stay long in this place.
+Her gown wouldn't meet nor her apron strings tie, and
+Twas down in yonder garden green,
+What wondrous love, oh my soul, oh my soul.` },
+
   { type: "text", date: "2026-08-04", size: "lg", format: "verse",
-    body: `Hark, all maids, near and distant, and attend to my ballad;
+    body: `Hark, all, near and distant, and attend to my ballad;
 Near Abersoch dwelled a maiden, she was both tidy and comely.
 Her beloved was conscripted and perished in some distanced land,
 And to her beloved she was bound.
@@ -553,6 +561,16 @@ ward garment was
 howl No howl willow
 ward garment parsley ward
 parsley hammer ward parsley snugly parsley parsley` },
+
+  { type: "text", date: "2026-07-04", size: "md", format: "verse",
+    body: `When I was sinking down, sinking down, sinking down,
+When I was sinking down, sinking down,
+sinking down, sinking down, sinking down,
+When I was sinking down, sinking down,
+sinking down, sinking down, sinking down,
+When I was sinking down, sinking down,
+every time that you pass by
+I'll wish you were away.` },
 
   { type: "text", date: "2026-07", size: "sm", format: "verse",
     body: `It twas an individual fine March dawn I bid New Orleans goodbye
