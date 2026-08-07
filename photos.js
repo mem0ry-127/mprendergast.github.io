@@ -869,7 +869,7 @@ looking, and looking, and looking` },
 
   { type: "audio", file: "audio/music/2024-10-31.mp3", duration: "0:58", title: "10.31.24 4_Master", date: "2024-10-31", size: "sm" },
 
-  { type: "audio", file: "audio/music/2024-10-18.mp3", duration: "0:16", title: "10.18.2024_Master", date: "2024-10-18", size: "sm" },
+  { type: "audio", file: "audio/music/2024-10-18.mp3", hidden:true, duration: "0:16", title: "10.18.2024_Master", date: "2024-10-18", size: "sm" },
 
   { type: "audio", file: "audio/music/2024-10-17b.mp3", duration: "1:28", title: "10.17.2024 3_Master", date: "2024-10-17", size: "sm" },
 
