@@ -861,7 +861,7 @@ looking, and looking, and looking` },
 
   { type: "audio", file: "audio/music/2025-08-28.mp3", duration: "3:27", title: "8.28.25_Master", date: "2025-08-28", size: "md" },
 
-  { type: "audio", file: "audio/music/2025-08-21.mp3", duration: "2:07", title: "8.21.2025_Master", date: "2025-08-21", size: "sm" },
+  { type: "audio", file: "audio/music/2025-08-21.mp3", hidden:true, duration: "2:07", title: "8.21.2025_Master", date: "2025-08-21", size: "sm" },
 
   { type: "audio", file: "audio/music/worried-man-blues.mp3", duration: "4:57", title: "Worried Man Blues_3_Master", date: "2025-01", size: "md" },
 
